@@ -1,0 +1,239 @@
+:root {
+  /* Color Palette */
+  --bg-darkest: #05070b;
+  --bg-dark: #0a0e17;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-hover: rgba(26, 37, 64, 0.85);
+  --bg-glass: rgba(15, 23, 42, 0.65);
+  
+  /* Brand Accents */
+  --orange-500: #ff5500;
+  --orange-400: #ff6e26;
+  --orange-600: #e04b00;
+  --orange-glow: rgba(255, 85, 0, 0.35);
+  
+  --cyan-400: #00d2ff;
+  --cyan-500: #0284c7;
+  --cyan-glow: rgba(0, 210, 255, 0.3);
+  
+  --gold-400: #fbbf24;
+  --green-400: #22c55e;
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-glow: rgba(255, 85, 0, 0.5);
+
+  /* Typography */
+  --font-display: 'Outfit', 'Koulen', 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-khmer: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-khmer-heading: 'Kantumruy Pro', 'Koulen', sans-serif;
+
+  font-family: var(--font-body);
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-darkest);
+  color: #f1f5f9;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Global Container - Perfectly Centered */
+.container {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Custom High-Tech Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-500);
+}
+
+/* Typography Base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px var(--orange-glow);
+  transform: translateY(-4px);
+}
+
+/* Glow & Neon Text */
+.text-orange-glow {
+  color: var(--orange-500);
+  text-shadow: 0 0 20px var(--orange-glow);
+}
+
+.text-cyan-glow {
+  color: var(--cyan-400);
+  text-shadow: 0 0 20px var(--cyan-glow);
+}
+
+/* Pulse Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+/* Global Form Controls & Select Options - Ensure 100% dark theme readability */
+select {
+  color-scheme: dark !important;
+  background-color: #0b1120;
+  color: #ffffff;
+}
+
+select option {
+  background-color: #0b1120 !important;
+  color: #ffffff !important;
+  padding: 8px 12px;
+}
+
+/* ============================================================
+   KHMER TYPOGRAPHY & SEAMLESS DYNAMIC FONT SYSTEM
+   Modern, sleek, and high-tech using Google Fonts Kantumruy Pro & Koulen
+   ============================================================ */
+
+/* Seamlessly activates across all elements whenever Khmer is chosen */
+html[lang="km"],
+body.lang-km,
+.lang-km {
+  --font-body: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  --font-display: 'Kantumruy Pro', 'Koulen', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-body) !important;
+  line-height: 1.65 !important;
+}
+
+/* All text nodes inherit Kantumruy Pro with zero letter-clipping */
+body.lang-km p,
+body.lang-km span,
+body.lang-km a,
+body.lang-km li,
+body.lang-km label,
+body.lang-km div,
+body.lang-km td,
+body.lang-km th,
+body.lang-km input,
+body.lang-km select,
+body.lang-km textarea,
+body.lang-km button {
+  font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  letter-spacing: normal !important;
+}
+
+/* Khmer Headings & Display Titles */
+body.lang-km h1,
+body.lang-km h2,
+body.lang-km h3,
+body.lang-km h4,
+body.lang-km h5,
+body.lang-km h6,
+body.lang-km .brand-text,
+body.lang-km .hero-title,
+body.lang-km .page-title,
+body.lang-km .modal-order-num,
+body.lang-km .sec-title,
+body.lang-km .brand-sub {
+  font-family: 'Kantumruy Pro', 'Koulen', sans-serif !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.01em !important;
+  font-weight: 700 !important;
+}
+
+/* Khmer interactive buttons, navigation items & badges */
+body.lang-km button,
+body.lang-km .btn,
+body.lang-km .nav-link,
+body.lang-km .nav-item,
+body.lang-km .auth-pill,
+body.lang-km .b2b-toggle-container,
+body.lang-km .lang-pill-btn,
+body.lang-km .user-pill-btn,
+body.lang-km .sub-badge,
+body.lang-km .filter-btn,
+body.lang-km .hero-badge,
+body.lang-km .btn-search,
+body.lang-km .btn-track,
+body.lang-km .cart-btn {
+  font-family: 'Kantumruy Pro', sans-serif !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  font-weight: 600 !important;
+}
+
+/* Chinese typography when zh is chosen */
+html[lang="zh"],
+body.lang-zh {
+  --font-body: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif !important;
+  --font-display: 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  font-family: var(--font-body) !important;
+}
+

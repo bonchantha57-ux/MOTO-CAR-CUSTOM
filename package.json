@@ -1,0 +1,11 @@
+{
+  "name": "motocar-custom-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "run-all.bat",
+    "dev": "npm --prefix frontend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "php backend/artisan serve --host=127.0.0.1 --port=8000"
+  }
+}
