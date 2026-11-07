@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         // Partner Garages
         Schema::create('partner_garages', function (Blueprint $table) {
             $table->id();
@@ -58,6 +59,7 @@ return new class extends Migration
             
             $table->timestamps();
             $table->softDeletes();
+            
         });
 
         // Installation Bookings
@@ -171,6 +173,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved', 'flagged'])->default('pending');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     public function down(): void
