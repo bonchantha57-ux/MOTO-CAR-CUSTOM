@@ -1,5 +1,23 @@
 <script setup lang="ts">
-// Main App Component
+import { onMounted, onUnmounted } from 'vue'
+import axios from 'axios'
+
+let keepAliveTimer: any = null
+
+onMounted(() => {
+  // 1. Warm up Railway backend immediately on page open
+  axios.get('/up').catch(() => {})
+  axios.get('/api/v1/products?per_page=12').catch(() => {})
+
+  // 2. Periodic keep-alive ping every 4 minutes while browser tab is active
+  keepAliveTimer = setInterval(() => {
+    axios.get('/up').catch(() => {})
+  }, 4 * 60 * 1000)
+})
+
+onUnmounted(() => {
+  if (keepAliveTimer) clearInterval(keepAliveTimer)
+})
 </script>
 
 <template>

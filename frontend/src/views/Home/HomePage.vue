@@ -47,6 +47,8 @@ const handleHomeAddToCart = (product: any) => {
 }
 
 const vehicleType = ref('all')
+import { defaultCategories, defaultProducts } from '@/data/initialData'
+
 const selectedMake = ref('')
 const selectedModel = ref('')
 const selectedYear = ref('')
@@ -61,8 +63,18 @@ const categoryMetaMap: Record<string, { icon: any, accent: string }> = {
   'carbon-aerodynamics': { icon: Zap, accent: '#00d2ff' },
 }
 
-const categories = ref<any[]>([])
-const featuredProducts = ref<any[]>([])
+const categories = ref<any[]>(defaultCategories.map((c) => {
+  const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: '#ff5500' }
+  return {
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+    count: c.products_count ?? 1,
+    icon: meta.icon,
+    accent: meta.accent,
+  }
+}))
+const featuredProducts = ref<any[]>([...defaultProducts])
 
 const loadHomeData = async () => {
   // Instant load from session cache

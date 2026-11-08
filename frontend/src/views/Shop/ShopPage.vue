@@ -21,6 +21,8 @@ import {
   Heart
 } from 'lucide-vue-next'
 
+import { defaultCategories, defaultBrands, defaultProducts } from '@/data/initialData'
+
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
@@ -29,10 +31,10 @@ const wishlistStore = useWishlistStore()
 const langStore = useLanguageStore()
 const addedSuccessId = ref<number | null>(null)
 
-const products = ref<any[]>([])
-const categories = ref<any[]>([])
-const brands = ref<any[]>([])
-const isLoading = ref(true)
+const products = ref<any[]>([...defaultProducts])
+const categories = ref<any[]>([...defaultCategories])
+const brands = ref<any[]>([...defaultBrands])
+const isLoading = ref(false)
 
 const selectedCategory = ref<string>((route.query.category as string) || (route.params.category as string) || '')
 const selectedBrand = ref<string>((route.query.brand as string) || '')
