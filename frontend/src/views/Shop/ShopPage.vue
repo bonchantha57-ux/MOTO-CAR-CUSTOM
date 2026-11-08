@@ -41,6 +41,14 @@ const searchQuery = ref<string>((route.query.q as string) || '')
 const sortBy = ref<string>((route.query.sort as string) || 'latest')
 
 const fetchCategoriesAndBrands = async () => {
+  // Instant UI from session cache
+  try {
+    const cachedCat = sessionStorage.getItem('cached_categories')
+    const cachedBrands = sessionStorage.getItem('cached_brands')
+    if (cachedCat) categories.value = JSON.parse(cachedCat)
+    if (cachedBrands) brands.value = JSON.parse(cachedBrands)
+  } catch (e) {}
+
   try {
     const [catRes, brandRes] = await Promise.all([
       axios.get('/api/v1/categories'),
@@ -48,13 +56,31 @@ const fetchCategoriesAndBrands = async () => {
     ])
     categories.value = catRes.data.data || []
     brands.value = brandRes.data.data || []
+    try {
+      sessionStorage.setItem('cached_categories', JSON.stringify(categories.value))
+      sessionStorage.setItem('cached_brands', JSON.stringify(brands.value))
+    } catch (e) {}
   } catch (err) {
     console.error('Failed to load categories/brands:', err)
   }
 }
 
 const fetchProducts = async () => {
-  isLoading.value = true
+  const cacheKey = `mcc_products_${selectedCategory.value}_${selectedBrand.value}_${sortBy.value}_${searchQuery.value}`
+  
+  // Instant display from cache if present
+  try {
+    const cached = sessionStorage.getItem(cacheKey)
+    if (cached) {
+      products.value = JSON.parse(cached)
+      isLoading.value = false
+    } else if (products.value.length === 0) {
+      isLoading.value = true
+    }
+  } catch (e) {
+    isLoading.value = true
+  }
+
   try {
     const params: any = {}
     if (selectedCategory.value) params.category = selectedCategory.value
@@ -64,6 +90,9 @@ const fetchProducts = async () => {
 
     const res = await axios.get('/api/v1/products', { params })
     products.value = res.data.data || []
+    try {
+      sessionStorage.setItem(cacheKey, JSON.stringify(products.value))
+    } catch (e) {}
   } catch (err) {
     console.error('Failed to load products:', err)
   } finally {

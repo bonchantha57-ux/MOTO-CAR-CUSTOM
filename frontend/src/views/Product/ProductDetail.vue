@@ -51,9 +51,24 @@ const garages = ref<any[]>([
 ])
 
 const fetchProductData = async () => {
-  isLoading.value = true
-  errorMessage.value = ''
   const slug = route.params.slug as string
+  errorMessage.value = ''
+
+  // Instant display from cache if available
+  try {
+    const cached = sessionStorage.getItem(`mcc_detail_${slug}`)
+    if (cached) {
+      const data = JSON.parse(cached)
+      product.value = data.product
+      activeImage.value = product.value?.thumbnail || ''
+      galleryImages.value = data.images || []
+      isLoading.value = false
+    } else {
+      isLoading.value = true
+    }
+  } catch (e) {
+    isLoading.value = true
+  }
 
   try {
     const res = await axios.get(`/api/v1/products/${slug}`)
@@ -61,6 +76,9 @@ const fetchProductData = async () => {
       product.value = res.data.product
       activeImage.value = product.value.thumbnail || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80'
       galleryImages.value = res.data.images || []
+      try {
+        sessionStorage.setItem(`mcc_detail_${slug}`, JSON.stringify(res.data))
+      } catch (e) {}
       
       // Fetch related products from same category or catalog
       fetchRelatedProducts(product.value.category_id, product.value.id)
@@ -69,7 +87,9 @@ const fetchProductData = async () => {
     }
   } catch (err: any) {
     console.error('Failed to load product:', err)
-    errorMessage.value = err.response?.data?.message || 'Product not found or unavailable.'
+    if (!product.value) {
+      errorMessage.value = err.response?.data?.message || 'Product not found or unavailable.'
+    }
   } finally {
     isLoading.value = false
   }

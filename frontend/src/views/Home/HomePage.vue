@@ -65,6 +65,29 @@ const categories = ref<any[]>([])
 const featuredProducts = ref<any[]>([])
 
 const loadHomeData = async () => {
+  // Instant load from session cache
+  try {
+    const cachedCat = sessionStorage.getItem('cached_categories')
+    const cachedFeatured = sessionStorage.getItem('cached_home_featured')
+    if (cachedCat) {
+      const parsedCat = JSON.parse(cachedCat)
+      categories.value = parsedCat.map((c: any) => {
+        const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: '#ff5500' }
+        return {
+          id: c.id,
+          name: c.name,
+          slug: c.slug,
+          count: c.products_count ?? 1,
+          icon: meta.icon,
+          accent: meta.accent,
+        }
+      })
+    }
+    if (cachedFeatured) {
+      featuredProducts.value = JSON.parse(cachedFeatured)
+    }
+  } catch (e) {}
+
   try {
     const [catRes, prodRes] = await Promise.all([
       axios.get('/api/v1/categories'),
@@ -83,10 +106,16 @@ const loadHomeData = async () => {
           accent: meta.accent,
         }
       })
+      try {
+        sessionStorage.setItem('cached_categories', JSON.stringify(catRes.data.data))
+      } catch (e) {}
     }
 
     if (prodRes.data && prodRes.data.data) {
       featuredProducts.value = prodRes.data.data
+      try {
+        sessionStorage.setItem('cached_home_featured', JSON.stringify(prodRes.data.data))
+      } catch (e) {}
     }
   } catch (err) {
     console.error('Failed to load home page dynamic data:', err)

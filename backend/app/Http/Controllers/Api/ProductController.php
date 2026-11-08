@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -70,7 +71,7 @@ class ProductController extends Controller
             'current_page' => $products->currentPage(),
             'last_page' => $products->lastPage(),
             'total' => $products->total(),
-        ]);
+        ])->header('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
     }
 
     /**
@@ -219,6 +220,9 @@ class ProductController extends Controller
             'updated_at' => now(),
         ]);
 
+        Cache::forget('api_categories');
+        Cache::forget('api_brands');
+
         return response()->json([
             'status' => 'success',
             'message' => 'Product created successfully and is now LIVE on store!',
@@ -232,19 +236,22 @@ class ProductController extends Controller
      */
     public function categories()
     {
-        $categories = DB::table('categories')
-            ->leftJoin('products', function($join) {
-                $join->on('categories.id', '=', 'products.category_id')
-                    ->whereNull('products.deleted_at')
-                    ->where('products.status', 'active');
-            })
-            ->select('categories.*', DB::raw('count(products.id) as products_count'))
-            ->where('categories.is_active', true)
-            ->groupBy('categories.id')
-            ->orderBy('categories.sort_order', 'asc')
-            ->get();
+        $categories = Cache::remember('api_categories', 300, function () {
+            return DB::table('categories')
+                ->leftJoin('products', function($join) {
+                    $join->on('categories.id', '=', 'products.category_id')
+                        ->whereNull('products.deleted_at')
+                        ->where('products.status', 'active');
+                })
+                ->select('categories.*', DB::raw('count(products.id) as products_count'))
+                ->where('categories.is_active', true)
+                ->groupBy('categories.id')
+                ->orderBy('categories.sort_order', 'asc')
+                ->get();
+        });
 
-        return response()->json(['status' => 'success', 'data' => $categories]);
+        return response()->json(['status' => 'success', 'data' => $categories])
+            ->header('Cache-Control', 'public, max-age=180, stale-while-revalidate=300');
     }
 
     /**
@@ -252,8 +259,12 @@ class ProductController extends Controller
      */
     public function brands()
     {
-        $brands = DB::table('brands')->where('is_active', true)->get();
-        return response()->json(['status' => 'success', 'data' => $brands]);
+        $brands = Cache::remember('api_brands', 300, function () {
+            return DB::table('brands')->where('is_active', true)->get();
+        });
+
+        return response()->json(['status' => 'success', 'data' => $brands])
+            ->header('Cache-Control', 'public, max-age=180, stale-while-revalidate=300');
     }
 
     /**
