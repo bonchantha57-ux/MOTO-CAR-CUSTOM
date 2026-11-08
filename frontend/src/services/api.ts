@@ -1,11 +1,11 @@
 import axios from 'axios'
 
+const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL as string) || 'https://moto-car-custom-production.up.railway.app'
+const cleanBaseUrl = rawBaseUrl.replace(/\/+$/, '')
+const apiBase = cleanBaseUrl.endsWith('/api') ? cleanBaseUrl : `${cleanBaseUrl}/api`
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL 
-    ? (import.meta.env.VITE_API_BASE_URL.endsWith('/api') 
-        ? import.meta.env.VITE_API_BASE_URL 
-        : `${import.meta.env.VITE_API_BASE_URL}/api`)
-    : 'https://moto-car-custom-production.up.railway.app/api',
+  baseURL: apiBase,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
