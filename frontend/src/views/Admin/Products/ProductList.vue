@@ -17,21 +17,27 @@ import {
   AlertCircle
 } from 'lucide-vue-next'
 import { formatImageUrl, handleProductImageError, DEFAULT_PRODUCT_THUMB } from '@/utils/image'
+import { defaultProducts } from '@/data/initialData'
 
 const router = useRouter()
 const langStore = useLanguageStore()
 
-const products = ref<any[]>([])
-const isLoading = ref(true)
+const products = ref<any[]>([...defaultProducts])
+const isLoading = ref(false)
 const searchQuery = ref('')
 
-const fetchProducts = async () => {
-  isLoading.value = true
+const fetchProducts = async (showLoading = false) => {
+  if (showLoading || products.value.length === 0) {
+    isLoading.value = true
+  }
   try {
     const res = await axios.get('/api/v1/products', {
       params: { q: searchQuery.value || undefined, per_page: 50 }
     })
     products.value = res.data.data || []
+    try {
+      sessionStorage.setItem('admin_cached_products', JSON.stringify(products.value))
+    } catch (e) {}
   } catch (err) {
     console.error('Error fetching products:', err)
   } finally {
@@ -43,11 +49,17 @@ const successMessage = ref('')
 const errorMessage = ref('')
 
 onMounted(() => {
+  try {
+    const cached = sessionStorage.getItem('admin_cached_products')
+    if (cached) {
+      products.value = JSON.parse(cached)
+    }
+  } catch (e) {}
   fetchProducts()
 })
 
 const handleSearch = () => {
-  fetchProducts()
+  fetchProducts(true)
 }
 
 const handleDelete = async (prod: any) => {

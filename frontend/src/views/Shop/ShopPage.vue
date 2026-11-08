@@ -140,6 +140,27 @@ const selectBrand = (slug: string) => {
   })
 }
 
+const getCategoryName = (cat: any) => {
+  if (!cat) return ''
+  if (langStore.currentLang === 'kh') {
+    const khMap: Record<string, string> = {
+      'exhaust-systems': 'បំពង់ស៊ីម៉ាំងប្រណាំង',
+      'performance-brakes': 'ប្រព័ន្ធហ្វ្រាំងប្រណាំង',
+      'suspension-coilovers': 'ប្រព័ន្ធបូម & ជើងក្រោម',
+      'forged-wheels': 'កង់ Forged គុណភាពខ្ពស់',
+      'carbon-aerodynamics': 'គ្រឿង Carbon កម្លាំងខ្យល់',
+    }
+    if (khMap[cat.slug]) return khMap[cat.slug]
+    if (cat.name_km) return cat.name_km
+  }
+  return cat.name || cat.slug || ''
+}
+
+const getBrandName = (brand: any) => {
+  if (!brand) return ''
+  return brand.name || brand.slug || ''
+}
+
 const handleSearch = () => {
   fetchProducts()
 }
@@ -219,7 +240,7 @@ const addToCart = (product: any, e: Event) => {
           <!-- Categories Filter -->
           <div class="filter-group">
             <h4 class="filter-title">
-              <Filter :size="15" class="text-orange" />
+              <Filter :size="16" class="text-orange" />
               <span>{{ langStore.t.categories }}</span>
             </h4>
             <div class="filter-options">
@@ -228,7 +249,10 @@ const addToCart = (product: any, e: Event) => {
                 :class="{ active: selectedCategory === '' }"
                 @click="selectCategory('')"
               >
-                <span>{{ langStore.t.allProducts }}</span>
+                <div class="filter-chip-left">
+                  <span class="cat-dot"></span>
+                  <span>{{ langStore.t.allProducts }}</span>
+                </div>
                 <span class="count-tag">{{ products.length }}</span>
               </button>
               <button 
@@ -238,7 +262,11 @@ const addToCart = (product: any, e: Event) => {
                 :class="{ active: selectedCategory === cat.slug }"
                 @click="selectCategory(cat.slug)"
               >
-                <span>{{ cat.name }}</span>
+                <div class="filter-chip-left">
+                  <span class="cat-dot"></span>
+                  <span>{{ getCategoryName(cat) }}</span>
+                </div>
+                <span class="count-tag">{{ cat.products_count || 1 }}</span>
               </button>
             </div>
           </div>
@@ -248,7 +276,7 @@ const addToCart = (product: any, e: Event) => {
           <!-- Brands Filter -->
           <div class="filter-group">
             <h4 class="filter-title">
-              <Tag :size="15" class="text-orange" />
+              <Tag :size="16" class="text-orange" />
               <span>{{ langStore.t.manufacturers }}</span>
             </h4>
             <div class="filter-options">
@@ -257,7 +285,10 @@ const addToCart = (product: any, e: Event) => {
                 :class="{ active: selectedBrand === '' }"
                 @click="selectBrand('')"
               >
-                <span>{{ langStore.t.allBrands }}</span>
+                <div class="filter-chip-left">
+                  <span class="cat-dot"></span>
+                  <span>{{ langStore.t.allBrands }}</span>
+                </div>
               </button>
               <button 
                 v-for="brand in brands" 
@@ -266,7 +297,10 @@ const addToCart = (product: any, e: Event) => {
                 :class="{ active: selectedBrand === brand.slug }"
                 @click="selectBrand(brand.slug)"
               >
-                <span>{{ brand.name }}</span>
+                <div class="filter-chip-left">
+                  <span class="cat-dot"></span>
+                  <span>{{ getBrandName(brand) }}</span>
+                </div>
               </button>
             </div>
           </div>
@@ -562,7 +596,7 @@ const addToCart = (product: any, e: Event) => {
 .filter-options {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .filter-chip-btn {
@@ -570,34 +604,68 @@ const addToCart = (product: any, e: Event) => {
   justify-content: space-between;
   align-items: center;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
-  padding: 0.55rem 0.85rem;
-  border-radius: 8px;
-  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #cbd5e1;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
+  width: 100%;
+}
+
+.filter-chip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64748b;
+  flex-shrink: 0;
+  transition: all 0.2s;
 }
 
 .filter-chip-btn:hover {
   background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 85, 0, 0.35);
   color: #ffffff;
+  transform: translateX(3px);
+}
+
+.filter-chip-btn:hover .cat-dot {
+  background: #ff5500;
 }
 
 .filter-chip-btn.active {
-  background: rgba(255, 85, 0, 0.15);
+  background: rgba(255, 85, 0, 0.16);
   border-color: #ff5500;
   color: #ff7834;
   font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+}
+
+.filter-chip-btn.active .cat-dot {
+  background: #ff5500;
+  box-shadow: 0 0 8px #ff5500;
 }
 
 .count-tag {
-  font-size: 0.72rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 700;
 }
 
 /* Product Cards */

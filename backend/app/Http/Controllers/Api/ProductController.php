@@ -272,98 +272,103 @@ class ProductController extends Controller
      */
     public function dashboardStats()
     {
-        $productsCount = DB::table('products')->whereNull('deleted_at')->count();
-        $usersCount = DB::table('users')->count();
-        $b2cCount = DB::table('users')->where('role', 'customer')->count();
-        $b2bCount = DB::table('users')->whereIn('role', ['b2b_client', 'garage'])->count();
-        $garagesCount = DB::table('partner_garages')->count();
-        $ordersCount = DB::table('orders')->count();
-        $totalRevenue = floatval(DB::table('orders')->sum('total_amount') ?? 0);
+        $data = Cache::remember('admin_dashboard_stats', 60, function () {
+            $productsCount = DB::table('products')->whereNull('deleted_at')->count();
+            $usersCount = DB::table('users')->count();
+            $b2cCount = DB::table('users')->where('role', 'customer')->count();
+            $b2bCount = DB::table('users')->whereIn('role', ['b2b_client', 'garage'])->count();
+            $garagesCount = DB::table('partner_garages')->count();
+            $ordersCount = DB::table('orders')->count();
+            $totalRevenue = floatval(DB::table('orders')->sum('total_amount') ?? 0);
 
-        // Real category distribution from products
-        $categoriesWithCount = DB::table('categories')
-            ->leftJoin('products', function($join) {
-                $join->on('categories.id', '=', 'products.category_id')
-                    ->whereNull('products.deleted_at');
-            })
-            ->select('categories.id', 'categories.name', DB::raw('count(products.id) as count'))
-            ->groupBy('categories.id', 'categories.name')
-            ->get();
+            // Real category distribution from products
+            $categoriesWithCount = DB::table('categories')
+                ->leftJoin('products', function($join) {
+                    $join->on('categories.id', '=', 'products.category_id')
+                        ->whereNull('products.deleted_at');
+                })
+                ->select('categories.id', 'categories.name', DB::raw('count(products.id) as count'))
+                ->groupBy('categories.id', 'categories.name')
+                ->get();
 
-        $totalCatProducts = $categoriesWithCount->sum('count');
-        $colors = ['#ff5500', '#fbbf24', '#ef4444', '#38bdf8', '#10b981', '#a855f7'];
-        $idx = 0;
-        $categoryBreakdown = $categoriesWithCount->map(function($c) use ($totalCatProducts, $colors, &$idx) {
-            $pct = $totalCatProducts > 0 ? round(($c->count / $totalCatProducts) * 100) : 0;
-            $color = $colors[$idx % count($colors)];
-            $idx++;
+            $totalCatProducts = $categoriesWithCount->sum('count');
+            $colors = ['#ff5500', '#fbbf24', '#ef4444', '#38bdf8', '#10b981', '#a855f7'];
+            $idx = 0;
+            $categoryBreakdown = $categoriesWithCount->map(function($c) use ($totalCatProducts, $colors, &$idx) {
+                $pct = $totalCatProducts > 0 ? round(($c->count / $totalCatProducts) * 100) : 0;
+                $color = $colors[$idx % count($colors)];
+                $idx++;
+                return [
+                    'name' => $c->name,
+                    'count' => intval($c->count),
+                    'percentage' => $pct,
+                    'color' => $color,
+                ];
+            });
+
+            // Real geographic deliveries / partner garage locations
+            $cities = DB::table('partner_garages')
+                ->select('city', DB::raw('count(*) as count'))
+                ->groupBy('city')
+                ->get();
+            $totalGarages = $cities->sum('count');
+            $geoBreakdown = $cities->map(function($g) use ($totalGarages) {
+                return [
+                    'city' => $g->city,
+                    'count' => intval($g->count),
+                    'percentage' => $totalGarages > 0 ? round(($g->count / $totalGarages) * 100) : 0,
+                ];
+            });
+
+            $recentUsers = DB::table('users')
+                ->select('id', 'name', 'email', 'phone', 'role', 'user_mode', 'created_at')
+                ->orderBy('id', 'desc')
+                ->limit(8)
+                ->get();
+
+            $recentProducts = DB::table('products')
+                ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+                ->select(
+                    'products.id',
+                    'products.name',
+                    'products.sku',
+                    'products.b2c_price',
+                    'products.b2b_price',
+                    'products.stock_quantity',
+                    'products.thumbnail',
+                    'categories.name as category_name'
+                )
+                ->whereNull('products.deleted_at')
+                ->orderBy('products.id', 'desc')
+                ->limit(6)
+                ->get();
+
+            $recentGarages = DB::table('partner_garages')
+                ->select('id', 'name', 'phone', 'email', 'address', 'city', 'status')
+                ->orderBy('id', 'desc')
+                ->limit(5)
+                ->get();
+
             return [
-                'name' => $c->name,
-                'count' => intval($c->count),
-                'percentage' => $pct,
-                'color' => $color,
+                'stats' => [
+                    'total_revenue' => $totalRevenue,
+                    'products_count' => $productsCount,
+                    'users_count' => $usersCount,
+                    'b2c_count' => $b2cCount,
+                    'b2b_count' => $b2bCount,
+                    'garages_count' => $garagesCount,
+                    'orders_count' => $ordersCount,
+                ],
+                'category_breakdown' => $categoryBreakdown,
+                'geo_breakdown' => $geoBreakdown,
+                'recent_users' => $recentUsers,
+                'recent_products' => $recentProducts,
+                'recent_garages' => $recentGarages,
             ];
         });
 
-        // Real geographic deliveries / partner garage locations
-        $cities = DB::table('partner_garages')
-            ->select('city', DB::raw('count(*) as count'))
-            ->groupBy('city')
-            ->get();
-        $totalGarages = $cities->sum('count');
-        $geoBreakdown = $cities->map(function($g) use ($totalGarages) {
-            return [
-                'city' => $g->city,
-                'count' => intval($g->count),
-                'percentage' => $totalGarages > 0 ? round(($g->count / $totalGarages) * 100) : 0,
-            ];
-        });
-
-        $recentUsers = DB::table('users')
-            ->select('id', 'name', 'email', 'phone', 'role', 'user_mode', 'created_at')
-            ->orderBy('id', 'desc')
-            ->limit(8)
-            ->get();
-
-        $recentProducts = DB::table('products')
-            ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
-            ->select(
-                'products.id',
-                'products.name',
-                'products.sku',
-                'products.b2c_price',
-                'products.b2b_price',
-                'products.stock_quantity',
-                'products.thumbnail',
-                'categories.name as category_name'
-            )
-            ->whereNull('products.deleted_at')
-            ->orderBy('products.id', 'desc')
-            ->limit(6)
-            ->get();
-
-        $recentGarages = DB::table('partner_garages')
-            ->select('id', 'name', 'phone', 'email', 'address', 'city', 'status')
-            ->orderBy('id', 'desc')
-            ->limit(5)
-            ->get();
-
-        return response()->json([
-            'status' => 'success',
-            'stats' => [
-                'total_revenue' => $totalRevenue,
-                'products_count' => $productsCount,
-                'users_count' => $usersCount,
-                'b2c_count' => $b2cCount,
-                'b2b_count' => $b2bCount,
-                'garages_count' => $garagesCount,
-                'orders_count' => $ordersCount,
-            ],
-            'category_breakdown' => $categoryBreakdown,
-            'geo_breakdown' => $geoBreakdown,
-            'recent_users' => $recentUsers,
-            'recent_products' => $recentProducts,
-            'recent_garages' => $recentGarages,
-        ]);
+        return response()->json(array_merge(['status' => 'success'], $data))
+            ->header('Cache-Control', 'private, max-age=30, stale-while-revalidate=60');
+    }
     }
 }

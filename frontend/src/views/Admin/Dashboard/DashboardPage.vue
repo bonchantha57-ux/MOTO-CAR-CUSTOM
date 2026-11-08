@@ -44,13 +44,31 @@ let unsubscribeOrderEvents: (() => void) | null = null
 let dashPollingTimer: any = null
 
 const fetchDashboardData = async (silent = false) => {
-  if (!silent) isLoading.value = true
+  // Try loading from session cache for instant render
+  if (!stats.value.products_count) {
+    try {
+      const cached = sessionStorage.getItem('admin_cached_stats')
+      if (cached) {
+        const parsed = JSON.parse(cached)
+        stats.value = parsed.stats || stats.value
+        recentUsers.value = parsed.recent_users || []
+        recentProducts.value = parsed.recent_products || []
+        recentGarages.value = parsed.recent_garages || []
+        isLoading.value = false
+      }
+    } catch (e) {}
+  }
+
+  if (!silent && !stats.value.products_count) isLoading.value = true
   try {
     const res = await axios.get('/api/v1/admin/dashboard-stats')
     stats.value = res.data.stats || {}
     recentUsers.value = res.data.recent_users || []
     recentProducts.value = res.data.recent_products || []
     recentGarages.value = res.data.recent_garages || []
+    try {
+      sessionStorage.setItem('admin_cached_stats', JSON.stringify(res.data))
+    } catch (e) {}
   } catch (err) {
     console.error('Failed to load admin stats:', err)
   } finally {
