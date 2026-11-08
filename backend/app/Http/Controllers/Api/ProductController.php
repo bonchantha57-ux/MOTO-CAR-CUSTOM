@@ -370,5 +370,4 @@ class ProductController extends Controller
         return response()->json(array_merge(['status' => 'success'], $data))
             ->header('Cache-Control', 'private, max-age=30, stale-while-revalidate=60');
     }
-    }
 }

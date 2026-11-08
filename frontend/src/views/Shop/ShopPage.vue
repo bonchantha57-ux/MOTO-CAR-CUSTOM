@@ -31,6 +31,7 @@ const wishlistStore = useWishlistStore()
 const langStore = useLanguageStore()
 const addedSuccessId = ref<number | null>(null)
 
+const allProductsPool = ref<any[]>([...defaultProducts])
 const products = ref<any[]>([...defaultProducts])
 const categories = ref<any[]>([...defaultCategories])
 const brands = ref<any[]>([...defaultBrands])
@@ -68,38 +69,119 @@ const fetchCategoriesAndBrands = async () => {
 }
 
 const fetchProducts = async () => {
-  const cacheKey = `mcc_products_${selectedCategory.value}_${selectedBrand.value}_${sortBy.value}_${searchQuery.value}`
+  const cat = selectedCategory.value
+  const brand = selectedBrand.value
+  const q = searchQuery.value.toLowerCase().trim()
+  const sort = sortBy.value
+
+  const cacheKey = `mcc_products_${cat}_${brand}_${sort}_${q}`
   
-  // Instant display from cache if present
+  // 1. Instant display from session cache or local pool
   try {
     const cached = sessionStorage.getItem(cacheKey)
     if (cached) {
       products.value = JSON.parse(cached)
       isLoading.value = false
-    } else if (products.value.length === 0) {
-      isLoading.value = true
+    } else {
+      // Instant client-side filter
+      let filtered = [...allProductsPool.value]
+      if (cat) {
+        filtered = filtered.filter(p => 
+          p.category_slug === cat || 
+          (p.category_name && p.category_name.toLowerCase().includes(cat.toLowerCase().replace(/-/g, ' ')))
+        )
+      }
+      if (brand) {
+        filtered = filtered.filter(p => 
+          p.brand_slug === brand || 
+          (p.brand_name && p.brand_name.toLowerCase().includes(brand.toLowerCase()))
+        )
+      }
+      if (q) {
+        filtered = filtered.filter(p => 
+          (p.name && p.name.toLowerCase().includes(q)) || 
+          (p.sku && p.sku.toLowerCase().includes(q))
+        )
+      }
+      if (sort === 'price_asc' || sort === 'price-low') {
+        filtered.sort((a, b) => Number(a.b2c_price) - Number(b.b2c_price))
+      } else if (sort === 'price_desc' || sort === 'price-high') {
+        filtered.sort((a, b) => Number(b.b2c_price) - Number(a.b2c_price))
+      }
+      products.value = filtered
+      isLoading.value = false
     }
   } catch (e) {
-    isLoading.value = true
+    isLoading.value = false
   }
 
+  // 2. Fetch live data from Railway backend API
   try {
     const params: any = {}
-    if (selectedCategory.value) params.category = selectedCategory.value
-    if (selectedBrand.value) params.brand = selectedBrand.value
-    if (searchQuery.value) params.q = searchQuery.value
-    if (sortBy.value) params.sort = sortBy.value
+    if (cat) params.category = cat
+    if (brand) params.brand = brand
+    if (q) params.q = q
+    if (sort) params.sort = sort
 
     const res = await axios.get('/api/v1/products', { params })
-    products.value = res.data.data || []
+    const fetched = res.data.data || []
+    if (fetched.length > 0 || (cat || brand || q)) {
+      products.value = fetched
+    }
+
+    // Also update allProductsPool if unfiltered
+    if (!cat && !brand && !q && fetched.length > 0) {
+      allProductsPool.value = fetched
+    }
+
     try {
       sessionStorage.setItem(cacheKey, JSON.stringify(products.value))
     } catch (e) {}
   } catch (err) {
-    console.error('Failed to load products:', err)
+    console.warn('API sync delayed, using instant filtered catalog:', err)
   } finally {
     isLoading.value = false
   }
+}
+
+const selectCategory = (slug: string) => {
+  selectedCategory.value = selectedCategory.value === slug ? '' : slug
+  router.push({
+    name: 'shop',
+    query: {
+      ...route.query,
+      category: selectedCategory.value || undefined
+    }
+  })
+  fetchProducts()
+}
+
+const selectBrand = (slug: string) => {
+  selectedBrand.value = selectedBrand.value === slug ? '' : slug
+  router.push({
+    name: 'shop',
+    query: {
+      ...route.query,
+      brand: selectedBrand.value || undefined
+    }
+  })
+  fetchProducts()
+}
+
+const getCategoryCount = (slug: string) => {
+  if (!slug) return allProductsPool.value.length
+  return allProductsPool.value.filter(p => 
+    p.category_slug === slug || 
+    (p.category_name && p.category_name.toLowerCase().includes(slug.toLowerCase().replace(/-/g, ' ')))
+  ).length
+}
+
+const getBrandCount = (slug: string) => {
+  if (!slug) return allProductsPool.value.length
+  return allProductsPool.value.filter(p => 
+    p.brand_slug === slug || 
+    (p.brand_name && p.brand_name.toLowerCase().includes(slug.toLowerCase()))
+  ).length
 }
 
 onMounted(() => {
@@ -118,27 +200,6 @@ watch(
   }
 )
 
-const selectCategory = (slug: string) => {
-  selectedCategory.value = selectedCategory.value === slug ? '' : slug
-  router.push({
-    name: 'shop',
-    query: {
-      ...route.query,
-      category: selectedCategory.value || undefined
-    }
-  })
-}
-
-const selectBrand = (slug: string) => {
-  selectedBrand.value = selectedBrand.value === slug ? '' : slug
-  router.push({
-    name: 'shop',
-    query: {
-      ...route.query,
-      brand: selectedBrand.value || undefined
-    }
-  })
-}
 
 const getCategoryName = (cat: any) => {
   if (!cat) return ''
@@ -253,7 +314,7 @@ const addToCart = (product: any, e: Event) => {
                   <span class="cat-dot"></span>
                   <span>{{ langStore.t.allProducts }}</span>
                 </div>
-                <span class="count-tag">{{ products.length }}</span>
+                <span class="count-tag">{{ allProductsPool.length }}</span>
               </button>
               <button 
                 v-for="cat in categories" 
@@ -266,7 +327,7 @@ const addToCart = (product: any, e: Event) => {
                   <span class="cat-dot"></span>
                   <span>{{ getCategoryName(cat) }}</span>
                 </div>
-                <span class="count-tag">{{ cat.products_count || 1 }}</span>
+                <span class="count-tag">{{ getCategoryCount(cat.slug) || cat.products_count || 1 }}</span>
               </button>
             </div>
           </div>
@@ -289,6 +350,7 @@ const addToCart = (product: any, e: Event) => {
                   <span class="cat-dot"></span>
                   <span>{{ langStore.t.allBrands }}</span>
                 </div>
+                <span class="count-tag">{{ allProductsPool.length }}</span>
               </button>
               <button 
                 v-for="brand in brands" 
@@ -301,6 +363,7 @@ const addToCart = (product: any, e: Event) => {
                   <span class="cat-dot"></span>
                   <span>{{ getBrandName(brand) }}</span>
                 </div>
+                <span class="count-tag">{{ getBrandCount(brand.slug) || 1 }}</span>
               </button>
             </div>
           </div>
@@ -308,7 +371,7 @@ const addToCart = (product: any, e: Event) => {
 
         <!-- Right: Products Grid -->
         <main class="products-grid-wrapper">
-          <div v-if="isLoading" class="loading-state">
+          <div v-if="isLoading && products.length === 0" class="loading-state">
             <div class="spinner"></div>
             <span>Fetching certified products...</span>
           </div>

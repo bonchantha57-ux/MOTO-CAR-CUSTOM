@@ -121,7 +121,7 @@ const handleDelete = async (prod: any) => {
 
       <!-- Products Table -->
       <div class="table-container glass-panel">
-        <div v-if="isLoading" class="loading-state">
+        <div v-if="isLoading && products.length === 0" class="loading-state">
           <div class="spinner"></div>
           <span>Loading products from database...</span>
         </div>

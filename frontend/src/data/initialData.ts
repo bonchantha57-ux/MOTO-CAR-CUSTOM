@@ -137,3 +137,4 @@ export const defaultProducts = [
     brand_slug: 'akrapovic'
   }
 ]
+

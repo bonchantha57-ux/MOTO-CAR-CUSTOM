@@ -20,25 +20,36 @@ import {
 } from 'lucide-vue-next'
 import { subscribeToOrderEvents } from '@/utils/orderRealtime'
 import { useLanguageStore } from '@/stores/language'
+import { defaultProducts } from '@/data/initialData'
 
 const router = useRouter()
 const authStore = useAuthStore()
 const langStore = useLanguageStore()
 
 const stats = ref<any>({
-  total_revenue: 0,
-  products_count: 0,
-  users_count: 0,
-  b2c_count: 0,
-  b2b_count: 0,
-  garages_count: 0,
-  orders_count: 0
+  total_revenue: 6840,
+  products_count: defaultProducts.length,
+  users_count: 5,
+  b2c_count: 4,
+  b2b_count: 1,
+  garages_count: 5,
+  orders_count: 4
 })
 
-const recentUsers = ref<any[]>([])
-const recentProducts = ref<any[]>([])
-const recentGarages = ref<any[]>([])
-const isLoading = ref(true)
+const recentUsers = ref<any[]>([
+  { id: 10, name: 'BORN CHANTHA', email: 'galaxyglobal.kh@gmail.com', role: 'customer', user_mode: 'b2c', created_at: '2026-10-31' },
+  { id: 9, name: 'Born Chantha', email: 'bonchantha57@gmail.com', role: 'customer', user_mode: 'b2c', created_at: '2026-10-31' },
+  { id: 6, name: 'Pheak', email: 'pheak@gmail.com', role: 'customer', user_mode: 'b2c', created_at: '2026-10-25' },
+  { id: 5, name: 'Speed Workshop', email: 'speed@workshop.com', role: 'b2b_client', user_mode: 'b2b', created_at: '2026-10-20' },
+  { id: 1, name: 'MotoCar Director', email: 'admin@motocar.com', role: 'super_admin', user_mode: 'b2c', created_at: '2026-10-18' }
+])
+const recentProducts = ref<any[]>([...defaultProducts])
+const recentGarages = ref<any[]>([
+  { id: 1, name: 'Apex Speed Garage Phnom Penh', phone: '+855 23 888 111', city: 'Phnom Penh', status: 'active' },
+  { id: 2, name: 'Speed Motor Workshop', phone: '+855 12 345 678', city: 'Phnom Penh', status: 'active' },
+  { id: 3, name: 'Angkor Performance Tuning', phone: '+855 63 999 888', city: 'Siem Reap', status: 'active' }
+])
+const isLoading = ref(false)
 
 let unsubscribeOrderEvents: (() => void) | null = null
 let dashPollingTimer: any = null
