@@ -236,8 +236,8 @@ class ProductController extends Controller
      */
     public function categories()
     {
-        $categories = Cache::remember('api_categories', 300, function () {
-            return DB::table('categories')
+        $categories = Cache::remember('api_categories_v2', 300, function () {
+            $list = DB::table('categories')
                 ->leftJoin('products', function($join) {
                     $join->on('categories.id', '=', 'products.category_id')
                         ->whereNull('products.deleted_at')
@@ -248,7 +248,25 @@ class ProductController extends Controller
                 ->groupBy('categories.id')
                 ->orderBy('categories.sort_order', 'asc')
                 ->get();
+
+            return json_decode(json_encode($list), true);
         });
+
+        if (!is_array($categories) || isset($categories['__PHP_Incomplete_Class_Name'])) {
+            Cache::forget('api_categories_v2');
+            $list = DB::table('categories')
+                ->leftJoin('products', function($join) {
+                    $join->on('categories.id', '=', 'products.category_id')
+                        ->whereNull('products.deleted_at')
+                        ->where('products.status', 'active');
+                })
+                ->select('categories.*', DB::raw('count(products.id) as products_count'))
+                ->where('categories.is_active', true)
+                ->groupBy('categories.id')
+                ->orderBy('categories.sort_order', 'asc')
+                ->get();
+            $categories = json_decode(json_encode($list), true);
+        }
 
         return response()->json(['status' => 'success', 'data' => $categories])
             ->header('Cache-Control', 'public, max-age=180, stale-while-revalidate=300');
@@ -259,9 +277,16 @@ class ProductController extends Controller
      */
     public function brands()
     {
-        $brands = Cache::remember('api_brands', 300, function () {
-            return DB::table('brands')->where('is_active', true)->get();
+        $brands = Cache::remember('api_brands_v2', 300, function () {
+            $list = DB::table('brands')->where('is_active', true)->get();
+            return json_decode(json_encode($list), true);
         });
+
+        if (!is_array($brands) || isset($brands['__PHP_Incomplete_Class_Name'])) {
+            Cache::forget('api_brands_v2');
+            $list = DB::table('brands')->where('is_active', true)->get();
+            $brands = json_decode(json_encode($list), true);
+        }
 
         return response()->json(['status' => 'success', 'data' => $brands])
             ->header('Cache-Control', 'public, max-age=180, stale-while-revalidate=300');
@@ -272,7 +297,7 @@ class ProductController extends Controller
      */
     public function dashboardStats()
     {
-        $data = Cache::remember('admin_dashboard_stats', 60, function () {
+        $data = Cache::remember('admin_dashboard_stats_v2', 60, function () {
             $productsCount = DB::table('products')->whereNull('deleted_at')->count();
             $usersCount = DB::table('users')->count();
             $b2cCount = DB::table('users')->where('role', 'customer')->count();
@@ -349,7 +374,7 @@ class ProductController extends Controller
                 ->limit(5)
                 ->get();
 
-            return [
+            $res = [
                 'stats' => [
                     'total_revenue' => $totalRevenue,
                     'products_count' => $productsCount,
@@ -365,9 +390,11 @@ class ProductController extends Controller
                 'recent_products' => $recentProducts,
                 'recent_garages' => $recentGarages,
             ];
+
+            return json_decode(json_encode($res), true);
         });
 
-        return response()->json(array_merge(['status' => 'success'], $data))
+        return response()->json(array_merge(['status' => 'success'], (array)$data))
             ->header('Cache-Control', 'private, max-age=30, stale-while-revalidate=60');
     }
 }

@@ -48,8 +48,18 @@ const fetchCategoriesAndBrands = async () => {
   try {
     const cachedCat = sessionStorage.getItem('cached_categories')
     const cachedBrands = sessionStorage.getItem('cached_brands')
-    if (cachedCat) categories.value = JSON.parse(cachedCat)
-    if (cachedBrands) brands.value = JSON.parse(cachedBrands)
+    if (cachedCat) {
+      const parsedCat = JSON.parse(cachedCat)
+      if (Array.isArray(parsedCat) && parsedCat.length > 0 && parsedCat[0].name) {
+        categories.value = parsedCat
+      }
+    }
+    if (cachedBrands) {
+      const parsedBrands = JSON.parse(cachedBrands)
+      if (Array.isArray(parsedBrands) && parsedBrands.length > 0 && parsedBrands[0].name) {
+        brands.value = parsedBrands
+      }
+    }
   } catch (e) {}
 
   try {
@@ -57,12 +67,14 @@ const fetchCategoriesAndBrands = async () => {
       axios.get('/api/v1/categories'),
       axios.get('/api/v1/brands')
     ])
-    categories.value = catRes.data.data || []
-    brands.value = brandRes.data.data || []
-    try {
+    if (Array.isArray(catRes.data?.data) && catRes.data.data.length > 0 && catRes.data.data[0].name) {
+      categories.value = catRes.data.data
       sessionStorage.setItem('cached_categories', JSON.stringify(categories.value))
+    }
+    if (Array.isArray(brandRes.data?.data) && brandRes.data.data.length > 0 && brandRes.data.data[0].name) {
+      brands.value = brandRes.data.data
       sessionStorage.setItem('cached_brands', JSON.stringify(brands.value))
-    } catch (e) {}
+    }
   } catch (err) {
     console.error('Failed to load categories/brands:', err)
   }
