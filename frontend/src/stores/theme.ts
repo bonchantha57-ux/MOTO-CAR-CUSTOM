@@ -3,8 +3,19 @@ import { ref, computed } from 'vue'
 
 export type ThemeMode = 'dark' | 'light'
 
+const STORAGE_KEY = 'mcc_theme_mode_v3'
+
 export const useThemeStore = defineStore('theme', () => {
-  const saved = (typeof window !== 'undefined' ? localStorage.getItem('mcc_theme') : null) as ThemeMode | null
+  // Clear any legacy bright/stale mode from older versions that caused eye glare
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.removeItem('mcc_theme')
+      localStorage.removeItem('mcc_theme_mode_v2')
+    } catch (e) {}
+  }
+
+  // Always default strictly to 'dark' (Supercar Obsidian Luxury) for optimal eye comfort and automotive prestige
+  const saved = (typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null) as ThemeMode | null
   const currentTheme = ref<ThemeMode>(saved === 'light' ? 'light' : 'dark')
 
   const isLight = computed(() => currentTheme.value === 'light')
@@ -35,7 +46,7 @@ export const useThemeStore = defineStore('theme', () => {
   const setTheme = (theme: ThemeMode) => {
     currentTheme.value = theme
     if (typeof window !== 'undefined') {
-      localStorage.setItem('mcc_theme', theme)
+      localStorage.setItem(STORAGE_KEY, theme)
     }
     applyThemeToDOM(theme)
   }
@@ -52,4 +63,3 @@ export const useThemeStore = defineStore('theme', () => {
     toggleTheme
   }
 })
-

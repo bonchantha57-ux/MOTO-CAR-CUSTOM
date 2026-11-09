@@ -40,18 +40,18 @@
 
 [data-theme="light"], .theme-light {
   color-scheme: light;
-  --bg-darkest: #f8fafc;
-  --bg-dark: #f1f5f9;
+  --bg-darkest: #eaedf2;
+  --bg-dark: #e2e8f0;
   --bg-card: #ffffff;
-  --bg-card-hover: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.96);
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-medium: rgba(0, 0, 0, 0.12);
-  --border-glow: rgba(249, 115, 22, 0.35);
+  --bg-card-hover: #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --border-subtle: #cbd5e1;
+  --border-medium: #94a3b8;
+  --border-glow: rgba(234, 88, 12, 0.35);
 }
 
 body.theme-light, [data-theme="light"] body {
-  background-color: #f8fafc !important;
+  background-color: #eaedf2 !important;
   color: #0f172a !important;
 }
 
@@ -66,10 +66,10 @@ body.theme-light h6 {
 
 body.theme-light .glass-panel,
 body.theme-light .glass-card {
-  background: rgba(255, 255, 255, 0.96) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
   color: #0f172a !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
 }
 
 /* Brand Logo in Light Mode */
@@ -260,36 +260,18 @@ body.theme-light .custom-select {
 }
 
 /* =====================================================================
-   HERO SHOWROOM SECTION IN LIGHT MODE (CRUCIAL TRANSFORMATION)
+   HERO SHOWROOM SECTION - EYE COMFORT & CINEMATIC PRESTIGE
+   The hero showroom maintains dramatic studio contrast so vehicles shine
+   and users NEVER suffer from blinding white glare ("រយះភ្នែក").
    ===================================================================== */
 body.theme-light .hero-section {
-  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%) !important;
   position: relative !important;
 }
 
-body.theme-light .hero-bg-media {
-  opacity: 0.18 !important;
-  filter: contrast(1.15) brightness(1.1) grayscale(30%) !important;
-  mix-blend-mode: multiply !important;
-}
-
-body.theme-light .hero-gradient-overlay {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.75) 50%, #f8fafc 100%) !important;
-}
-
-body.theme-light .hero-main-title {
-  color: #0f172a !important;
-  text-shadow: none !important;
-}
-
-body.theme-light .hero-description {
-  color: #475569 !important;
-}
-
 body.theme-light .fitment-engine-card {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.15) !important;
 }
 
 body.theme-light .card-header-bar {

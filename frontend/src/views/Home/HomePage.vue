@@ -1435,34 +1435,13 @@ const applyFitmentSearch = () => {
 
 /* =====================================================================
    LIGHT THEME SHOWROOM OVERRIDES FOR HOMEPAGE
+   Keeps dramatic cinematic contrast in hero to prevent eye glare ("រយះភ្នែក")
+   while elegantly adapting cards and content below.
    ===================================================================== */
-:global(body.theme-light) .hero-section {
-  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%) !important;
-}
-
-:global(body.theme-light) .hero-bg-media {
-  opacity: 0.18 !important;
-  filter: contrast(1.15) brightness(1.1) grayscale(30%) !important;
-  mix-blend-mode: multiply !important;
-}
-
-:global(body.theme-light) .hero-gradient-overlay {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.75) 50%, #f8fafc 100%) !important;
-}
-
-:global(body.theme-light) .hero-main-title {
-  color: #0f172a !important;
-  text-shadow: none !important;
-}
-
-:global(body.theme-light) .hero-description {
-  color: #475569 !important;
-}
-
 :global(body.theme-light) .fitment-engine-card {
   background: rgba(255, 255, 255, 0.98) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.15) !important;
 }
 
 :global(body.theme-light) .card-header-bar {
