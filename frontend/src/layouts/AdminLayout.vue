@@ -287,7 +287,7 @@ const handleLogout = async () => {
                 class="admin-avatar" 
                 @error="handleAvatarError($event)"
               />
-              <span class="avatar-edit-dot" style="position: absolute; bottom: -2px; right: -2px; background: #ff5500; border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1.5px solid #080c16;">📷</span>
+              <span class="avatar-edit-dot" style="position: absolute; bottom: -2px; right: -2px; background: var(--orange-500); border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1.5px solid #080c16;">📷</span>
             </div>
             <div class="profile-info">
               <strong class="admin-name">{{ authStore.user?.name || 'MotoCar Director' }}</strong>
@@ -302,7 +302,7 @@ const handleLogout = async () => {
         <div class="admin-modal-box glass-panel" style="background: #0f172a; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; width: 100%; max-width: 480px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255,85,0,0.15); display: flex; align-items: center; justify-content: center; color: #ff5500;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255,85,0,0.15); display: flex; align-items: center; justify-content: center; color: var(--orange-500);">
                 <User :size="18" />
               </div>
               <h3 style="margin: 0; color: #ffffff; font-size: 1.2rem; font-weight: 700;">{{ langStore.t.admin?.adminProfilePicture || 'Admin Profile & Picture' }}</h3>
@@ -324,13 +324,13 @@ const handleLogout = async () => {
             <div style="position: relative; width: 90px; height: 90px; margin: 0 auto 0.75rem;">
               <img 
                 :src="formatImageUrl(adminForm.avatar || authStore.user?.avatar_url, DEFAULT_AVATAR)" 
-                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #ff5500; box-shadow: 0 0 15px rgba(255,85,0,0.35);" 
+                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--orange-500); box-shadow: 0 0 15px rgba(255,85,0,0.35);" 
                 @error="handleAvatarError($event)"
               />
               <button 
                 type="button" 
                 @click="triggerAdminFile"
-                style="position: absolute; bottom: 0; right: 0; width: 30px; height: 30px; background: #ff5500; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid #0f172a; cursor: pointer;"
+                style="position: absolute; bottom: 0; right: 0; width: 30px; height: 30px; background: var(--orange-500); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid #0f172a; cursor: pointer;"
                 title="Upload Photo from PC"
               >
                 <Camera :size="14" />
@@ -348,7 +348,7 @@ const handleLogout = async () => {
               type="button" 
               @click="triggerAdminFile"
               :disabled="isUploadingAvatar"
-              style="background: rgba(255,85,0,0.12); border: 1px solid rgba(255,85,0,0.3); color: #ff5500; padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;"
+              style="background: rgba(255,85,0,0.12); border: 1px solid rgba(255,85,0,0.3); color: var(--orange-500); padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;"
             >
               <Upload :size="13" />
               <span>{{ isUploadingAvatar ? (langStore.t.admin?.uploading || 'Uploading Picture...') : (langStore.t.admin?.choosePhoto || 'Choose Photo from Computer') }}</span>
@@ -397,7 +397,7 @@ const handleLogout = async () => {
               <button 
                 type="submit" 
                 :disabled="isSavingAdmin"
-                style="background: linear-gradient(135deg, #ff5500, #ff7700); border: none; color: white; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;"
+                style="background: linear-gradient(135deg, var(--orange-500), #ff7700); border: none; color: white; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;"
               >
                 {{ isSavingAdmin ? 'Saving Changes...' : (langStore.t.admin?.saveAdminProfile || 'Save Admin Profile') }}
               </button>
@@ -463,8 +463,8 @@ const handleLogout = async () => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(255, 85, 0, 0.4);
-  border: 1px solid rgba(255, 85, 0, 0.5);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+  border: 1px solid rgba(249, 115, 22, 0.5);
   flex-shrink: 0;
 }
 
@@ -482,7 +482,7 @@ const handleLogout = async () => {
 .part-1 {
   font-size: 1.15rem;
   font-weight: 900;
-  color: #ff5500;
+  color: var(--orange-500);
   letter-spacing: -0.02em;
 }
 
@@ -537,9 +537,9 @@ const handleLogout = async () => {
 }
 
 .nav-item.router-link-active {
-  background: rgba(255, 85, 0, 0.15);
+  background: rgba(249, 115, 22, 0.15);
   color: #ff7834;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   font-weight: 700;
 }
 
@@ -633,7 +633,7 @@ const handleLogout = async () => {
   white-space: nowrap;
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 
 .header-right {
   display: flex;
@@ -663,8 +663,8 @@ const handleLogout = async () => {
 }
 
 .lang-pill-btn:hover {
-  background: rgba(255, 85, 0, 0.1);
-  border-color: rgba(255, 85, 0, 0.35);
+  background: rgba(249, 115, 22, 0.1);
+  border-color: rgba(249, 115, 22, 0.35);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -718,15 +718,15 @@ const handleLogout = async () => {
 }
 
 .lang-item:hover {
-  background: rgba(255, 85, 0, 0.12);
-  color: #ff5500;
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--orange-500);
 }
 
 .lang-item.active {
-  background: rgba(255, 85, 0, 0.18);
+  background: rgba(249, 115, 22, 0.18);
   color: #ffffff;
   font-weight: 700;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
 .lang-item-flag {
@@ -749,7 +749,7 @@ const handleLogout = async () => {
 }
 
 .check-mark {
-  color: #ff5500;
+  color: var(--orange-500);
   font-weight: 900;
   font-size: 0.9rem;
 }
@@ -782,7 +782,7 @@ const handleLogout = async () => {
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ff5500;
+  border: 2px solid var(--orange-500);
 }
 
 .profile-info {

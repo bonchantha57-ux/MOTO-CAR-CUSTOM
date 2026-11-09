@@ -498,8 +498,8 @@ watch(() => route.params.orderNumber, (newCode) => {
   font-weight: 800;
   letter-spacing: 0.1em;
   color: #ff7834;
-  background: rgba(255, 85, 0, 0.12);
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.3rem 0.8rem;
   border-radius: 9999px;
   margin-bottom: 0.8rem;
@@ -538,8 +538,8 @@ watch(() => route.params.orderNumber, (newCode) => {
 }
 
 .search-box:focus-within {
-  border-color: #ff5500;
-  box-shadow: 0 0 25px rgba(255, 85, 0, 0.3);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.3);
 }
 
 .track-input {
@@ -555,7 +555,7 @@ watch(() => route.params.orderNumber, (newCode) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -568,7 +568,7 @@ watch(() => route.params.orderNumber, (newCode) => {
 
 .btn-track:hover {
   background: #ff6a1f;
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
 .error-banner {
@@ -590,7 +590,7 @@ watch(() => route.params.orderNumber, (newCode) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, rgba(14, 165, 233, 0.22) 0%, rgba(255, 85, 0, 0.18) 100%);
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.22) 0%, rgba(249, 115, 22, 0.18) 100%);
   border: 1px solid rgba(14, 165, 233, 0.4);
   box-shadow: 0 8px 32px rgba(14, 165, 233, 0.25);
   backdrop-filter: blur(12px);
@@ -603,7 +603,7 @@ watch(() => route.params.orderNumber, (newCode) => {
 
 @keyframes toast-glow {
   0% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(255, 85, 0, 0.35); }
+  100% { box-shadow: 0 0 25px rgba(249, 115, 22, 0.35); }
 }
 
 .toast-left {
@@ -737,7 +737,7 @@ watch(() => route.params.orderNumber, (newCode) => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.75rem 1.4rem;
@@ -750,7 +750,7 @@ watch(() => route.params.orderNumber, (newCode) => {
 
 .btn-clear-track:hover {
   background: #ff6a1f;
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
 .btn-deleted-shop {
@@ -968,17 +968,17 @@ watch(() => route.params.orderNumber, (newCode) => {
 }
 
 .step-active .step-circle {
-  background: rgba(255, 85, 0, 0.2);
-  border-color: #ff5500;
+  background: rgba(249, 115, 22, 0.2);
+  border-color: var(--orange-500);
   color: #ff7834;
-  box-shadow: 0 0 16px rgba(255, 85, 0, 0.6);
+  box-shadow: 0 0 16px rgba(249, 115, 22, 0.6);
   animation: pulse-ring 2s infinite ease-in-out;
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 85, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
 }
 
 .step-cancelled .step-circle {
@@ -1124,7 +1124,7 @@ watch(() => route.params.orderNumber, (newCode) => {
 }
 
 .price-val {
-  color: #ff5500;
+  color: var(--orange-500);
   font-size: 1.05rem;
   display: block;
 }
@@ -1189,7 +1189,7 @@ watch(() => route.params.orderNumber, (newCode) => {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1270,9 +1270,9 @@ watch(() => route.params.orderNumber, (newCode) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 85, 0, 0.12);
-  border: 1px solid rgba(255, 85, 0, 0.3);
-  color: #ff5500;
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: var(--orange-500);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   font-size: 0.85rem;
@@ -1282,7 +1282,7 @@ watch(() => route.params.orderNumber, (newCode) => {
 }
 
 .btn-garage-link:hover {
-  background: rgba(255, 85, 0, 0.22);
+  background: rgba(249, 115, 22, 0.22);
 }
 
 /* Empty State */
@@ -1297,12 +1297,12 @@ watch(() => route.params.orderNumber, (newCode) => {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  box-shadow: 0 0 30px rgba(255, 85, 0, 0.2);
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.2);
 }
 
 .empty-track-state h3 {
@@ -1331,7 +1331,7 @@ watch(() => route.params.orderNumber, (newCode) => {
   text-decoration: none;
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 .text-cyan { color: #00d2ff; }
 .text-green { color: #22c55e; }
 </style>

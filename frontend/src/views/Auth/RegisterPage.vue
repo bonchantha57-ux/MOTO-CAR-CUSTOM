@@ -259,8 +259,8 @@ const handleRegister = async () => {
 <style scoped>
 .register-card {
   background: rgba(13, 18, 29, 0.92);
-  border: 1px solid rgba(255, 85, 0, 0.3);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 85, 0, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(249, 115, 22, 0.15);
   border-radius: 16px;
   padding: 2.25rem 2rem;
   backdrop-filter: blur(20px);
@@ -277,8 +277,8 @@ const handleRegister = async () => {
 
 .auth-tag {
   display: inline-block;
-  background: rgba(255, 85, 0, 0.15);
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.4);
   color: #ff7834;
   font-size: 0.72rem;
   font-weight: 800;
@@ -394,8 +394,8 @@ label {
 }
 
 .input-wrapper input:focus {
-  border-color: #ff5500;
-  box-shadow: 0 0 15px rgba(255, 85, 0, 0.25);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.25);
   background: #090e18;
 }
 
@@ -425,8 +425,8 @@ label {
 }
 
 .interest-pill.active {
-  background: rgba(255, 85, 0, 0.2);
-  border-color: #ff5500;
+  background: rgba(249, 115, 22, 0.2);
+  border-color: var(--orange-500);
   color: #ff7834;
 }
 
@@ -448,28 +448,28 @@ label {
 }
 
 .checkbox-container input {
-  accent-color: #ff5500;
+  accent-color: var(--orange-500);
   width: 16px;
   height: 16px;
   margin-top: 2px;
 }
 
 .text-orange {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 /* Submit Button */
 .btn-submit-auth {
   margin-top: 0.5rem;
   width: 100%;
-  background: linear-gradient(135deg, #ff5500 0%, #ea580c 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ea580c 100%);
   color: white;
   border: none;
   border-radius: 10px;
   padding: 0.85rem 1.5rem;
   font-weight: 800;
   font-size: 0.95rem;
-  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -479,7 +479,7 @@ label {
 .btn-submit-auth:hover:not(:disabled) {
   background: #e04b00;
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5);
 }
 
 .btn-submit-auth:disabled {
@@ -523,7 +523,7 @@ label {
 }
 
 .register-link {
-  color: #ff5500;
+  color: var(--orange-500);
   font-weight: 700;
   margin-left: 0.35rem;
 }

@@ -254,7 +254,7 @@ const shopForVehicle = (v: Vehicle) => {
 
       <!-- Empty State -->
       <div v-else-if="savedVehicles.length === 0" class="empty-garage glass-panel" style="text-align: center; padding: 4.5rem 2rem; border-radius: 16px;">
-        <div style="width: 80px; height: 80px; background: rgba(255, 85, 0, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 1px solid rgba(255, 85, 0, 0.25);">
+        <div style="width: 80px; height: 80px; background: rgba(249, 115, 22, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 1px solid rgba(249, 115, 22, 0.25);">
           <Car :size="42" class="text-orange" />
         </div>
         <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem;">Your Garage is Currently Empty</h3>
@@ -358,9 +358,9 @@ const shopForVehicle = (v: Vehicle) => {
 
 .sub-badge {
   display: inline-block;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   color: #ff7834;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   font-size: 0.72rem;
@@ -386,7 +386,7 @@ const shopForVehicle = (v: Vehicle) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: #ffffff;
   border: none;
   padding: 0.75rem 1.4rem;
@@ -400,7 +400,7 @@ const shopForVehicle = (v: Vehicle) => {
 .add-vehicle-btn:hover {
   background: #ff6a1f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
 }
 
 .glass-panel {
@@ -414,8 +414,8 @@ const shopForVehicle = (v: Vehicle) => {
 .add-panel {
   padding: 2rem;
   margin-bottom: 2.5rem;
-  border-color: rgba(255, 85, 0, 0.3);
-  box-shadow: 0 0 25px rgba(255, 85, 0, 0.1);
+  border-color: rgba(249, 115, 22, 0.3);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.1);
 }
 
 .panel-header {
@@ -475,8 +475,8 @@ const shopForVehicle = (v: Vehicle) => {
 
 .custom-input:focus,
 .custom-select:focus {
-  border-color: #ff5500;
-  box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.15);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .form-actions {
@@ -499,7 +499,7 @@ const shopForVehicle = (v: Vehicle) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.65rem 1.4rem;
@@ -527,13 +527,13 @@ const shopForVehicle = (v: Vehicle) => {
 
 .vehicle-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 85, 0, 0.35);
+  border-color: rgba(249, 115, 22, 0.35);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .vehicle-card.is-active {
-  border-color: #ff5500;
-  box-shadow: 0 0 25px rgba(255, 85, 0, 0.2);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.2);
 }
 
 .vehicle-card.is-active::before {
@@ -543,7 +543,7 @@ const shopForVehicle = (v: Vehicle) => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #ff5500, #ff8c00);
+  background: linear-gradient(90deg, var(--orange-500), #ff8c00);
 }
 
 .card-head {
@@ -570,10 +570,10 @@ const shopForVehicle = (v: Vehicle) => {
   font-size: 0.72rem;
   font-weight: 800;
   color: #ff7834;
-  background: rgba(255, 85, 0, 0.15);
+  background: rgba(249, 115, 22, 0.15);
   padding: 0.2rem 0.55rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
 .card-body {
@@ -586,8 +586,8 @@ const shopForVehicle = (v: Vehicle) => {
   width: 58px;
   height: 58px;
   border-radius: 12px;
-  background: rgba(255, 85, 0, 0.1);
-  border: 1px solid rgba(255, 85, 0, 0.25);
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -671,7 +671,7 @@ const shopForVehicle = (v: Vehicle) => {
 }
 
 .btn-shop {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
 }
 

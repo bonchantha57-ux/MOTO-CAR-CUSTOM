@@ -326,7 +326,7 @@ onMounted(() => {
   box-shadow: 0 0 8px #22c55e;
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 .text-cyan { color: #00d2ff; }
 .text-green { color: #22c55e; }
 
@@ -342,20 +342,20 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #ff5500, #ff7700);
+  background: linear-gradient(135deg, var(--orange-500), #ff7700);
   color: white;
   padding: 0.9rem 1.8rem;
   border-radius: 10px;
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
   transition: all 0.2s;
 }
 
 .btn-primary-track:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 26px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 26px rgba(249, 115, 22, 0.5);
 }
 
 .btn-outline-orders {
@@ -455,7 +455,7 @@ onMounted(() => {
 }
 
 .item-price {
-  color: #ff5500;
+  color: var(--orange-500);
   font-size: 1.1rem;
   display: block;
 }

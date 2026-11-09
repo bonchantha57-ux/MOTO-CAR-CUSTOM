@@ -44,10 +44,10 @@ const applyPromo = () => {
 
 const handleProceedCheckout = () => {
   if (!authStore.isAuthenticated) {
-    router.push('/auth/login?redirect=/cart')
+    router.push('/auth/login?redirect=/checkout')
     return
   }
-  showKhqrModal.value = true
+  router.push('/checkout')
 }
 
 const confirmPayment = async () => {
@@ -133,7 +133,7 @@ const confirmPayment = async () => {
         <h2>{{ langStore.t.loginRequiredTitle }}</h2>
         <p>{{ langStore.t.loginRequiredMsg }}</p>
         <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
-          <router-link to="/auth/login?redirect=/cart" class="btn-browse-catalog" style="background: #ff5500;">
+          <router-link to="/auth/login?redirect=/cart" class="btn-browse-catalog" style="background: var(--orange-500);">
             <span>{{ langStore.t.signIn }}</span>
           </router-link>
           <router-link to="/auth/register" class="btn-browse-catalog" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);">
@@ -280,8 +280,8 @@ const confirmPayment = async () => {
 
             <!-- Checkout Action Button -->
             <button class="btn-checkout" @click="handleProceedCheckout">
-              <QrCode :size="18" />
-              <span>Pay with Bakong KHQR</span>
+              <ShieldCheck :size="18" />
+              <span>បន្តទៅកាន់ការទូទាត់ប្រាក់ (Checkout / Payout)</span>
             </button>
 
             <!-- Mode Notice -->
@@ -392,7 +392,7 @@ const confirmPayment = async () => {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -413,7 +413,7 @@ const confirmPayment = async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -512,7 +512,7 @@ const confirmPayment = async () => {
 }
 
 .item-title:hover {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .item-sku {
@@ -723,7 +723,7 @@ const confirmPayment = async () => {
 
 .grand-total {
   font-size: 1.5rem;
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .btn-checkout {
@@ -732,7 +732,7 @@ const confirmPayment = async () => {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #ff5500 0%, #ff7700 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ff7700 100%);
   color: white;
   border: none;
   padding: 1rem;
@@ -740,14 +740,14 @@ const confirmPayment = async () => {
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.35);
   margin-bottom: 1.25rem;
   transition: all 0.25s;
 }
 
 .btn-checkout:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.5);
 }
 
 .b2b-notice {
@@ -867,7 +867,7 @@ const confirmPayment = async () => {
 }
 
 .khqr-amount {
-  color: #ff5500 !important;
+  color: var(--orange-500) !important;
   font-size: 1.1rem;
 }
 

@@ -56,7 +56,7 @@ const selectedYear = ref('')
 const makes = ref(['Honda', 'Ducati', 'Yamaha', 'Kawasaki', 'BMW Motorrad', 'Ford Performance', 'Porsche', 'Toyota GR'])
 
 const categoryMetaMap: Record<string, { icon: any, accent: string }> = {
-  'exhaust-systems': { icon: Flame, accent: '#ff5500' },
+  'exhaust-systems': { icon: Flame, accent: 'var(--orange-500)' },
   'performance-brakes': { icon: Disc, accent: '#ef4444' },
   'suspension-coilovers': { icon: SlidersHorizontal, accent: '#fbbf24' },
   'forged-wheels': { icon: CircleDot, accent: '#a855f7' },
@@ -64,7 +64,7 @@ const categoryMetaMap: Record<string, { icon: any, accent: string }> = {
 }
 
 const categories = ref<any[]>(defaultCategories.map((c) => {
-  const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: '#ff5500' }
+  const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: 'var(--orange-500)' }
   return {
     id: c.id,
     name: c.name,
@@ -84,7 +84,7 @@ const loadHomeData = async () => {
     if (cachedCat) {
       const parsedCat = JSON.parse(cachedCat)
       categories.value = parsedCat.map((c: any) => {
-        const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: '#ff5500' }
+        const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: 'var(--orange-500)' }
         return {
           id: c.id,
           name: c.name,
@@ -108,7 +108,7 @@ const loadHomeData = async () => {
 
     if (catRes.data && catRes.data.data) {
       categories.value = catRes.data.data.map((c: any) => {
-        const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: '#ff5500' }
+        const meta = categoryMetaMap[c.slug] || { icon: Flame, accent: 'var(--orange-500)' }
         return {
           id: c.id,
           name: c.name,
@@ -191,10 +191,6 @@ const applyFitmentSearch = () => {
       </div>
 
       <div class="container hero-content">
-        <div class="hero-badge-tag">
-          <span class="badge-icon-wrap"><Zap :size="13" /></span>
-          <span>{{ langStore.t.heroBadge }}</span>
-        </div>
 
         <h1 class="hero-main-title">
           {{ langStore.t.heroTitle }}
@@ -592,8 +588,8 @@ const applyFitmentSearch = () => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 85, 0, 0.15);
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.4);
   color: #ff7834;
   font-size: 0.78rem;
   font-weight: 800;
@@ -601,12 +597,12 @@ const applyFitmentSearch = () => {
   padding: 0.35rem 0.9rem;
   border-radius: 9999px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 0 20px rgba(255, 85, 0, 0.2);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
 }
 
 .badge-icon-wrap {
   display: flex;
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .hero-main-title {
@@ -620,8 +616,8 @@ const applyFitmentSearch = () => {
 }
 
 .neon-orange {
-  color: #ff5500;
-  text-shadow: 0 0 30px rgba(255, 85, 0, 0.5);
+  color: var(--orange-500);
+  text-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
 }
 
 .neon-cyan {
@@ -643,8 +639,8 @@ const applyFitmentSearch = () => {
   max-width: 1050px;
   margin: 0 auto 3rem auto;
   background: rgba(13, 18, 29, 0.88);
-  border: 1px solid rgba(255, 85, 0, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 85, 0, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(249, 115, 22, 0.15);
   border-radius: 14px;
   padding: 1.6rem;
   text-align: left;
@@ -703,9 +699,9 @@ const applyFitmentSearch = () => {
 }
 
 .type-pill-switch button.active {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
-  box-shadow: 0 2px 10px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 2px 10px rgba(249, 115, 22, 0.4);
 }
 
 .fitment-grid-inputs {
@@ -740,12 +736,12 @@ const applyFitmentSearch = () => {
 }
 
 .custom-select:focus, .custom-input:focus {
-  border-color: #ff5500;
+  border-color: var(--orange-500);
 }
 
 .btn-find-parts {
   height: 42px;
-  background: linear-gradient(135deg, #ff5500 0%, #ea580c 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ea580c 100%);
   border: none;
   border-radius: 8px;
   color: white;
@@ -755,7 +751,7 @@ const applyFitmentSearch = () => {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
   transition: all 0.2s;
 }
 
@@ -845,7 +841,7 @@ const applyFitmentSearch = () => {
 
 .explore-all-link:hover {
   gap: 0.65rem;
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 /* CATEGORIES */
@@ -909,7 +905,7 @@ const applyFitmentSearch = () => {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   font-size: 0.7rem;
   font-weight: 800;
@@ -1029,7 +1025,7 @@ const applyFitmentSearch = () => {
 }
 
 .product-name-link:hover {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .rating-strip {
@@ -1076,14 +1072,14 @@ const applyFitmentSearch = () => {
 .price-currency {
   font-size: 1.1rem;
   font-weight: 800;
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .price-value {
   font-size: 1.6rem;
   font-weight: 900;
   font-family: var(--font-display);
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .price-tag {
@@ -1133,7 +1129,7 @@ const applyFitmentSearch = () => {
 }
 
 .btn-add-cart {
-  background: #ff5500;
+  background: var(--orange-500);
   border: none;
   color: white;
   border-radius: 8px;
@@ -1143,7 +1139,7 @@ const applyFitmentSearch = () => {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
   transition: all 0.2s;
 }
 
@@ -1354,13 +1350,13 @@ const applyFitmentSearch = () => {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   padding: 1rem 1.75rem;
   border-radius: 9px;
   font-size: 0.95rem;
   font-weight: 800;
-  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
   transition: all 0.2s;
 }
 

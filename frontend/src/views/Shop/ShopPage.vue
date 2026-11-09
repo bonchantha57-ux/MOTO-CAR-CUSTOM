@@ -504,9 +504,9 @@ const addToCart = (product: any, e: Event) => {
 
 .sub-badge {
   display: inline-block;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   color: #ff7834;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   font-size: 0.72rem;
@@ -537,8 +537,8 @@ const addToCart = (product: any, e: Event) => {
 }
 
 .mode-b2c {
-  background: rgba(255, 85, 0, 0.1);
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   color: #ff7834;
 }
 
@@ -602,7 +602,7 @@ const addToCart = (product: any, e: Event) => {
 }
 
 .search-input:focus {
-  border-color: #ff5500;
+  border-color: var(--orange-500);
 }
 
 .sort-selector {
@@ -618,8 +618,8 @@ const addToCart = (product: any, e: Event) => {
 
 .sort-selector:hover,
 .sort-selector:focus-within {
-  border-color: #ff5500;
-  box-shadow: 0 0 14px rgba(255, 85, 0, 0.25);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.25);
 }
 
 .sort-select {
@@ -712,26 +712,26 @@ const addToCart = (product: any, e: Event) => {
 
 .filter-chip-btn:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 85, 0, 0.35);
+  border-color: rgba(249, 115, 22, 0.35);
   color: #ffffff;
   transform: translateX(3px);
 }
 
 .filter-chip-btn:hover .cat-dot {
-  background: #ff5500;
+  background: var(--orange-500);
 }
 
 .filter-chip-btn.active {
-  background: rgba(255, 85, 0, 0.16);
-  border-color: #ff5500;
+  background: rgba(249, 115, 22, 0.16);
+  border-color: var(--orange-500);
   color: #ff7834;
   font-weight: 700;
-  box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.15);
 }
 
 .filter-chip-btn.active .cat-dot {
-  background: #ff5500;
-  box-shadow: 0 0 8px #ff5500;
+  background: var(--orange-500);
+  box-shadow: 0 0 8px var(--orange-500);
 }
 
 .count-tag {
@@ -761,7 +761,7 @@ const addToCart = (product: any, e: Event) => {
 
 .product-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(255, 85, 0, 0.4);
+  border-color: rgba(249, 115, 22, 0.4);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -814,7 +814,7 @@ const addToCart = (product: any, e: Event) => {
 }
 
 .badge-new {
-  background: #ff5500;
+  background: var(--orange-500);
 }
 
 .badge-viral,
@@ -944,7 +944,7 @@ const addToCart = (product: any, e: Event) => {
   font-weight: 900;
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 .text-cyan { color: #38bdf8; }
 .text-green { color: #4ade80; }
 
@@ -958,7 +958,7 @@ const addToCart = (product: any, e: Event) => {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.55rem 1rem;
@@ -993,7 +993,7 @@ const addToCart = (product: any, e: Event) => {
 }
 
 .btn-reset-filter {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.65rem 1.25rem;
@@ -1005,8 +1005,8 @@ const addToCart = (product: any, e: Event) => {
 .spinner {
   width: 34px;
   height: 34px;
-  border: 3px solid rgba(255, 85, 0, 0.2);
-  border-top-color: #ff5500;
+  border: 3px solid rgba(249, 115, 22, 0.2);
+  border-top-color: var(--orange-500);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

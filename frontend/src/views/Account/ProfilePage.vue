@@ -382,9 +382,9 @@ const handleSave = async () => {
 
 .sub-badge {
   display: inline-block;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   color: #ff7834;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   font-size: 0.72rem;
@@ -460,8 +460,8 @@ const handleSave = async () => {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #ff5500;
-  box-shadow: 0 0 20px rgba(255, 85, 0, 0.3);
+  border: 3px solid var(--orange-500);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
 }
 
 .role-badge {
@@ -478,7 +478,7 @@ const handleSave = async () => {
 }
 
 .role-b2c {
-  background: #ff5500;
+  background: var(--orange-500);
   color: #ffffff;
 }
 
@@ -495,7 +495,7 @@ const handleSave = async () => {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: 2px solid #0b0f19;
   display: flex;
@@ -516,9 +516,9 @@ const handleSave = async () => {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  background: rgba(255, 85, 0, 0.12);
-  color: #ff5500;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--orange-500);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.45rem 0.85rem;
   border-radius: 8px;
   font-size: 0.75rem;
@@ -529,9 +529,9 @@ const handleSave = async () => {
 }
 
 .btn-upload-avatar:hover {
-  background: #ff5500;
+  background: var(--orange-500);
   color: #ffffff;
-  border-color: #ff5500;
+  border-color: var(--orange-500);
 }
 
 .user-display-name {
@@ -656,8 +656,8 @@ const handleSave = async () => {
 }
 
 .custom-input:focus {
-  border-color: #ff5500;
-  box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.15);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .input-wrapper.disabled .custom-input {
@@ -677,7 +677,7 @@ const handleSave = async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.8rem 1.6rem;
@@ -691,7 +691,7 @@ const handleSave = async () => {
 .save-btn:hover:not(:disabled) {
   background: #ff6a1f;
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
 }
 
 .save-btn:disabled {

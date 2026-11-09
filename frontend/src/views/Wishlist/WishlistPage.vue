@@ -194,7 +194,7 @@ const viewProduct = (slug: string) => {
 .sub-badge {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #ff5500;
+  color: var(--orange-500);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -222,7 +222,7 @@ const viewProduct = (slug: string) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.75rem 1.25rem;
@@ -236,7 +236,7 @@ const viewProduct = (slug: string) => {
 .btn-move-all:hover {
   background: #ff6a1f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.4);
 }
 
 .btn-clear-wishlist {
@@ -276,8 +276,8 @@ const viewProduct = (slug: string) => {
   height: 90px;
   margin: 0 auto 1.5rem;
   border-radius: 50%;
-  background: rgba(255, 85, 0, 0.1);
-  border: 1px solid rgba(255, 85, 0, 0.25);
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,21 +301,21 @@ const viewProduct = (slug: string) => {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.92rem;
   padding: 0.85rem 1.75rem;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
   transition: all 0.2s;
 }
 
 .btn-explore-catalog:hover {
   background: #ff6a1f;
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5);
 }
 
 /* Wishlist Grid */
@@ -338,7 +338,7 @@ const viewProduct = (slug: string) => {
 
 .wishlist-item-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 85, 0, 0.4);
+  border-color: rgba(249, 115, 22, 0.4);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -400,7 +400,7 @@ const viewProduct = (slug: string) => {
 }
 
 .badge-new {
-  background: #ff5500;
+  background: var(--orange-500);
 }
 
 .badge-viral,
@@ -429,7 +429,7 @@ const viewProduct = (slug: string) => {
 }
 
 .brand-tag {
-  color: #ff5500;
+  color: var(--orange-500);
   font-weight: 800;
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -505,7 +505,7 @@ const viewProduct = (slug: string) => {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.55rem 0.9rem;
@@ -519,10 +519,10 @@ const viewProduct = (slug: string) => {
 .btn-card-cart:hover {
   background: #ff6a1f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 .text-cyan { color: #00d2ff; }
 .text-green { color: #22c55e; }
 </style>

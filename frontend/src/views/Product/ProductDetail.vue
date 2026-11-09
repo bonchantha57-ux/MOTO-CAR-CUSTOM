@@ -586,7 +586,7 @@ const handleBuyNow = () => {
 }
 
 .bc-link:hover {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .active-bc {
@@ -621,8 +621,8 @@ const handleBuyNow = () => {
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(255, 85, 0, 0.2);
-  border-top-color: #ff5500;
+  border: 3px solid rgba(249, 115, 22, 0.2);
+  border-top-color: var(--orange-500);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -635,7 +635,7 @@ const handleBuyNow = () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -704,7 +704,7 @@ const handleBuyNow = () => {
 }
 
 .badge-new {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   font-size: 0.72rem;
   font-weight: 800;
@@ -733,8 +733,8 @@ const handleBuyNow = () => {
 }
 
 .thumb-btn.active {
-  border-color: #ff5500;
-  box-shadow: 0 0 12px rgba(255, 85, 0, 0.4);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.4);
 }
 
 .thumb-btn img {
@@ -789,8 +789,8 @@ const handleBuyNow = () => {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 85, 0, 0.15);
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   color: #ff7834;
   font-size: 0.78rem;
   font-weight: 700;
@@ -876,7 +876,7 @@ const handleBuyNow = () => {
 .price-currency {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .price-amount {
@@ -1005,9 +1005,9 @@ const handleBuyNow = () => {
 }
 
 .installation-option-card.selected {
-  border-color: #ff5500;
-  background: rgba(255, 85, 0, 0.05);
-  box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
+  border-color: var(--orange-500);
+  background: rgba(249, 115, 22, 0.05);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.15);
 }
 
 .install-check-label {
@@ -1021,7 +1021,7 @@ const handleBuyNow = () => {
 .custom-checkbox {
   width: 18px;
   height: 18px;
-  accent-color: #ff5500;
+  accent-color: var(--orange-500);
   margin-top: 0.2rem;
   cursor: pointer;
 }
@@ -1048,7 +1048,7 @@ const handleBuyNow = () => {
 .install-chip {
   font-size: 0.65rem;
   font-weight: 800;
-  background: rgba(255, 85, 0, 0.2);
+  background: rgba(249, 115, 22, 0.2);
   color: #ff7834;
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
@@ -1139,7 +1139,7 @@ const handleBuyNow = () => {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #ff5500 0%, #ff7700 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ff7700 100%);
   color: white;
   border: none;
   padding: 0.85rem 1.5rem;
@@ -1147,13 +1147,13 @@ const handleBuyNow = () => {
   font-weight: 700;
   font-size: 0.92rem;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.35);
   transition: all 0.25s;
 }
 
 .btn-add-cart:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.5);
 }
 
 .btn-buy-now {
@@ -1315,9 +1315,9 @@ const handleBuyNow = () => {
 }
 
 .tab-btn.active {
-  color: #ff5500;
-  border-bottom-color: #ff5500;
-  background: rgba(255, 85, 0, 0.05);
+  color: var(--orange-500);
+  border-bottom-color: var(--orange-500);
+  background: rgba(249, 115, 22, 0.05);
 }
 
 .tab-content-body {
@@ -1397,7 +1397,7 @@ const handleBuyNow = () => {
 }
 
 .btn-view-all {
-  color: #ff5500;
+  color: var(--orange-500);
   font-size: 0.88rem;
   font-weight: 700;
   transition: color 0.2s;
@@ -1420,7 +1420,7 @@ const handleBuyNow = () => {
 
 .rel-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 85, 0, 0.4);
+  border-color: rgba(249, 115, 22, 0.4);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
@@ -1571,14 +1571,14 @@ const handleBuyNow = () => {
   .mobile-price-num {
     font-size: 1.25rem;
     font-weight: 800;
-    color: #ff5500;
+    color: var(--orange-500);
   }
 
   .mobile-add-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #ff5500;
+    background: var(--orange-500);
     color: white;
     border: none;
     padding: 0.65rem 1.25rem;

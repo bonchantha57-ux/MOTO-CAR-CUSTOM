@@ -75,7 +75,7 @@ import { ArrowLeft, ShieldCheck, Zap } from 'lucide-vue-next'
 .auth-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(255, 85, 0, 0.08) 0%, rgba(5, 7, 11, 0.95) 80%);
+  background: radial-gradient(circle at 50% 20%, rgba(249, 115, 22, 0.08) 0%, rgba(5, 7, 11, 0.95) 80%);
 }
 
 .auth-top-header {
@@ -104,9 +104,9 @@ import { ArrowLeft, ShieldCheck, Zap } from 'lucide-vue-next'
 }
 
 .back-link:hover {
-  background: rgba(255, 85, 0, 0.12);
-  border-color: rgba(255, 85, 0, 0.4);
-  color: #ff5500;
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.4);
+  color: var(--orange-500);
 }
 
 .auth-brand-logo {
@@ -119,13 +119,13 @@ import { ArrowLeft, ShieldCheck, Zap } from 'lucide-vue-next'
 .logo-mark {
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, #ff5500 0%, #ff8c00 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ff8c00 100%);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
 }
 
 .logo-text {
@@ -140,7 +140,7 @@ import { ArrowLeft, ShieldCheck, Zap } from 'lucide-vue-next'
 }
 
 .text-orange {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .brand-sub {

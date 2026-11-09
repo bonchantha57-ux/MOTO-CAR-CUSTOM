@@ -58,7 +58,7 @@ const handleLogout = async () => {
               :src="authStore.user?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&h=200&q=80'" 
               class="user-main-avatar" 
             />
-            <router-link to="/account/profile" class="avatar-edit-badge" title="Change Profile Picture" style="position: absolute; bottom: 0; right: 0; width: 26px; height: 26px; background: #ff5500; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid #080c16;">
+            <router-link to="/account/profile" class="avatar-edit-badge" title="Change Profile Picture" style="position: absolute; bottom: 0; right: 0; width: 26px; height: 26px; background: var(--orange-500); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: 2px solid #080c16;">
               <Camera :size="13" />
             </router-link>
           </div>
@@ -201,7 +201,7 @@ const handleLogout = async () => {
 
 .profile-hero-card {
   background: rgba(13, 18, 29, 0.9);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(249, 115, 22, 0.35);
   border-radius: 16px;
   padding: 2rem 2.5rem;
   display: flex;
@@ -210,7 +210,7 @@ const handleLogout = async () => {
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 85, 0, 0.12);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(249, 115, 22, 0.12);
 }
 
 .profile-left {
@@ -224,8 +224,8 @@ const handleLogout = async () => {
   height: 72px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2.5px solid #ff5500;
-  box-shadow: 0 0 20px rgba(255, 85, 0, 0.35);
+  border: 2.5px solid var(--orange-500);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.35);
 }
 
 .name-badge-row {
@@ -250,8 +250,8 @@ const handleLogout = async () => {
 }
 
 .chip-b2c {
-  background: rgba(255, 85, 0, 0.2);
-  border: 1px solid rgba(255, 85, 0, 0.5);
+  background: rgba(249, 115, 22, 0.2);
+  border: 1px solid rgba(249, 115, 22, 0.5);
   color: #ff7834;
 }
 
@@ -347,7 +347,7 @@ const handleLogout = async () => {
   flex-shrink: 0;
 }
 
-.bg-orange { background: rgba(255, 85, 0, 0.15); color: #ff5500; }
+.bg-orange { background: rgba(249, 115, 22, 0.15); color: var(--orange-500); }
 .bg-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
 .bg-cyan { background: rgba(0, 210, 255, 0.15); color: #00d2ff; }
 .bg-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
@@ -377,7 +377,7 @@ const handleLogout = async () => {
 
 .metric-card:hover .card-arrow {
   transform: translateX(4px);
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 /* Dashboard Tiles */
@@ -406,7 +406,7 @@ const handleLogout = async () => {
   letter-spacing: 0.08em;
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
-  background: rgba(255, 85, 0, 0.15);
+  background: rgba(249, 115, 22, 0.15);
   color: #ff7834;
 }
 
@@ -438,7 +438,7 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: #ff5500;
+  color: var(--orange-500);
   font-weight: 700;
   font-size: 0.88rem;
   transition: gap 0.2s;

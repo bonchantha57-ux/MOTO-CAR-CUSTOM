@@ -204,9 +204,9 @@ const trackOrder = (orderNum: string) => {
 
 .sub-badge {
   display: inline-block;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   color: #ff7834;
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   font-size: 0.72rem;
@@ -243,8 +243,8 @@ const trackOrder = (orderNum: string) => {
 }
 
 .btn-shop-new:hover {
-  background: #ff5500;
-  border-color: #ff5500;
+  background: var(--orange-500);
+  border-color: var(--orange-500);
   color: white;
 }
 
@@ -279,7 +279,7 @@ const trackOrder = (orderNum: string) => {
   gap: 0.75rem;
 }
 
-.text-orange { color: #ff5500; }
+.text-orange { color: var(--orange-500); }
 
 .order-id {
   display: block;
@@ -395,7 +395,7 @@ const trackOrder = (orderNum: string) => {
 }
 
 .total-val {
-  color: #ff5500;
+  color: var(--orange-500);
   font-size: 1.2rem;
   font-weight: 800;
 }
@@ -409,7 +409,7 @@ const trackOrder = (orderNum: string) => {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   padding: 0.65rem 1.25rem;
@@ -455,13 +455,13 @@ const trackOrder = (orderNum: string) => {
 .empty-icon-wrap {
   width: 80px;
   height: 80px;
-  background: rgba(255, 85, 0, 0.1);
+  background: rgba(249, 115, 22, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  border: 1px solid rgba(255, 85, 0, 0.25);
+  border: 1px solid rgba(249, 115, 22, 0.25);
 }
 
 .empty-title {
@@ -483,18 +483,18 @@ const trackOrder = (orderNum: string) => {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #ff5500 0%, #ff7700 100%);
+  background: linear-gradient(135deg, var(--orange-500) 0%, #ff7700 100%);
   color: white;
   padding: 0.85rem 1.85rem;
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(255, 85, 0, 0.35);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
   transition: all 0.25s ease;
 }
 
 .btn-start-shopping:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(255, 85, 0, 0.5);
+  box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5);
 }
 </style>

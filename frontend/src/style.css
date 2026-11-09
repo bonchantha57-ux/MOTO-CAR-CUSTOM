@@ -1,28 +1,28 @@
 :root {
-  /* Color Palette */
-  --bg-darkest: #05070b;
-  --bg-dark: #0a0e17;
-  --bg-card: rgba(15, 23, 42, 0.75);
-  --bg-card-hover: rgba(26, 37, 64, 0.85);
+  /* Clean Luxury Dark Mode Palette - Soft on Eyes, High-End Automotive Feel */
+  --bg-darkest: #07090e;
+  --bg-dark: #0d131f;
+  --bg-card: rgba(17, 24, 39, 0.72);
+  --bg-card-hover: rgba(30, 41, 59, 0.85);
   --bg-glass: rgba(15, 23, 42, 0.65);
   
-  /* Brand Accents */
-  --orange-500: #ff5500;
-  --orange-400: #ff6e26;
-  --orange-600: #e04b00;
-  --orange-glow: rgba(255, 85, 0, 0.35);
+  /* Brand Accents - Clean Warm Sunset Tangerine (Not Piercing) */
+  --orange-500: #f97316;
+  --orange-400: #fb923c;
+  --orange-600: #ea580c;
+  --orange-glow: rgba(249, 115, 22, 0.15);
   
-  --cyan-400: #00d2ff;
-  --cyan-500: #0284c7;
-  --cyan-glow: rgba(0, 210, 255, 0.3);
+  --cyan-400: #38bdf8;
+  --cyan-500: #0ea5e9;
+  --cyan-glow: rgba(56, 189, 248, 0.15);
   
   --gold-400: #fbbf24;
-  --green-400: #22c55e;
+  --green-400: #10b981;
   
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.14);
-  --border-glow: rgba(255, 85, 0, 0.5);
+  /* Clean Subtle Borders */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-glow: rgba(249, 115, 22, 0.28);
 
   /* Typography */
   --font-display: 'Outfit', 'Koulen', 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -117,10 +117,25 @@ button {
   transform: translateY(-4px);
 }
 
+/* Text & Background Utilities */
+.text-orange {
+  color: var(--orange-500) !important;
+}
+.bg-orange {
+  background-color: var(--orange-500) !important;
+}
+.border-orange {
+  border-color: var(--orange-500) !important;
+}
+.bg-orange-glow {
+  background: rgba(249, 115, 22, 0.12) !important;
+  border: 1px solid rgba(249, 115, 22, 0.25) !important;
+}
+
 /* Glow & Neon Text */
 .text-orange-glow {
   color: var(--orange-500);
-  text-shadow: 0 0 20px var(--orange-glow);
+  text-shadow: 0 0 15px var(--orange-glow);
 }
 
 .text-cyan-glow {

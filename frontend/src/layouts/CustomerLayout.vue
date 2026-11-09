@@ -680,7 +680,7 @@ const handleSearch = () => {
 }
 
 .icon-flame {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .announcement-right {
@@ -705,7 +705,7 @@ const handleSearch = () => {
 
 .b2b-toggle-container:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 85, 0, 0.4);
+  border-color: rgba(249, 115, 22, 0.4);
 }
 
 .b2b-toggle-container.mode-b2b {
@@ -760,8 +760,8 @@ const handleSearch = () => {
 }
 
 .lang-pill-btn:hover {
-  border-color: #ff5500;
-  background: rgba(255, 85, 0, 0.12);
+  border-color: var(--orange-500);
+  background: rgba(249, 115, 22, 0.12);
   color: #ff7834;
 }
 
@@ -783,7 +783,7 @@ const handleSearch = () => {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
   padding: 0.35rem;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 85, 0, 0.2);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 15px rgba(249, 115, 22, 0.2);
   z-index: 100;
 }
 
@@ -800,12 +800,12 @@ const handleSearch = () => {
 }
 
 .lang-item:hover {
-  background: rgba(255, 85, 0, 0.18);
+  background: rgba(249, 115, 22, 0.18);
   color: #ffffff;
 }
 
 .lang-item.active {
-  background: rgba(255, 85, 0, 0.28);
+  background: rgba(249, 115, 22, 0.28);
   color: #ff7834;
   font-weight: 700;
 }
@@ -840,7 +840,7 @@ const handleSearch = () => {
 }
 
 .top-link:hover {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .auth-box {
@@ -850,8 +850,8 @@ const handleSearch = () => {
 }
 
 .auth-pill {
-  background: rgba(255, 85, 0, 0.12);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.35);
   color: #ff7834;
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
@@ -860,7 +860,7 @@ const handleSearch = () => {
 }
 
 .auth-pill:hover {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
 }
 
@@ -885,15 +885,15 @@ const handleSearch = () => {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(255, 85, 0, 0.15);
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.4);
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   transition: all 0.2s;
 }
 
 .user-pill-btn:hover {
-  background: rgba(255, 85, 0, 0.25);
+  background: rgba(249, 115, 22, 0.25);
 }
 
 .user-avatar {
@@ -901,7 +901,7 @@ const handleSearch = () => {
   height: 22px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #ff5500;
+  border: 1px solid var(--orange-500);
 }
 
 .user-name {
@@ -918,7 +918,7 @@ const handleSearch = () => {
 }
 
 .b2c-badge {
-  background: rgba(255, 85, 0, 0.3);
+  background: rgba(249, 115, 22, 0.3);
   color: #ff7834;
 }
 
@@ -947,7 +947,7 @@ const handleSearch = () => {
   border-radius: 12px;
   padding: 0.75rem;
   z-index: 100;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 85, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(249, 115, 22, 0.15);
 }
 
 .dropdown-user-top {
@@ -964,7 +964,7 @@ const handleSearch = () => {
   height: 34px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid #ff5500;
+  border: 1.5px solid var(--orange-500);
 }
 
 .dropdown-user-top strong {
@@ -1070,8 +1070,8 @@ const handleSearch = () => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.45);
-  border: 1px solid rgba(255, 85, 0, 0.5);
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.45);
+  border: 1px solid rgba(249, 115, 22, 0.5);
   flex-shrink: 0;
 }
 
@@ -1100,7 +1100,7 @@ const handleSearch = () => {
 }
 
 .brand-part-2 {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .brand-badge {
@@ -1122,7 +1122,7 @@ const handleSearch = () => {
   align-items: center;
   gap: 0.75rem;
   background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(249, 115, 22, 0.35);
   border-radius: 10px;
   padding: 0.45rem 0.85rem;
   cursor: pointer;
@@ -1132,14 +1132,14 @@ const handleSearch = () => {
 }
 
 .vehicle-fitment-bar:hover {
-  border-color: #ff5500;
-  box-shadow: 0 4px 20px rgba(255, 85, 0, 0.2);
+  border-color: var(--orange-500);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.2);
 }
 
 .fitment-icon-box {
   width: 32px;
   height: 32px;
-  background: rgba(255, 85, 0, 0.12);
+  background: rgba(249, 115, 22, 0.12);
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -1147,7 +1147,7 @@ const handleSearch = () => {
 }
 
 .text-orange {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .fitment-details {
@@ -1181,7 +1181,7 @@ const handleSearch = () => {
 }
 
 .fitment-add-btn {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   display: flex;
   align-items: center;
@@ -1231,7 +1231,7 @@ const handleSearch = () => {
 }
 
 .manage-link {
-  color: #ff5500;
+  color: var(--orange-500);
   font-weight: 600;
 }
 
@@ -1252,9 +1252,9 @@ const handleSearch = () => {
 .item-icon {
   width: 30px;
   height: 30px;
-  background: rgba(255, 85, 0, 0.15);
+  background: rgba(249, 115, 22, 0.15);
   border-radius: 6px;
-  color: #ff5500;
+  color: var(--orange-500);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1293,8 +1293,8 @@ const handleSearch = () => {
 }
 
 .search-input-box:focus-within {
-  border-color: #ff5500;
-  box-shadow: 0 0 15px rgba(255, 85, 0, 0.25);
+  border-color: var(--orange-500);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.25);
 }
 
 .search-icon {
@@ -1327,7 +1327,7 @@ const handleSearch = () => {
 }
 
 .search-action-btn {
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   border: none;
   font-weight: 700;
@@ -1363,9 +1363,9 @@ const handleSearch = () => {
 }
 
 .action-btn:hover {
-  color: #ff5500;
-  background: rgba(255, 85, 0, 0.1);
-  border-color: rgba(255, 85, 0, 0.4);
+  color: var(--orange-500);
+  background: rgba(249, 115, 22, 0.1);
+  border-color: rgba(249, 115, 22, 0.4);
 }
 
 .badge-dot {
@@ -1374,7 +1374,7 @@ const handleSearch = () => {
   right: 10px;
   width: 6px;
   height: 6px;
-  background: #ff5500;
+  background: var(--orange-500);
   border-radius: 50%;
 }
 
@@ -1425,7 +1425,7 @@ const handleSearch = () => {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #ff5500;
+  background: var(--orange-500);
   color: white;
   font-size: 0.65rem;
   font-weight: 800;
@@ -1501,7 +1501,7 @@ const handleSearch = () => {
 }
 
 .tab-badge.moto {
-  background: rgba(255, 85, 0, 0.2);
+  background: rgba(249, 115, 22, 0.2);
   color: #ff7834;
 }
 
@@ -1544,7 +1544,7 @@ const handleSearch = () => {
   transform: translateX(-50%);
   width: 80%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 85, 0, 0.6), rgba(0, 210, 255, 0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.6), rgba(0, 210, 255, 0.6), transparent);
 }
 
 .footer-grid {
@@ -1611,7 +1611,7 @@ const handleSearch = () => {
 }
 
 .footer-links-col a:hover {
-  color: #ff5500;
+  color: var(--orange-500);
 }
 
 .contact-entry {
@@ -1719,8 +1719,8 @@ const handleSearch = () => {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: rgba(255, 85, 0, 0.12);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.35);
   color: #ff7834;
   padding: 0.65rem;
   border-radius: 8px;
@@ -1774,8 +1774,8 @@ const handleSearch = () => {
 }
 
 .drawer-lang-btn.active {
-  background: #ff5500;
-  border-color: #ff5500;
+  background: var(--orange-500);
+  border-color: var(--orange-500);
   color: white;
 }
 
@@ -1916,7 +1916,7 @@ const handleSearch = () => {
   }
 
   .bottom-bar-item.active {
-    color: #ff5500;
+    color: var(--orange-500);
   }
 
   .bottom-bar-icon {
@@ -1933,7 +1933,7 @@ const handleSearch = () => {
     position: absolute;
     top: -6px;
     right: -8px;
-    background: #ff5500;
+    background: var(--orange-500);
     color: white;
     font-size: 0.6rem;
     font-weight: 800;
@@ -1943,7 +1943,7 @@ const handleSearch = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(255, 85, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.5);
   }
 }
 </style>
