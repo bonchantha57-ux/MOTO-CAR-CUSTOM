@@ -215,16 +215,37 @@ watch(
 
 const getCategoryName = (cat: any) => {
   if (!cat) return ''
-  if (langStore.currentLang === 'kh') {
-    const khMap: Record<string, string> = {
+  const slug = cat.slug || ''
+  if (langStore.currentLang === 'km') {
+    const kmMap: Record<string, string> = {
       'exhaust-systems': 'បំពង់ស៊ីម៉ាំងប្រណាំង',
+      'exhaust': 'បំពង់ស៊ីម៉ាំងប្រណាំង',
       'performance-brakes': 'ប្រព័ន្ធហ្វ្រាំងប្រណាំង',
+      'brakes': 'ប្រព័ន្ធហ្វ្រាំងប្រណាំង',
       'suspension-coilovers': 'ប្រព័ន្ធបូម & ជើងក្រោម',
+      'suspension': 'ប្រព័ន្ធបូម & ជើងក្រោម',
       'forged-wheels': 'កង់ Forged គុណភាពខ្ពស់',
+      'wheels': 'កង់ Forged គុណភាពខ្ពស់',
       'carbon-aerodynamics': 'គ្រឿង Carbon កម្លាំងខ្យល់',
+      'carbon': 'គ្រឿង Carbon កម្លាំងខ្យល់',
     }
-    if (khMap[cat.slug]) return khMap[cat.slug]
+    if (kmMap[slug]) return kmMap[slug]
     if (cat.name_km) return cat.name_km
+  } else if (langStore.currentLang === 'zh') {
+    const zhMap: Record<string, string> = {
+      'exhaust-systems': '竞技排气系统',
+      'exhaust': '竞技排气系统',
+      'performance-brakes': '高性能刹车卡钳',
+      'brakes': '高性能刹车卡钳',
+      'suspension-coilovers': '避震与悬挂系统',
+      'suspension': '避震与悬挂系统',
+      'forged-wheels': '定制锻造轮毂',
+      'wheels': '定制锻造轮毂',
+      'carbon-aerodynamics': '碳纤维空气动力学套件',
+      'carbon': '碳纤维空气动力学套件',
+    }
+    if (zhMap[slug]) return zhMap[slug]
+    if (cat.name_zh) return cat.name_zh
   }
   return cat.name || cat.slug || ''
 }
@@ -276,7 +297,7 @@ const addToCart = (product: any, e: Event) => {
           <Flame v-else :size="16" />
           <div>
             <strong>{{ authStore.isB2B ? langStore.t.wholesaleB2B : langStore.t.retailB2C }}</strong>
-            <small>{{ authStore.isB2B ? 'Wholesale Garage Tier Prices Active' : 'Genuine Retail Guarantee' }}</small>
+            <small>{{ authStore.isB2B ? (langStore.currentLang === 'km' ? 'តម្លៃបោះដុំពិសេសសម្រាប់យានដ្ឋាន' : (langStore.currentLang === 'zh' ? '车行专属批发底价已激活' : 'Wholesale Garage Tier Prices Active')) : (langStore.currentLang === 'km' ? 'ការធានាគ្រឿងបន្លាស់សុទ្ធ ១០០%' : (langStore.currentLang === 'zh' ? '100% 正品零售保障' : 'Genuine Retail Guarantee')) }}</small>
           </div>
         </div>
       </div>
@@ -385,15 +406,15 @@ const addToCart = (product: any, e: Event) => {
         <main class="products-grid-wrapper">
           <div v-if="isLoading && products.length === 0" class="loading-state">
             <div class="spinner"></div>
-            <span>Fetching certified products...</span>
+            <span>{{ langStore.currentLang === 'km' ? 'កំពុងទាញទិន្នន័យគ្រឿងបន្លាស់សុទ្ធ...' : (langStore.currentLang === 'zh' ? '正在加载原厂认证配件...' : 'Fetching certified products...') }}</span>
           </div>
 
           <div v-else-if="products.length === 0" class="empty-state glass-panel">
             <ShoppingBag :size="48" class="text-orange" />
-            <h3>No Products Found</h3>
-            <p>Try clearing your category filter or search for another keyword.</p>
+            <h3>{{ langStore.t.noProductsFound }}</h3>
+            <p>{{ langStore.currentLang === 'km' ? 'សូមសាកល្បងសម្អាតតម្រង ឬស្វែងរកដោយពាក្យគន្លឹះផ្សេង។' : (langStore.currentLang === 'zh' ? '请尝试重置分类筛选或输入其他关键词搜索。' : 'Try clearing your category filter or search for another keyword.') }}</p>
             <button class="btn-reset-filter" @click="selectedCategory = ''; selectedBrand = ''; searchQuery = ''; fetchProducts()">
-              Reset All Filters
+              {{ langStore.t.resetFilters }}
             </button>
           </div>
 
@@ -432,7 +453,7 @@ const addToCart = (product: any, e: Event) => {
 
               <!-- Content Body -->
               <div class="card-info">
-                <span class="card-category">{{ prod.category_name }}</span>
+                <span class="card-category">{{ getCategoryName({ slug: prod.category_slug, name: prod.category_name, name_km: prod.category_name_km, name_zh: prod.category_name_zh }) }}</span>
                 <h3 class="card-name">{{ prod.name }}</h3>
                 <p class="card-short-desc">{{ prod.short_description }}</p>
 

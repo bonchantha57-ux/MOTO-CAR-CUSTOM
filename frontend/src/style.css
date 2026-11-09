@@ -34,6 +34,141 @@
   color-scheme: dark;
 }
 
+/* Luxury Light Mode - Clean Automotive Showroom White/Gray */
+[data-theme="light"], .theme-light {
+  color-scheme: light;
+  --bg-darkest: #f1f5f9;
+  --bg-dark: #e2e8f0;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.14);
+  --border-glow: rgba(249, 115, 22, 0.35);
+}
+
+body.theme-light, [data-theme="light"] body {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+body.theme-light h1, 
+body.theme-light h2, 
+body.theme-light h3, 
+body.theme-light h4, 
+body.theme-light h5, 
+body.theme-light h6 {
+  color: #0f172a;
+}
+
+body.theme-light .glass-panel,
+body.theme-light .glass-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #0f172a !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .top-announcement-bar {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+body.theme-light .main-header {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-light .sub-nav {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-light .nav-tab {
+  color: #475569 !important;
+}
+
+body.theme-light .nav-tab:hover,
+body.theme-light .nav-tab.router-link-active {
+  color: #f97316 !important;
+}
+
+body.theme-light .custom-input,
+body.theme-light .custom-select,
+body.theme-light .search-input-box input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-light .site-footer {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .site-footer .col-title {
+  color: #0f172a !important;
+}
+
+body.theme-light .site-footer a {
+  color: #475569 !important;
+}
+
+body.theme-light .site-footer a:hover {
+  color: #f97316 !important;
+}
+
+body.theme-light .product-card,
+body.theme-light .product-item-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .cat-tile {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+body.theme-light .mobile-bottom-bar {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+body.theme-light .user-dropdown-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+body.theme-light .menu-item {
+  color: #334155 !important;
+}
+
+body.theme-light .menu-item:hover {
+  background: #f1f5f9 !important;
+  color: #f97316 !important;
+}
+
+body.theme-light .hero-stats-row {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-light .stat-number {
+  color: #0f172a !important;
+}
+
+body.theme-light .stat-caption {
+  color: #64748b !important;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

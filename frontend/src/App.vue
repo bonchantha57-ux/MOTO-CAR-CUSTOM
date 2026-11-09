@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
+import { useThemeStore } from '@/stores/theme'
+import { useLanguageStore } from '@/stores/language'
+
+const themeStore = useThemeStore()
+const langStore = useLanguageStore()
 
 let keepAliveTimer: any = null
 

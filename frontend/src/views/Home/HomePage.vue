@@ -171,6 +171,24 @@ const partnerGarages = ref([
   },
 ])
 
+const getCategoryTitle = (cat: any) => {
+  if (!cat) return ''
+  const slug = cat.slug || ''
+  if (slug === 'exhaust-systems' || slug === 'exhaust') return langStore.t.catExhaust
+  if (slug === 'performance-brakes' || slug === 'brakes') return langStore.t.catBrakes
+  if (slug === 'suspension-coilovers' || slug === 'suspension') return langStore.t.catSuspension
+  if (slug === 'forged-wheels' || slug === 'wheels') return langStore.t.catWheels
+  if (slug === 'carbon-aerodynamics' || slug === 'carbon') return langStore.t.catCarbon
+  return cat.name || ''
+}
+
+const getProductBadge = (product: any) => {
+  if (product.badge) return product.badge
+  if (product.is_on_sale) return langStore.t.hotSale
+  if (product.is_featured) return langStore.t.bestSeller
+  return langStore.t.genuineParts
+}
+
 const applyFitmentSearch = () => {
   router.push({
     name: 'shop',
@@ -210,7 +228,7 @@ const applyFitmentSearch = () => {
               <ShieldCheck :size="20" class="text-orange" />
               <div>
                 <h3>{{ langStore.t.vehicleFitmentBoxTitle }}</h3>
-                <p>We automatically filter only parts certified for your exact model year</p>
+                <p>{{ langStore.t.fitmentHelperText }}</p>
               </div>
             </div>
 
@@ -282,18 +300,18 @@ const applyFitmentSearch = () => {
         <!-- Metric Badges -->
         <div class="hero-stats-row">
           <div class="stat-box">
-            <strong class="stat-number">5,200+</strong>
-            <span class="stat-caption">Verified Genuine Parts</span>
+            <strong class="stat-number">{{ langStore.t.verifiedPartsCount }}</strong>
+            <span class="stat-caption">{{ langStore.t.verifiedParts }}</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat-box">
-            <strong class="stat-number">45+</strong>
-            <span class="stat-caption">Certified Garages in Cambodia</span>
+            <strong class="stat-number">{{ langStore.t.certifiedGaragesCount }}</strong>
+            <span class="stat-caption">{{ langStore.t.certifiedGaragesStat }}</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat-box">
-            <strong class="stat-number">100%</strong>
-            <span class="stat-caption">Direct Importer Guarantee</span>
+            <strong class="stat-number">{{ langStore.t.directGuaranteeCount }}</strong>
+            <span class="stat-caption">{{ langStore.t.directGuarantee }}</span>
           </div>
         </div>
       </div>
@@ -304,11 +322,11 @@ const applyFitmentSearch = () => {
       <div class="container">
         <div class="section-top-header">
           <div>
-            <div class="sub-label">PRECISION PERFORMANCE SELECTION</div>
-            <h2 class="title-heading">Explore Custom Tuning Categories</h2>
+            <div class="sub-label">{{ langStore.t.precisionSelection }}</div>
+            <h2 class="title-heading">{{ langStore.t.exploreCategories }}</h2>
           </div>
           <router-link to="/shop" class="explore-all-link">
-            <span>View All Categories</span>
+            <span>{{ langStore.t.viewAllCategories }}</span>
             <ArrowRight :size="16" />
           </router-link>
         </div>
@@ -323,8 +341,8 @@ const applyFitmentSearch = () => {
             <div class="cat-icon-container" :style="{ color: cat.accent, background: `${cat.accent}18` }">
               <component :is="cat.icon" :size="28" />
             </div>
-            <h3 class="cat-tile-title">{{ cat.name }}</h3>
-            <span class="cat-tile-count">{{ cat.count }} Tested Products</span>
+            <h3 class="cat-tile-title">{{ getCategoryTitle(cat) }}</h3>
+            <span class="cat-tile-count">{{ cat.count }} {{ langStore.t.testedProducts }}</span>
           </router-link>
         </div>
       </div>
@@ -335,14 +353,14 @@ const applyFitmentSearch = () => {
       <div class="container">
         <div class="section-top-header">
           <div>
-            <div class="sub-label">TRACK-PROVEN UPGRADES</div>
-            <h2 class="title-heading">Top Rated Custom Performance Parts</h2>
+            <div class="sub-label">{{ langStore.t.trackProvenUpgrades }}</div>
+            <h2 class="title-heading">{{ langStore.t.topRatedParts }}</h2>
           </div>
 
           <div class="wholesale-indicator-pill" :class="{ 'b2b-active': authStore.isB2B }">
             <Building2 v-if="authStore.isB2B" :size="15" />
-            <span v-if="authStore.isB2B">Active View: <strong>B2B Wholesale Tier Pricing</strong></span>
-            <span v-else>Active View: <strong>B2C Retail MSRP</strong></span>
+            <span v-if="authStore.isB2B">{{ langStore.t.activeB2BView }}</span>
+            <span v-else>{{ langStore.t.activeB2CView }}</span>
           </div>
         </div>
 
@@ -350,7 +368,7 @@ const applyFitmentSearch = () => {
           <div v-for="product in featuredProducts" :key="product.id" class="product-item-card glass-card">
             <!-- Badge -->
             <div class="card-badge" :class="`badge-${(product.badge || '').toLowerCase().replace(/[^a-z0-9]/g, '-')}`">
-              {{ product.badge || (product.is_on_sale ? 'HOT SALE' : (product.is_featured ? 'Best Seller' : 'Genuine Parts')) }}
+              {{ getProductBadge(product) }}
             </div>
 
             <!-- Floating Wishlist Heart Button -->
@@ -369,7 +387,7 @@ const applyFitmentSearch = () => {
               <img :src="product.thumbnail || product.image" :alt="product.name || product.title" class="product-thumb-img" />
               <div class="fitment-chip">
                 <CheckCircle2 :size="13" class="text-green" />
-                <span>Fitment Certified</span>
+                <span>{{ langStore.t.fitmentCertified }}</span>
               </div>
             </router-link>
 
@@ -377,7 +395,7 @@ const applyFitmentSearch = () => {
             <div class="card-body-content">
               <div class="vehicle-compatibility">
                 <Car :size="13" />
-                <span>{{ product.category_name || product.vehicle || 'Fitment Guaranteed' }}</span>
+                <span>{{ product.category_name || product.vehicle || langStore.t.fitmentCertified }}</span>
               </div>
 
               <router-link :to="`/product/${product.slug}`" class="product-name-link">
@@ -389,7 +407,7 @@ const applyFitmentSearch = () => {
                   <Star v-for="s in 5" :key="s" :size="13" class="star-filled" />
                 </div>
                 <span class="rating-score">{{ product.rating_average || product.rating || 5.0 }}</span>
-                <span class="rating-count">({{ product.rating_count || product.reviews_count || 24 }} verified reviews)</span>
+                <span class="rating-count">({{ product.rating_count || product.reviews_count || 24 }} {{ langStore.t.verifiedReviews }})</span>
               </div>
 
               <!-- Price Box with B2B wholesale calculation -->
@@ -398,7 +416,7 @@ const applyFitmentSearch = () => {
                   <div class="retail-pricing">
                     <span class="price-currency">$</span>
                     <span class="price-value">{{ product.b2c_price || product.price_b2c }}</span>
-                    <span class="price-tag">Retail Price</span>
+                    <span class="price-tag">{{ langStore.t.retailPrice }}</span>
                   </div>
                 </template>
                 <template v-else>
@@ -406,7 +424,7 @@ const applyFitmentSearch = () => {
                     <div class="wholesale-main">
                       <span class="price-currency">$</span>
                       <span class="price-value text-cyan-glow">{{ product.b2b_price || product.price_b2b }}</span>
-                      <span class="moq-tag">MOQ: {{ product.min_order_qty_b2b || product.moq || 1 }} Units</span>
+                      <span class="moq-tag">MOQ: {{ product.min_order_qty_b2b || product.moq || 1 }} {{ langStore.t.moqUnits }}</span>
                     </div>
                     <div class="retail-strike">MSRP: ${{ product.b2c_price || product.price_b2c }}</div>
                   </div>
@@ -434,14 +452,14 @@ const applyFitmentSearch = () => {
       <div class="container">
         <div class="section-top-header">
           <div>
-            <div class="sub-label">PROFESSIONAL FITTING WORKSHOPS</div>
-            <h2 class="title-heading">Partner Garages & Certified Mechanics</h2>
+            <div class="sub-label">{{ langStore.t.fittingWorkshops }}</div>
+            <h2 class="title-heading">{{ langStore.t.partnerGaragesMechanics }}</h2>
             <p class="section-sub-desc">
-              Order your parts online and pick certified installation at partner garages with dyno tuning & warranty guarantee
+              {{ langStore.t.partnerGaragesSub }}
             </p>
           </div>
           <router-link to="/garages" class="explore-all-link">
-            <span>Garages Directory</span>
+            <span>{{ langStore.t.garagesDirectory }}</span>
             <ArrowRight :size="16" />
           </router-link>
         </div>
@@ -451,7 +469,7 @@ const applyFitmentSearch = () => {
             <div class="station-top">
               <span class="verified-status">
                 <ShieldCheck :size="15" />
-                Certified Partner Workshop
+                {{ langStore.t.certifiedWorkshop }}
               </span>
               <div class="station-rating">
                 <Star :size="14" class="star-filled" />
@@ -469,7 +487,7 @@ const applyFitmentSearch = () => {
             <div class="station-specs-box">
               <div class="spec-label">
                 <Wrench :size="13" />
-                <span>Specialization:</span>
+                <span>{{ langStore.t.specialization }}</span>
               </div>
               <p class="spec-desc">{{ garage.specialty }}</p>
             </div>
@@ -477,7 +495,7 @@ const applyFitmentSearch = () => {
             <div class="station-footer-action">
               <router-link to="/garages" class="btn-schedule-slot">
                 <Calendar :size="15" />
-                <span>Book Fitting Appointment</span>
+                <span>{{ langStore.t.bookAppointment }}</span>
               </router-link>
             </div>
           </div>
@@ -491,31 +509,31 @@ const applyFitmentSearch = () => {
         <div class="banner-info-pane">
           <div class="banner-pill">
             <Building2 :size="14" />
-            <span>WHOLESALE & WORKSHOP SUPPLY NETWORK</span>
+            <span>{{ langStore.t.wholesaleNetwork }}</span>
           </div>
           <h2 class="banner-hero-heading">
-            Do You Own a Tuning Garage or Motorcycle Shop in Cambodia?
+            {{ langStore.t.b2bHeading }}
           </h2>
           <p class="banner-lead-text">
-            Join the MotoCar Custom B2B Network to unlock exclusive wholesale volume pricing, 30-day credit lines, consolidated air-freight, and automated customer installation booking referrals.
+            {{ langStore.t.b2bLead }}
           </p>
 
           <div class="feature-bullets-grid">
             <div class="bullet-item">
               <Check :size="16" class="bullet-check" />
-              <span>Up to 35% Wholesale Margin Discounts</span>
+              <span>{{ langStore.t.b2bBullet1 }}</span>
             </div>
             <div class="bullet-item">
               <Check :size="16" class="bullet-check" />
-              <span>Formal RFQ Invoicing & VAT Receipts</span>
+              <span>{{ langStore.t.b2bBullet2 }}</span>
             </div>
             <div class="bullet-item">
               <Check :size="16" class="bullet-check" />
-              <span>Priority Direct Dyno Technical Support</span>
+              <span>{{ langStore.t.b2bBullet3 }}</span>
             </div>
             <div class="bullet-item">
               <Check :size="16" class="bullet-check" />
-              <span>Free Installation Customer Referrals</span>
+              <span>{{ langStore.t.b2bBullet4 }}</span>
             </div>
           </div>
         </div>
@@ -523,11 +541,11 @@ const applyFitmentSearch = () => {
         <div class="banner-cta-pane">
           <router-link to="/auth/register?type=b2b" class="btn-b2b-primary">
             <TrendingUp :size="18" />
-            <span>Apply for B2B Account</span>
+            <span>{{ langStore.t.applyB2BBtn }}</span>
           </router-link>
           <router-link to="/shop?b2b=true" class="btn-b2b-secondary">
             <FileText :size="18" />
-            <span>Browse Wholesale Price Catalog</span>
+            <span>{{ langStore.t.browseWholesaleCatalog }}</span>
           </router-link>
         </div>
       </div>

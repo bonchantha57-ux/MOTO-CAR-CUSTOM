@@ -5,7 +5,10 @@ import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import { useWishlistStore } from '@/stores/wishlist'
 import { useLanguageStore } from '@/stores/language'
+import { useThemeStore } from '@/stores/theme'
 import {
+  Sun,
+  Moon,
   Flame,
   Building2,
   User as UserIcon,
@@ -49,6 +52,7 @@ const authStore = useAuthStore()
 const cartStore = useCartStore()
 const wishlistStore = useWishlistStore()
 const langStore = useLanguageStore()
+const themeStore = useThemeStore()
 
 onMounted(() => {
   wishlistStore.fetchWishlist()
@@ -108,13 +112,21 @@ const handleSearch = () => {
 
 <template>
   <div class="customer-layout">
-    <!-- Top Announcement & B2B Switcher Bar -->
+    <!-- Top Bar with Theme Mode Switcher & B2B Switcher -->
     <div class="top-announcement-bar">
       <div class="container top-bar-content">
-        <div class="announcement-left">
-          <span class="live-dot"></span>
-          <Flame class="icon-flame" :size="14" />
-          <span class="announce-text">{{ langStore.t.announcement }}</span>
+        <!-- Background Color Switcher (Dark Mode / Light Mode - Black / White) -->
+        <div class="theme-switcher-wrapper">
+          <button 
+            type="button" 
+            class="theme-toggle-btn"
+            :title="themeStore.isDark ? langStore.t.switchToLight : langStore.t.switchToDark"
+            @click="themeStore.toggleTheme"
+          >
+            <Sun v-if="themeStore.isDark" :size="13" class="theme-icon text-amber" />
+            <Moon v-else :size="13" class="theme-icon text-blue" />
+            <span class="theme-btn-label">{{ themeStore.isDark ? langStore.t.themeLight : langStore.t.themeDark }}</span>
+          </button>
         </div>
 
         <div class="announcement-right">
@@ -217,28 +229,28 @@ const handleSearch = () => {
                   <div class="dropdown-menu-list">
                     <router-link to="/account/dashboard" class="menu-item" @click="isUserMenuOpen = false">
                       <LayoutDashboard :size="15" />
-                      <span>Dashboard</span>
+                      <span>{{ langStore.t.dashboard }}</span>
                     </router-link>
                     <router-link to="/account/garage" class="menu-item" @click="isUserMenuOpen = false">
                       <Car :size="15" />
-                      <span>My Garage Vehicles</span>
+                      <span>{{ langStore.t.myGarage }}</span>
                     </router-link>
                     <router-link to="/account/orders" class="menu-item" @click="isUserMenuOpen = false">
                       <Package :size="15" />
-                      <span>Orders & Tracking</span>
+                      <span>{{ langStore.t.ordersTracking }}</span>
                     </router-link>
                     <router-link v-if="authStore.isB2B" to="/account/rfq" class="menu-item text-cyan" @click="isUserMenuOpen = false">
                       <FileText :size="15" />
-                      <span>B2B RFQ Quotes</span>
+                      <span>{{ langStore.t.b2bQuotes }}</span>
                     </router-link>
                     <router-link v-if="authStore.isAdmin" to="/admin/dashboard" class="menu-item text-orange" @click="isUserMenuOpen = false">
                       <ShieldCheck :size="15" />
-                      <span>Admin Portal</span>
+                      <span>{{ langStore.t.adminPortal }}</span>
                     </router-link>
                     <div class="dropdown-divider"></div>
                     <button type="button" class="menu-item logout-action" @click="handleLogout">
                       <LogOut :size="14" />
-                      <span>Log Out</span>
+                      <span>{{ langStore.t.logout }}</span>
                     </button>
                   </div>
                 </div>
@@ -284,8 +296,8 @@ const handleSearch = () => {
           <!-- Saved Vehicles Dropdown -->
           <div v-if="isVehicleDropdownOpen" class="vehicle-dropdown glass-card" @click.stop>
             <div class="dropdown-header">
-              <span>Select Your Garage Vehicle:</span>
-              <router-link to="/account/garage" class="manage-link">Manage ({{ savedVehicles.length }})</router-link>
+              <span>{{ langStore.t.selectGarageVehicle }}</span>
+              <router-link to="/account/garage" class="manage-link">{{ langStore.t.manage }} ({{ savedVehicles.length }})</router-link>
             </div>
             <div class="dropdown-list">
               <div 
@@ -300,7 +312,7 @@ const handleSearch = () => {
                 </div>
                 <div class="item-text">
                   <strong>{{ v.make }} {{ v.model }}</strong>
-                  <small>{{ v.year }} • Verified Fitment</small>
+                  <small>{{ v.year }} • {{ langStore.t.verifiedFitment }}</small>
                 </div>
               </div>
             </div>
@@ -453,13 +465,20 @@ const handleSearch = () => {
             </div>
           </div>
 
+          <!-- Theme Mode Switcher in Drawer -->
+          <div class="drawer-theme-toggle" @click="themeStore.toggleTheme">
+            <Sun v-if="themeStore.isDark" :size="16" class="text-amber" />
+            <Moon v-else :size="16" class="text-blue" />
+            <span>{{ themeStore.isDark ? langStore.t.switchToLight : langStore.t.switchToDark }}</span>
+          </div>
+
           <!-- Mobile Search Input -->
           <div class="drawer-search">
             <Search :size="15" class="text-orange" />
             <input 
               v-model="searchQuery" 
               type="text" 
-              placeholder="Search Akrapovic, Brembo..."
+              :placeholder="langStore.t.searchPlaceholder"
               @keyup.enter="handleSearch"
             />
           </div>
@@ -468,47 +487,47 @@ const handleSearch = () => {
           <div class="drawer-nav-list">
             <router-link to="/" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Home :size="16" />
-              <span>Home Showroom</span>
+              <span>{{ langStore.t.homeShowroom }}</span>
             </router-link>
             <router-link to="/shop" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <ShoppingBag :size="16" />
-              <span>All Performance Parts</span>
+              <span>{{ langStore.t.allPerformanceParts }}</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { type: 'motorcycle' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Layers :size="16" />
-              <span>Motorcycle Custom</span>
+              <span>{{ langStore.t.motoCustom }}</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { type: 'car' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Car :size="16" />
-              <span>Car Custom</span>
+              <span>{{ langStore.t.carCustom }}</span>
             </router-link>
-            <router-link :to="{ name: 'shop', query: { category: 'exhaust' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
+            <router-link :to="{ name: 'shop', query: { category: 'exhaust-systems' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Flame :size="16" />
-              <span>Exhaust Systems</span>
+              <span>{{ langStore.t.exhaustSystems }}</span>
             </router-link>
-            <router-link :to="{ name: 'shop', query: { category: 'suspension' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
+            <router-link :to="{ name: 'shop', query: { category: 'suspension-coilovers' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <SlidersHorizontal :size="16" />
-              <span>Suspension & Coilovers</span>
+              <span>{{ langStore.t.suspension }}</span>
             </router-link>
-            <router-link :to="{ name: 'shop', query: { category: 'brakes' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
+            <router-link :to="{ name: 'shop', query: { category: 'performance-brakes' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Disc :size="16" />
-              <span>Performance Brakes</span>
+              <span>{{ langStore.t.brakes }}</span>
             </router-link>
             <router-link to="/shop?b2b=true" class="drawer-nav-item text-cyan" @click="isMobileDrawerOpen = false">
               <Briefcase :size="16" />
-              <span>B2B Wholesale Catalog</span>
+              <span>{{ langStore.t.b2bWholesaleCatalog }}</span>
             </router-link>
             <router-link to="/garages" class="drawer-nav-item text-orange" @click="isMobileDrawerOpen = false">
               <Wrench :size="16" />
-              <span>Certified Partner Garages</span>
+              <span>{{ langStore.t.certifiedGarages }}</span>
             </router-link>
             <router-link to="/wishlist" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Heart :size="16" />
-              <span>Saved Wishlist ({{ wishlistStore.itemsCount }})</span>
+              <span>{{ langStore.t.savedWishlist }} ({{ wishlistStore.itemsCount }})</span>
             </router-link>
             <router-link to="/track" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
               <Package :size="16" />
-              <span>Track Your Order</span>
+              <span>{{ langStore.t.trackYourOrder }}</span>
             </router-link>
 
             <div class="drawer-divider"></div>
@@ -517,25 +536,25 @@ const handleSearch = () => {
             <template v-if="!authStore.isAuthenticated">
               <router-link to="/auth/login" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
                 <LogIn :size="16" />
-                <span>Sign In</span>
+                <span>{{ langStore.t.signIn }}</span>
               </router-link>
               <router-link to="/auth/register" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
                 <UserPlus :size="16" />
-                <span>Register Free Account</span>
+                <span>{{ langStore.t.registerFreeAccount }}</span>
               </router-link>
             </template>
             <template v-else>
               <router-link to="/account/dashboard" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
                 <User :size="16" />
-                <span>My Account ({{ authStore.user?.name }})</span>
+                <span>{{ langStore.t.myAccount }} ({{ authStore.user?.name }})</span>
               </router-link>
               <router-link v-if="authStore.isAdmin" to="/admin/dashboard" class="drawer-nav-item text-orange" @click="isMobileDrawerOpen = false">
                 <ShieldCheck :size="16" />
-                <span>Admin Command Portal</span>
+                <span>{{ langStore.t.adminCommandPortal }}</span>
               </router-link>
               <button class="drawer-nav-item drawer-logout" @click="handleLogout">
                 <LogOut :size="16" />
-                <span>Sign Out</span>
+                <span>{{ langStore.t.logout }}</span>
               </button>
             </template>
           </div>
@@ -552,26 +571,26 @@ const handleSearch = () => {
     <nav class="mobile-bottom-bar">
       <router-link to="/" class="bottom-bar-item" active-class="active">
         <Home :size="20" class="bottom-bar-icon" />
-        <span class="bottom-bar-lbl">Home</span>
+        <span class="bottom-bar-lbl">{{ langStore.t.home }}</span>
       </router-link>
       <router-link to="/shop" class="bottom-bar-item" active-class="active">
         <ShoppingBag :size="20" class="bottom-bar-icon" />
-        <span class="bottom-bar-lbl">Catalog</span>
+        <span class="bottom-bar-lbl">{{ langStore.t.catalog }}</span>
       </router-link>
       <router-link to="/cart" class="bottom-bar-item bottom-bar-cart" active-class="active">
         <div class="bottom-cart-wrapper">
           <ShoppingCart :size="20" class="bottom-bar-icon" />
           <span v-if="cartStore.totalItems > 0" class="bottom-cart-badge">{{ cartStore.totalItems }}</span>
         </div>
-        <span class="bottom-bar-lbl">Cart</span>
+        <span class="bottom-bar-lbl">{{ langStore.t.cart }}</span>
       </router-link>
       <router-link to="/garages" class="bottom-bar-item" active-class="active">
         <Wrench :size="20" class="bottom-bar-icon" />
-        <span class="bottom-bar-lbl">Garages</span>
+        <span class="bottom-bar-lbl">{{ langStore.t.garages }}</span>
       </router-link>
       <router-link :to="authStore.isAuthenticated ? '/account/dashboard' : '/auth/login'" class="bottom-bar-item" active-class="active">
         <User :size="20" class="bottom-bar-icon" />
-        <span class="bottom-bar-lbl">{{ authStore.isAuthenticated ? 'Account' : 'Login' }}</span>
+        <span class="bottom-bar-lbl">{{ authStore.isAuthenticated ? langStore.t.account : langStore.t.login }}</span>
       </router-link>
     </nav>
 
@@ -591,11 +610,11 @@ const handleSearch = () => {
             </div>
           </div>
           <p class="brand-description">
-            Cambodia's premier digital distribution workshop for authentic supercar and superbike tuning parts, certified fitment guarantee, and nationwide garage installations.
+            {{ langStore.t.footerDesc }}
           </p>
           <div class="secure-badge">
             <ShieldCheck :size="18" class="text-green" />
-            <span>100% Genuine Certified & Guaranteed Fitment</span>
+            <span>{{ langStore.t.footerGuarantee }}</span>
           </div>
 
           <div class="payment-badges">
@@ -607,34 +626,34 @@ const handleSearch = () => {
 
         <!-- Quick Links -->
         <div class="footer-links-col">
-          <h4 class="col-title">Customer Care</h4>
+          <h4 class="col-title">{{ langStore.t.customerCare }}</h4>
           <ul>
-            <li><router-link to="/shop">Shop Performance Parts</router-link></li>
-            <li><router-link to="/garages">Find Certified Partner Garage</router-link></li>
-            <li><router-link to="/track">Track Live Delivery</router-link></li>
-            <li><router-link to="/faq">Vehicle Compatibility Check</router-link></li>
-            <li><router-link to="/about">About MotoCar Custom</router-link></li>
+            <li><router-link to="/shop">{{ langStore.t.shopParts }}</router-link></li>
+            <li><router-link to="/garages">{{ langStore.t.findGarages }}</router-link></li>
+            <li><router-link to="/track">{{ langStore.t.trackDelivery }}</router-link></li>
+            <li><router-link to="/faq">{{ langStore.t.compatibilityCheck }}</router-link></li>
+            <li><router-link to="/about">{{ langStore.t.aboutUs }}</router-link></li>
           </ul>
         </div>
 
         <!-- B2B Garages Network -->
         <div class="footer-links-col">
-          <h4 class="col-title">B2B Garage Network</h4>
+          <h4 class="col-title">{{ langStore.t.b2bNetwork }}</h4>
           <ul>
-            <li><router-link to="/auth/register?type=b2b">Apply for Wholesale Tier</router-link></li>
-            <li><router-link to="/account/rfq">Submit RFQ Volume Quote</router-link></li>
-            <li><router-link to="/shop?b2b=true">Wholesale Price List</router-link></li>
-            <li><router-link to="/garages">Register as Partner Garage</router-link></li>
-            <li><router-link to="/admin">Staff & Garage Portal</router-link></li>
+            <li><router-link to="/auth/register?type=b2b">{{ langStore.t.applyWholesale }}</router-link></li>
+            <li><router-link to="/account/rfq">{{ langStore.t.submitRfq }}</router-link></li>
+            <li><router-link to="/shop?b2b=true">{{ langStore.t.wholesalePrices }}</router-link></li>
+            <li><router-link to="/garages">{{ langStore.t.registerGarage }}</router-link></li>
+            <li><router-link to="/admin">{{ langStore.t.staffPortal }}</router-link></li>
           </ul>
         </div>
 
         <!-- Contact Info -->
         <div class="footer-links-col contact-col">
-          <h4 class="col-title">Workshop Headquarters</h4>
+          <h4 class="col-title">{{ langStore.t.headquarters }}</h4>
           <div class="contact-entry">
             <MapPin :size="16" class="contact-icon text-orange" />
-            <span>#88 Russian Blvd, Toul Kork, Phnom Penh, Cambodia</span>
+            <span>{{ langStore.t.address }}</span>
           </div>
           <div class="contact-entry">
             <Phone :size="16" class="contact-icon text-orange" />
@@ -646,7 +665,7 @@ const handleSearch = () => {
           </div>
           <div class="contact-entry">
             <Clock :size="16" class="contact-icon text-orange" />
-            <span>Mon - Sat: 08:00 AM - 06:30 PM (ICT)</span>
+            <span>{{ langStore.t.workingHours }}</span>
           </div>
         </div>
       </div>
@@ -654,7 +673,7 @@ const handleSearch = () => {
       <!-- Bottom Bar -->
       <div class="footer-bottom-bar">
         <div class="container bottom-inner">
-          <p>© 2026 MotoCar Custom Co., Ltd. All rights reserved.</p>
+          <p>© 2026 {{ langStore.t.allRightsReserved }}</p>
         </div>
       </div>
     </footer>
@@ -696,24 +715,75 @@ const handleSearch = () => {
   gap: 0.75rem;
 }
 
-.announcement-left {
+/* THEME MODE SWITCHER (DARK / LIGHT - BLACK / WHITE) */
+.theme-switcher-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #94a3b8;
 }
 
-.live-dot {
-  width: 6px;
-  height: 6px;
-  background: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulseGlow 1.8s infinite;
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.icon-flame {
-  color: var(--orange-500);
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(249, 115, 22, 0.4);
+  color: #ffffff;
+}
+
+body.theme-light .theme-toggle-btn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .theme-toggle-btn:hover {
+  background: #f8fafc;
+  border-color: #f97316;
+  color: #0f172a;
+}
+
+.text-amber {
+  color: #f59e0b;
+}
+
+.text-blue {
+  color: #3b82f6;
+}
+
+.drawer-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body.theme-light .drawer-theme-toggle {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #1e293b;
 }
 
 .announcement-right {
