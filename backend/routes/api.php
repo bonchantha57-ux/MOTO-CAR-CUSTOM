@@ -38,10 +38,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/admin/products', [ProductController::class, 'store']);
     Route::get('/admin/dashboard-stats', [ProductController::class, 'dashboardStats']);
 
-    // Order Creation & Public Tracking
+    // Order Creation, Tracking & Invoices
     Route::post('/orders', [OrderController::class, 'store']);
     Route::post('/checkout', [OrderController::class, 'store']);
     Route::get('/orders/track/{orderNumber}', [OrderController::class, 'track']);
+    Route::get('/orders/{orderNumber}/invoice', [OrderController::class, 'invoice']);
 });
 
 // Wishlist Operations

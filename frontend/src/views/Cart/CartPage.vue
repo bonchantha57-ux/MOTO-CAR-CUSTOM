@@ -32,6 +32,7 @@ const promoApplied = ref(false)
 const promoError = ref('')
 const isCheckingOut = ref(false)
 const showKhqrModal = ref(false)
+const checkoutError = ref('')
 
 const applyPromo = () => {
   if (promoCode.value.toUpperCase() === 'MOTOCAR2026') {
@@ -107,7 +108,7 @@ const confirmPayment = async () => {
     router.push(`/order-confirmation/${orderNumber}`)
   } catch (err: any) {
     console.error('Failed to create order:', err)
-    alert(err.response?.data?.message || 'Failed to submit order. Please try again.')
+    checkoutError.value = err.response?.data?.message || 'Failed to submit order. Please try again.'
   } finally {
     isCheckingOut.value = false
   }

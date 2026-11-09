@@ -244,11 +244,6 @@ const viewProduct = (slug: string) => {
 
 const addToCart = (product: any, e: Event) => {
   e.stopPropagation()
-  if (!authStore.isAuthenticated) {
-    alert(langStore.t.loginRequiredMsg)
-    router.push({ path: '/auth/login', query: { redirect: route.fullPath } })
-    return
-  }
   cartStore.addItem(product, 1, authStore.isB2B)
   addedSuccessId.value = product.id
   setTimeout(() => {
@@ -256,6 +251,11 @@ const addToCart = (product: any, e: Event) => {
       addedSuccessId.value = null
     }
   }, 2200)
+
+  if (!authStore.isAuthenticated) {
+    router.push({ path: '/auth/login', query: { redirect: '/checkout' } })
+    return
+  }
 }
 </script>
 

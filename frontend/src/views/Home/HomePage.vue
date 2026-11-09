@@ -37,12 +37,15 @@ const cartStore = useCartStore()
 const langStore = useLanguageStore()
 
 const handleHomeAddToCart = (product: any) => {
+  // Add item into the shopping cart
+  cartStore.addItem(product, 1, authStore.isB2B)
+
+  // Redirect directly to login/register page if unauthenticated, without any popup alert
   if (!authStore.isAuthenticated) {
-    alert(langStore.t.loginRequiredMsg)
-    router.push({ path: '/auth/login', query: { redirect: '/shop' } })
+    router.push({ path: '/auth/login', query: { redirect: '/checkout' } })
     return
   }
-  cartStore.addItem(product, 1, authStore.isB2B)
+
   router.push('/cart')
 }
 

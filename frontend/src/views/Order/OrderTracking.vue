@@ -22,10 +22,12 @@ import {
   ArrowRight,
   Trash2,
   Radio,
-  ShoppingBag
+  ShoppingBag,
+  FileText
 } from 'lucide-vue-next'
 import { formatImageUrl, DEFAULT_PRODUCT_THUMB } from '@/utils/image'
 import { subscribeToOrderEvents } from '@/utils/orderRealtime'
+import InvoiceModal from '@/components/InvoiceModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -33,6 +35,7 @@ const authStore = useAuthStore()
 
 const searchInput = ref('')
 const isLoading = ref(false)
+const isInvoiceModalOpen = ref(false)
 const orderData = ref<any>(null)
 const items = ref<any[]>([])
 const steps = ref<any[]>([])
@@ -299,9 +302,15 @@ watch(() => route.params.orderNumber, (newCode) => {
               <small class="created-time">Ordered on {{ new Date(orderData.created_at).toLocaleString() }}</small>
             </div>
 
-            <div class="order-status-pill" :class="`status-${orderData.status?.toLowerCase()}`">
-              <span class="status-dot"></span>
-              <span>{{ orderData.status?.toUpperCase() }}</span>
+            <div class="header-right-actions">
+              <button class="btn-tracking-invoice" @click="isInvoiceModalOpen = true" title="View & Print Official Purchase Invoice">
+                <FileText :size="15" />
+                <span>View Invoice (វិក្កយបត្រ)</span>
+              </button>
+              <div class="order-status-pill" :class="`status-${orderData.status?.toLowerCase()}`">
+                <span class="status-dot"></span>
+                <span>{{ orderData.status?.toUpperCase() }}</span>
+              </div>
             </div>
           </div>
 
@@ -459,6 +468,14 @@ watch(() => route.params.orderNumber, (newCode) => {
         </div>
       </div>
     </div>
+
+    <!-- Official Purchase Invoice Modal -->
+    <InvoiceModal
+      v-if="orderData"
+      :is-open="isInvoiceModalOpen"
+      :order="{ ...orderData, items: items }"
+      @close="isInvoiceModalOpen = false"
+    />
   </div>
 </template>
 
@@ -792,6 +809,35 @@ watch(() => route.params.orderNumber, (newCode) => {
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
   gap: 1.25rem;
+}
+
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.btn-tracking-invoice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+  border: 1.5px solid rgba(249, 115, 22, 0.4);
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-tracking-invoice:hover {
+  background: #f97316;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
 }
 
 .top-tag-row {

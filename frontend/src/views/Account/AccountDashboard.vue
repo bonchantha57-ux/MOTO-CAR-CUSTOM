@@ -16,7 +16,8 @@ import {
   ArrowRight,
   Camera,
   Mail,
-  Phone
+  Phone,
+  FileText
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -152,6 +153,19 @@ const handleLogout = async () => {
 
       <!-- Quick Navigation Tiles -->
       <div class="dashboard-tiles-grid">
+        <div class="dash-tile glass-card">
+          <div class="tile-top">
+            <FileText :size="20" class="text-orange" />
+            <span class="tag">INVOICES & RECEIPTS</span>
+          </div>
+          <h3>My Purchase Invoices</h3>
+          <p>Access, view, and print official VAT purchase invoices and digital receipts for all your orders</p>
+          <router-link to="/account/orders" class="tile-action-link">
+            <span>View All Invoices</span>
+            <ArrowRight :size="15" />
+          </router-link>
+        </div>
+
         <div class="dash-tile glass-card">
           <div class="tile-top">
             <Wrench :size="20" class="text-orange" />

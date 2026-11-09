@@ -271,4 +271,50 @@ class OrderController extends Controller
             ]
         ]);
     }
+
+    /**
+     * Get official invoice data by order number
+     */
+    public function invoice($orderNumber)
+    {
+        $order = DB::table('orders')
+            ->leftJoin('users', 'orders.user_id', '=', 'users.id')
+            ->where('orders.order_number', $orderNumber)
+            ->orWhere('orders.id', $orderNumber)
+            ->orWhere('orders.tracking_number', $orderNumber)
+            ->select(
+                'orders.*',
+                'users.name as customer_name',
+                'users.email as customer_email',
+                'users.phone as customer_phone'
+            )
+            ->first();
+
+        if (!$order) {
+            return response()->json([
+                'status' => 'error',
+                'message' => "Invoice not found for order '{$orderNumber}'."
+            ], 404);
+        }
+
+        $items = DB::table('order_items')->where('order_id', $order->id)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'invoice_number' => 'INV-' . $order->order_number,
+                'order' => $order,
+                'items' => $items,
+                'company' => [
+                    'name' => 'MotoCar Custom Co., Ltd.',
+                    'brand' => 'MotoCar Custom Performance Workshop',
+                    'tax_id' => 'K009-902488192',
+                    'address' => '#88 Russian Blvd, Toul Kork, Phnom Penh, Cambodia',
+                    'phone' => '+855 23 888 999 / +855 70 888 999',
+                    'email' => 'vip@motocarcustom.com',
+                    'website' => 'https://moto-car-custom-ten.vercel.app'
+                ]
+            ]
+        ]);
+    }
 }

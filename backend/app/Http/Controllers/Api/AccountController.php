@@ -27,7 +27,11 @@ class AccountController extends Controller
             }
         }
 
-        return $request->query('user_id') ?: $request->header('X-User-Id');
+        $id = $request->header('X-User-Id') ?: ($request->query('user_id') ?: $request->input('user_id'));
+        if ($id) {
+            return intval($id);
+        }
+        return null;
     }
 
     /**
@@ -46,9 +50,16 @@ class AccountController extends Controller
         }
 
         $orders = DB::table('orders')
-            ->where('user_id', $userId)
-            ->whereNull('deleted_at')
-            ->orderBy('id', 'desc')
+            ->leftJoin('users', 'orders.user_id', '=', 'users.id')
+            ->where('orders.user_id', $userId)
+            ->whereNull('orders.deleted_at')
+            ->select(
+                'orders.*',
+                'users.name as customer_name',
+                'users.email as customer_email',
+                'users.phone as customer_phone'
+            )
+            ->orderBy('orders.id', 'desc')
             ->get();
 
         foreach ($orders as $order) {

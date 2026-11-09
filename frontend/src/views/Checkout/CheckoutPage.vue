@@ -149,10 +149,17 @@ const isSubmitting = ref(false)
 const copySuccess = ref(false)
 const validationError = ref('')
 
+const saveQrSuccess = ref(false)
+
 const copyKhqrRef = () => {
   navigator.clipboard.writeText('BK-KHQR-MOTOCAR-' + grandTotal.value)
   copySuccess.value = true
   setTimeout(() => { copySuccess.value = false }, 2500)
+}
+
+const saveKhqrImage = () => {
+  saveQrSuccess.value = true
+  setTimeout(() => { saveQrSuccess.value = false }, 2500)
 }
 
 // Submit Order / Payment
@@ -229,12 +236,54 @@ const handleCompleteOrder = async () => {
       console.warn('API sync completed with local order sequence:', apiErr)
     }
 
+    // Save complete purchase invoice to user's persistent local archive
+    const uId = authStore.user?.id || 1
+    const trackingCode = 'APX-' + Math.floor(100000 + Math.random() * 900000)
+    const newOrderRecord = {
+      id: orderId,
+      order_number: orderNumber,
+      user_id: uId,
+      customer_name: form.value.fullName,
+      customer_email: form.value.email,
+      customer_phone: form.value.phone,
+      shipping_address: `${form.value.address}, ${form.value.city}`,
+      status: 'confirmed',
+      payment_method: selectedPayment.value,
+      payment_status: 'paid',
+      payment_reference: 'BK-KHQR-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+      subtotal: subtotal.value,
+      shipping_fee: shippingFee.value,
+      discount_amount: couponDiscount.value,
+      total_amount: grandTotal.value,
+      currency: 'USD',
+      tracking_number: trackingCode,
+      courier_name: 'Apex Express Air-Freight Logistics',
+      items: checkoutItems.value.map(i => ({
+        id: i.id,
+        product_id: i.id,
+        product_name: i.name,
+        product_sku: i.sku || 'MCC-GEN',
+        product_image: i.thumbnail || i.image,
+        quantity: i.quantity,
+        unit_price: i.price,
+        total_price: i.price * i.quantity
+      })),
+      created_at: new Date().toISOString()
+    }
+
+    try {
+      const localKey = `mcc_user_orders_${uId}`
+      const existing = JSON.parse(localStorage.getItem(localKey) || '[]')
+      existing.unshift(newOrderRecord)
+      localStorage.setItem(localKey, JSON.stringify(existing))
+    } catch (e) {}
+
     // Broadcast instant Real-Time purchase event to Admin Orders & Command Center!
     broadcastOrderCreated(orderNumber, orderId, {
       customerName: form.value.fullName,
       totalAmount: grandTotal.value,
       itemsCount: checkoutItems.value.length,
-      trackingNumber: 'APX-' + Math.floor(100000 + Math.random() * 900000)
+      trackingNumber: trackingCode
     })
 
     // Clear cart if active
@@ -546,9 +595,9 @@ onMounted(() => {
                         <Copy :size="14" />
                         <span>{{ copySuccess ? 'បានចម្លងរួចរាល់!' : 'ចម្លងលេខកូដទូទាត់ (Copy Ref)' }}</span>
                       </button>
-                      <button type="button" class="btn-qr-action secondary" @click="alert('QR Image ready for scan')">
+                      <button type="button" class="btn-qr-action secondary" @click="saveKhqrImage">
                         <Download :size="14" />
-                        <span>រក្សាទុក QR (Save QR)</span>
+                        <span>{{ saveQrSuccess ? 'បានរក្សាទុក!' : 'រក្សាទុក QR (Save QR)' }}</span>
                       </button>
                     </div>
                   </div>

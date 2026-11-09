@@ -13,10 +13,13 @@ import {
   QrCode,
   MapPin,
   Calendar,
-  Sparkles
+  Sparkles,
+  FileText,
+  Printer
 } from 'lucide-vue-next'
 import { formatImageUrl, DEFAULT_PRODUCT_THUMB } from '@/utils/image'
 import { broadcastOrderCreated } from '@/utils/orderRealtime'
+import InvoiceModal from '@/components/InvoiceModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -25,6 +28,7 @@ const orderNumber = ref<string>((route.params.orderNumber as string) || '')
 const orderData = ref<any>(null)
 const items = ref<any[]>([])
 const isLoading = ref(true)
+const isInvoiceModalOpen = ref(false)
 
 const fetchOrderDetails = async () => {
   if (!orderNumber.value) {
@@ -98,6 +102,10 @@ onMounted(() => {
 
         <!-- Action Buttons -->
         <div class="actions-row">
+          <button class="btn-invoice-confirm" @click="isInvoiceModalOpen = true">
+            <FileText :size="18" />
+            <span>View & Print Official Invoice (វិក្កយបត្រ)</span>
+          </button>
           <router-link :to="`/track/${orderNumber}`" class="btn-primary-track">
             <Truck :size="18" />
             <span>Track Order & Live Flight Logistics</span>
@@ -178,6 +186,17 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- Official Purchase Invoice Modal -->
+    <InvoiceModal
+      :is-open="isInvoiceModalOpen"
+      :order="orderData || {
+        order_number: orderNumber,
+        items: items,
+        total_amount: items.reduce((s, i) => s + (Number(i.total_price) || (Number(i.unit_price) * Number(i.quantity))), 0)
+      }"
+      @close="isInvoiceModalOpen = false"
+    />
   </div>
 </template>
 
@@ -336,6 +355,28 @@ onMounted(() => {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.btn-invoice-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+  border: 1.5px solid rgba(249, 115, 22, 0.5);
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-invoice-confirm:hover {
+  background: #f97316;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 26px rgba(249, 115, 22, 0.4);
 }
 
 .btn-primary-track {

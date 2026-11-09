@@ -12,22 +12,46 @@ import {
   ArrowRight,
   ExternalLink,
   ShoppingBag,
-  Loader2
+  Loader2,
+  FileText
 } from 'lucide-vue-next'
 import { subscribeToOrderEvents } from '@/utils/orderRealtime'
+import InvoiceModal from '@/components/InvoiceModal.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
 const orders = ref<any[]>([])
 const isLoading = ref(true)
+const selectedOrderForInvoice = ref<any>(null)
+const isInvoiceModalOpen = ref(false)
 let unsubscribeEvents: (() => void) | null = null
 
+const openInvoice = (order: any) => {
+  selectedOrderForInvoice.value = order
+  isInvoiceModalOpen.value = true
+}
+
 const fetchOrders = async (silent = false) => {
-  if (!silent) isLoading.value = true
+  const uId = authStore.user?.id || 1
+  const localKey = `mcc_user_orders_${uId}`
+
+  // Instant 0ms render from user local purchase archive
+  try {
+    const cached = localStorage.getItem(localKey)
+    if (cached) {
+      const parsed = JSON.parse(cached)
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        orders.value = parsed
+        isLoading.value = false
+      }
+    }
+  } catch (e) {}
+
+  if (!silent && orders.value.length === 0) isLoading.value = true
   try {
     const headers: Record<string, string> = {
-      'X-User-Id': String(authStore.user?.id || 1)
+      'X-User-Id': String(uId)
     }
     const token = localStorage.getItem('auth_token')
     if (token) {
@@ -35,7 +59,19 @@ const fetchOrders = async (silent = false) => {
     }
 
     const res = await axios.get('/api/v1/account/orders', { headers })
-    orders.value = res.data.data || []
+    const fetched = res.data.data || []
+    if (fetched.length > 0) {
+      // Merge unique orders preserving real DB records
+      const map = new Map<string, any>()
+      fetched.forEach((o: any) => map.set(o.order_number, o))
+      orders.value.forEach((o: any) => {
+        if (!map.has(o.order_number)) map.set(o.order_number, o)
+      })
+      orders.value = Array.from(map.values())
+      try {
+        localStorage.setItem(localKey, JSON.stringify(orders.value))
+      } catch (e) {}
+    }
   } catch (err) {
     console.error('Failed to fetch orders:', err)
   } finally {
@@ -169,6 +205,10 @@ const trackOrder = (orderNum: string) => {
             </div>
 
             <div class="footer-actions">
+              <button class="invoice-btn" @click="openInvoice(order)" title="View & Print Official Purchase Invoice">
+                <FileText :size="15" />
+                <span>View Invoice (វិក្កយបត្រ)</span>
+              </button>
               <button class="track-btn" @click="trackOrder(order.order_number)">
                 <Truck :size="15" />
                 <span>Live Tracking</span>
@@ -178,6 +218,13 @@ const trackOrder = (orderNum: string) => {
         </div>
       </div>
     </div>
+
+    <!-- Official Purchase Invoice Modal -->
+    <InvoiceModal
+      :is-open="isInvoiceModalOpen"
+      :order="selectedOrderForInvoice"
+      @close="isInvoiceModalOpen = false"
+    />
   </div>
 </template>
 
@@ -403,6 +450,36 @@ const trackOrder = (orderNum: string) => {
 .payment-val {
   color: #94a3b8;
   font-size: 0.85rem;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.invoice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  padding: 0.65rem 1.15rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.invoice-btn:hover {
+  background: #f97316;
+  color: #ffffff;
+  border-color: #f97316;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
 }
 
 .track-btn {
