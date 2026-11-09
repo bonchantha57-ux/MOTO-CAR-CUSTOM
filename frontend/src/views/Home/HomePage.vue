@@ -1432,4 +1432,164 @@ const applyFitmentSearch = () => {
     display: none;
   }
 }
+
+/* =====================================================================
+   LIGHT THEME SHOWROOM OVERRIDES FOR HOMEPAGE
+   ===================================================================== */
+:global(body.theme-light) .hero-section {
+  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%) !important;
+}
+
+:global(body.theme-light) .hero-bg-media {
+  opacity: 0.18 !important;
+  filter: contrast(1.15) brightness(1.1) grayscale(30%) !important;
+  mix-blend-mode: multiply !important;
+}
+
+:global(body.theme-light) .hero-gradient-overlay {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.75) 50%, #f8fafc 100%) !important;
+}
+
+:global(body.theme-light) .hero-main-title {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+
+:global(body.theme-light) .hero-description {
+  color: #475569 !important;
+}
+
+:global(body.theme-light) .fitment-engine-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+}
+
+:global(body.theme-light) .card-header-bar {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+:global(body.theme-light) .header-title-box h3 {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .header-title-box p {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .type-pill-switch {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+:global(body.theme-light) .type-pill-switch button {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .type-pill-switch button.active {
+  background: #f97316 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3) !important;
+}
+
+:global(body.theme-light) .fitment-grid-inputs label {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+:global(body.theme-light) .custom-select,
+:global(body.theme-light) .custom-input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+:global(body.theme-light) .hero-stats-row {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08) !important;
+}
+
+:global(body.theme-light) .stat-number {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .stat-caption {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .stat-sep {
+  background: #e2e8f0 !important;
+}
+
+:global(body.theme-light) .wholesale-indicator-pill {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+:global(body.theme-light) .cat-tile {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+:global(body.theme-light) .cat-tile-title {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .cat-tile-count {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .product-item-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+:global(body.theme-light) .product-name-link {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .product-name-link:hover {
+  color: #f97316 !important;
+}
+
+:global(body.theme-light) .vehicle-compatibility {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .rating-score {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .rating-count {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .btn-view-spec {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+:global(body.theme-light) .garage-station-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+:global(body.theme-light) .station-name {
+  color: #0f172a !important;
+}
+
+:global(body.theme-light) .station-meta {
+  color: #64748b !important;
+}
+
+:global(body.theme-light) .spec-desc {
+  color: #334155 !important;
+}
 </style>

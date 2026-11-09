@@ -112,24 +112,32 @@ const handleSearch = () => {
 
 <template>
   <div class="customer-layout">
-    <!-- Top Bar with Theme Mode Switcher & B2B Switcher -->
+    <!-- Top Bar with Status & Controls -->
     <div class="top-announcement-bar">
       <div class="container top-bar-content">
-        <!-- Background Color Switcher (Dark Mode / Light Mode - Black / White) -->
-        <div class="theme-switcher-wrapper">
-          <button 
-            type="button" 
-            class="theme-toggle-btn"
-            :title="themeStore.isDark ? langStore.t.switchToLight : langStore.t.switchToDark"
-            @click="themeStore.toggleTheme"
-          >
-            <Sun v-if="themeStore.isDark" :size="13" class="theme-icon text-amber" />
-            <Moon v-else :size="13" class="theme-icon text-blue" />
-            <span class="theme-btn-label">{{ themeStore.isDark ? langStore.t.themeLight : langStore.t.themeDark }}</span>
-          </button>
+        <!-- Left: High-Performance Status Slogan -->
+        <div class="top-status-indicator">
+          <span class="status-pulse-dot"></span>
+          <span class="status-slogan">{{ langStore.currentLang === 'km' ? 'មជ្ឈមណ្ឌលគ្រឿងបន្លាស់ប្រណាំងរថយន្ត-ម៉ូតូកម្រិតខ្ពស់' : (langStore.currentLang === 'zh' ? '柬埔寨领先的高性能汽车与摩托车改装商城' : 'PREMIER HIGH-PERFORMANCE TUNING & WHOLESALE') }}</span>
         </div>
 
         <div class="announcement-right">
+          <!-- Segmented Theme Mode Switcher (Light Mode / Dark Mode) -->
+          <div 
+            class="theme-segmented-switch" 
+            @click="themeStore.toggleTheme"
+            :title="themeStore.isDark ? langStore.t.switchToLight : langStore.t.switchToDark"
+          >
+            <div class="theme-seg-option" :class="{ active: !themeStore.isDark }">
+              <Sun :size="12" class="sun-icon" />
+              <span>{{ langStore.t.themeLight }}</span>
+            </div>
+            <div class="theme-seg-option" :class="{ active: themeStore.isDark }">
+              <Moon :size="12" class="moon-icon" />
+              <span>{{ langStore.t.themeDark }}</span>
+            </div>
+          </div>
+
           <!-- B2C / B2B Mode Switcher -->
           <div 
             class="b2b-toggle-container"
@@ -715,45 +723,90 @@ const handleSearch = () => {
   gap: 0.75rem;
 }
 
-/* THEME MODE SWITCHER (DARK / LIGHT - BLACK / WHITE) */
-.theme-switcher-wrapper {
+/* TOP STATUS INDICATOR */
+.top-status-indicator {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #94a3b8;
 }
 
-.theme-toggle-btn {
+.status-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseGlow 1.8s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* THEME MODE SEGMENTED SWITCH */
+.theme-segmented-switch {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #cbd5e1;
-  padding: 0.22rem 0.65rem;
+  padding: 2px;
   border-radius: 9999px;
-  font-size: 0.76rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   user-select: none;
+  transition: all 0.25s ease;
 }
 
-.theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+.theme-segmented-switch:hover {
   border-color: rgba(249, 115, 22, 0.4);
+}
+
+.theme-seg-option {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  transition: all 0.25s ease;
+}
+
+.theme-seg-option.active {
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
 }
 
-body.theme-light .theme-toggle-btn {
-  background: #ffffff;
-  border-color: #cbd5e1;
-  color: #334155;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+.theme-seg-option.active .sun-icon {
+  color: #f59e0b;
 }
 
-body.theme-light .theme-toggle-btn:hover {
-  background: #f8fafc;
-  border-color: #f97316;
+.theme-seg-option.active .moon-icon {
+  color: #38bdf8;
+}
+
+body.theme-light .theme-segmented-switch {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+body.theme-light .theme-seg-option {
+  color: #64748b;
+}
+
+body.theme-light .theme-seg-option.active {
+  background: #ffffff;
   color: #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .theme-seg-option.active .sun-icon {
+  color: #f97316;
 }
 
 .text-amber {
@@ -1937,6 +1990,65 @@ body.theme-light .drawer-theme-toggle {
   height: 1px;
   background: rgba(255, 255, 255, 0.08);
   margin: 0.75rem 0;
+}
+
+body.theme-light .mobile-drawer-card {
+  background: #ffffff !important;
+  border-right-color: #e2e8f0 !important;
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.12) !important;
+}
+
+body.theme-light .btn-close-drawer {
+  color: #0f172a !important;
+}
+
+body.theme-light .drawer-header {
+  border-bottom-color: #f1f5f9 !important;
+}
+
+body.theme-light .drawer-mode-toggle {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .drawer-lang-selector {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.theme-light .drawer-lang-btn {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .drawer-lang-btn.active {
+  background: #fff7ed !important;
+  border-color: #f97316 !important;
+  color: #f97316 !important;
+}
+
+body.theme-light .drawer-search {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-light .drawer-search input {
+  color: #0f172a !important;
+}
+
+body.theme-light .drawer-nav-item {
+  color: #334155 !important;
+}
+
+body.theme-light .drawer-nav-item:hover {
+  background: #f1f5f9 !important;
+  color: #f97316 !important;
+}
+
+body.theme-light .drawer-divider {
+  background: #e2e8f0 !important;
 }
 
 /* Mobile Bottom Navigation Bar */

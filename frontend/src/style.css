@@ -34,21 +34,24 @@
   color-scheme: dark;
 }
 
-/* Luxury Light Mode - Clean Automotive Showroom White/Gray */
+/* =====================================================================
+   LUXURY SHOWROOM LIGHT MODE & SUPERCAR OBSIDIAN DARK MODE
+   ===================================================================== */
+
 [data-theme="light"], .theme-light {
   color-scheme: light;
-  --bg-darkest: #f1f5f9;
-  --bg-dark: #e2e8f0;
-  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-darkest: #f8fafc;
+  --bg-dark: #f1f5f9;
+  --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.96);
   --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-medium: rgba(0, 0, 0, 0.14);
+  --border-medium: rgba(0, 0, 0, 0.12);
   --border-glow: rgba(249, 115, 22, 0.35);
 }
 
 body.theme-light, [data-theme="light"] body {
-  background-color: #f1f5f9 !important;
+  background-color: #f8fafc !important;
   color: #0f172a !important;
 }
 
@@ -58,35 +61,105 @@ body.theme-light h3,
 body.theme-light h4, 
 body.theme-light h5, 
 body.theme-light h6 {
-  color: #0f172a;
+  color: #0f172a !important;
 }
 
 body.theme-light .glass-panel,
 body.theme-light .glass-card {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
   color: #0f172a !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
+/* Brand Logo in Light Mode */
+body.theme-light .brand-part-1 {
+  color: #0f172a !important;
+}
+
+body.theme-light .brand-part-2 {
+  color: #f97316 !important;
+}
+
+/* Top Announcement & Navigation Bar */
 body.theme-light .top-announcement-bar {
   background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
 }
 
-body.theme-light .main-header {
-  background: rgba(255, 255, 255, 0.96) !important;
+body.theme-light .top-status-indicator {
+  color: #64748b !important;
+}
+
+body.theme-light .top-link {
+  color: #475569 !important;
+}
+
+body.theme-light .top-link:hover {
+  color: #f97316 !important;
+}
+
+body.theme-light .b2b-toggle-container {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .b2b-toggle-container:hover {
+  background: #e2e8f0 !important;
+  border-color: #f97316 !important;
+}
+
+body.theme-light .b2b-toggle-container.mode-b2b {
+  background: #e0f2fe !important;
+  border-color: #38bdf8 !important;
+  color: #0284c7 !important;
+}
+
+body.theme-light .lang-pill-btn {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .lang-pill-btn:hover {
+  background: #ffffff !important;
+  border-color: #f97316 !important;
+}
+
+body.theme-light .lang-dropdown-menu {
+  background: #ffffff !important;
   border-color: #e2e8f0 !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.theme-light .lang-item {
+  color: #334155 !important;
+}
+
+body.theme-light .lang-item:hover,
+body.theme-light .lang-item.active {
+  background: #fff7ed !important;
+  color: #f97316 !important;
+}
+
+/* Main Header */
+body.theme-light .main-header {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
 }
 
 body.theme-light .sub-nav {
   background: #ffffff !important;
-  border-color: #e2e8f0 !important;
+  border-top: 1px solid #f1f5f9 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
 }
 
 body.theme-light .nav-tab {
   color: #475569 !important;
+  font-weight: 600 !important;
 }
 
 body.theme-light .nav-tab:hover,
@@ -94,18 +167,301 @@ body.theme-light .nav-tab.router-link-active {
   color: #f97316 !important;
 }
 
-body.theme-light .custom-input,
-body.theme-light .custom-select,
+/* Vehicle Fitment Header Bar */
+body.theme-light .vehicle-fitment-bar {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.theme-light .vehicle-fitment-bar:hover {
+  border-color: #f97316 !important;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.15) !important;
+}
+
+body.theme-light .fitment-active-name {
+  color: #0f172a !important;
+}
+
+body.theme-light .vehicle-dropdown {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .dropdown-header {
+  color: #64748b !important;
+  border-bottom-color: #f1f5f9 !important;
+}
+
+body.theme-light .dropdown-vehicle-item:hover {
+  background: #f8fafc !important;
+}
+
+body.theme-light .dropdown-vehicle-item .item-text strong {
+  color: #0f172a !important;
+}
+
+/* Search Bar */
+body.theme-light .search-input-box {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.theme-light .search-input-box:focus-within {
+  border-color: #f97316 !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12) !important;
+}
+
 body.theme-light .search-input-box input {
+  color: #0f172a !important;
+}
+
+body.theme-light .kbd-shortcut {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #64748b !important;
+}
+
+/* Action buttons */
+body.theme-light .action-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.theme-light .action-btn:hover {
+  background: #fff7ed !important;
+  border-color: #f97316 !important;
+  color: #f97316 !important;
+}
+
+body.theme-light .cart-info .cart-lbl {
+  color: #64748b !important;
+}
+
+body.theme-light .cart-info .cart-total {
+  color: #0f172a !important;
+}
+
+body.theme-light .user-pill-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+body.theme-light .custom-input,
+body.theme-light .custom-select {
   background: #ffffff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
 
+/* =====================================================================
+   HERO SHOWROOM SECTION IN LIGHT MODE (CRUCIAL TRANSFORMATION)
+   ===================================================================== */
+body.theme-light .hero-section {
+  background: radial-gradient(circle at 50% 15%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%) !important;
+  position: relative !important;
+}
+
+body.theme-light .hero-bg-media {
+  opacity: 0.18 !important;
+  filter: contrast(1.15) brightness(1.1) grayscale(30%) !important;
+  mix-blend-mode: multiply !important;
+}
+
+body.theme-light .hero-gradient-overlay {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.75) 50%, #f8fafc 100%) !important;
+}
+
+body.theme-light .hero-main-title {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+
+body.theme-light .hero-description {
+  color: #475569 !important;
+}
+
+body.theme-light .fitment-engine-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.theme-light .card-header-bar {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body.theme-light .header-title-box h3 {
+  color: #0f172a !important;
+}
+
+body.theme-light .header-title-box p {
+  color: #64748b !important;
+}
+
+body.theme-light .type-pill-switch {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+body.theme-light .type-pill-switch button {
+  color: #64748b !important;
+}
+
+body.theme-light .type-pill-switch button.active {
+  background: #f97316 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3) !important;
+}
+
+body.theme-light .fitment-grid-inputs label {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+body.theme-light .hero-stats-row {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.theme-light .stat-number {
+  color: #0f172a !important;
+}
+
+body.theme-light .stat-caption {
+  color: #64748b !important;
+}
+
+body.theme-light .stat-sep {
+  background: #e2e8f0 !important;
+}
+
+/* Categories, Products, and Garages in Light Mode */
+body.theme-light .categories-section {
+  background: #f8fafc !important;
+}
+
+body.theme-light .sub-label {
+  color: #ea580c !important;
+}
+
+body.theme-light .title-heading {
+  color: #0f172a !important;
+}
+
+body.theme-light .cat-tile {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.theme-light .cat-tile:hover {
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.12) !important;
+  border-color: #f97316 !important;
+}
+
+body.theme-light .cat-tile-title {
+  color: #0f172a !important;
+}
+
+body.theme-light .cat-tile-count {
+  color: #64748b !important;
+}
+
+body.theme-light .products-section {
+  background: #f1f5f9 !important;
+}
+
+body.theme-light .product-item-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.theme-light .product-item-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.theme-light .product-name-link {
+  color: #0f172a !important;
+}
+
+body.theme-light .product-name-link:hover {
+  color: #f97316 !important;
+}
+
+body.theme-light .vehicle-compatibility {
+  color: #64748b !important;
+}
+
+body.theme-light .rating-score {
+  color: #0f172a !important;
+}
+
+body.theme-light .rating-count {
+  color: #64748b !important;
+}
+
+body.theme-light .btn-view-spec {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+
+body.theme-light .btn-view-spec:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+body.theme-light .fitment-chip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #15803d !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .garages-section {
+  background: #f8fafc !important;
+}
+
+body.theme-light .garage-station-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.theme-light .station-name {
+  color: #0f172a !important;
+}
+
+body.theme-light .station-meta {
+  color: #64748b !important;
+}
+
+body.theme-light .spec-desc {
+  color: #334155 !important;
+}
+
+body.theme-light .spec-label {
+  color: #64748b !important;
+}
+
+body.theme-light .verified-status {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #15803d !important;
+}
+
 body.theme-light .site-footer {
   background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  color: #334155 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
 }
 
 body.theme-light .site-footer .col-title {
@@ -118,26 +474,6 @@ body.theme-light .site-footer a {
 
 body.theme-light .site-footer a:hover {
   color: #f97316 !important;
-}
-
-body.theme-light .product-card,
-body.theme-light .product-item-card {
-  background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  color: #0f172a !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-body.theme-light .cat-tile {
-  background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  color: #0f172a !important;
-}
-
-body.theme-light .mobile-bottom-bar {
-  background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  color: #475569 !important;
 }
 
 body.theme-light .user-dropdown-card {
@@ -156,17 +492,10 @@ body.theme-light .menu-item:hover {
   color: #f97316 !important;
 }
 
-body.theme-light .hero-stats-row {
+body.theme-light .mobile-bottom-bar {
   background: #ffffff !important;
   border-color: #e2e8f0 !important;
-}
-
-body.theme-light .stat-number {
-  color: #0f172a !important;
-}
-
-body.theme-light .stat-caption {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
 *, *::before, *::after {
