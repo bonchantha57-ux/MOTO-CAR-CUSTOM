@@ -9,12 +9,14 @@ import {
   Flame,
   Building2,
   User as UserIcon,
+  User,
   MapPin,
   Truck,
   Car,
   Search,
   Heart,
   ShoppingBag,
+  ShoppingCart,
   Plus,
   ShieldCheck,
   Phone,
@@ -22,13 +24,23 @@ import {
   Clock,
   ChevronDown,
   Wrench as WrenchIcon,
+  Wrench,
   UserPlus,
   LogOut,
+  LogIn,
   Menu,
   X,
   Sparkles,
   Layers,
-  Globe
+  Globe,
+  LayoutDashboard,
+  Package,
+  FileText,
+  SlidersHorizontal,
+  Disc,
+  Briefcase,
+  Home,
+  Shield
 } from 'lucide-vue-next'
 import { formatImageUrl, handleAvatarError, DEFAULT_USER_AVATAR } from '@/utils/image'
 
@@ -204,19 +216,24 @@ const handleSearch = () => {
                   </div>
                   <div class="dropdown-menu-list">
                     <router-link to="/account/dashboard" class="menu-item" @click="isUserMenuOpen = false">
-                      <span>📊 Dashboard</span>
+                      <LayoutDashboard :size="15" />
+                      <span>Dashboard</span>
                     </router-link>
                     <router-link to="/account/garage" class="menu-item" @click="isUserMenuOpen = false">
-                      <span>🚗 My Garage Vehicles</span>
+                      <Car :size="15" />
+                      <span>My Garage Vehicles</span>
                     </router-link>
                     <router-link to="/account/orders" class="menu-item" @click="isUserMenuOpen = false">
-                      <span>📦 Orders & Tracking</span>
+                      <Package :size="15" />
+                      <span>Orders & Tracking</span>
                     </router-link>
                     <router-link v-if="authStore.isB2B" to="/account/rfq" class="menu-item text-cyan" @click="isUserMenuOpen = false">
-                      <span>💼 B2B RFQ Quotes</span>
+                      <FileText :size="15" />
+                      <span>B2B RFQ Quotes</span>
                     </router-link>
                     <router-link v-if="authStore.isAdmin" to="/admin/dashboard" class="menu-item text-orange" @click="isUserMenuOpen = false">
-                      <span>⚡ Admin Portal</span>
+                      <ShieldCheck :size="15" />
+                      <span>Admin Portal</span>
                     </router-link>
                     <div class="dropdown-divider"></div>
                     <button type="button" class="menu-item logout-action" @click="handleLogout">
@@ -450,37 +467,48 @@ const handleSearch = () => {
           <!-- Drawer Navigation Links -->
           <div class="drawer-nav-list">
             <router-link to="/" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🏠 Home Showroom</span>
+              <Home :size="16" />
+              <span>Home Showroom</span>
             </router-link>
             <router-link to="/shop" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🛍️ All Performance Parts</span>
+              <ShoppingBag :size="16" />
+              <span>All Performance Parts</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { type: 'motorcycle' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🏍️ Motorcycle Custom</span>
+              <Layers :size="16" />
+              <span>Motorcycle Custom</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { type: 'car' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🏎️ Car Custom</span>
+              <Car :size="16" />
+              <span>Car Custom</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { category: 'exhaust' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🔥 Exhaust Systems</span>
+              <Flame :size="16" />
+              <span>Exhaust Systems</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { category: 'suspension' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>⚡ Suspension & Coilovers</span>
+              <SlidersHorizontal :size="16" />
+              <span>Suspension & Coilovers</span>
             </router-link>
             <router-link :to="{ name: 'shop', query: { category: 'brakes' } }" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>🛑 Performance Brakes</span>
+              <Disc :size="16" />
+              <span>Performance Brakes</span>
             </router-link>
             <router-link to="/shop?b2b=true" class="drawer-nav-item text-cyan" @click="isMobileDrawerOpen = false">
-              <span>💼 B2B Wholesale Catalog</span>
+              <Briefcase :size="16" />
+              <span>B2B Wholesale Catalog</span>
             </router-link>
             <router-link to="/garages" class="drawer-nav-item text-orange" @click="isMobileDrawerOpen = false">
-              <span>🔧 Certified Partner Garages</span>
+              <Wrench :size="16" />
+              <span>Certified Partner Garages</span>
             </router-link>
             <router-link to="/wishlist" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>❤️ Saved Wishlist ({{ wishlistStore.itemsCount }})</span>
+              <Heart :size="16" />
+              <span>Saved Wishlist ({{ wishlistStore.itemsCount }})</span>
             </router-link>
             <router-link to="/track" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-              <span>📦 Track Your Order</span>
+              <Package :size="16" />
+              <span>Track Your Order</span>
             </router-link>
 
             <div class="drawer-divider"></div>
@@ -488,21 +516,26 @@ const handleSearch = () => {
             <!-- Auth Options -->
             <template v-if="!authStore.isAuthenticated">
               <router-link to="/auth/login" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-                <span>🔑 Sign In</span>
+                <LogIn :size="16" />
+                <span>Sign In</span>
               </router-link>
               <router-link to="/auth/register" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-                <span>📝 Register Free Account</span>
+                <UserPlus :size="16" />
+                <span>Register Free Account</span>
               </router-link>
             </template>
             <template v-else>
               <router-link to="/account/dashboard" class="drawer-nav-item" @click="isMobileDrawerOpen = false">
-                <span>👤 My Account ({{ authStore.user?.name }})</span>
+                <User :size="16" />
+                <span>My Account ({{ authStore.user?.name }})</span>
               </router-link>
               <router-link v-if="authStore.isAdmin" to="/admin/dashboard" class="drawer-nav-item text-orange" @click="isMobileDrawerOpen = false">
-                <span>⚡ Admin Command Portal</span>
+                <ShieldCheck :size="16" />
+                <span>Admin Command Portal</span>
               </router-link>
               <button class="drawer-nav-item drawer-logout" @click="handleLogout">
-                <span>🚪 Sign Out</span>
+                <LogOut :size="16" />
+                <span>Sign Out</span>
               </button>
             </template>
           </div>
@@ -518,26 +551,26 @@ const handleSearch = () => {
     <!-- Mobile Bottom App Bar (Optimized for Mobile Phone UX) -->
     <nav class="mobile-bottom-bar">
       <router-link to="/" class="bottom-bar-item" active-class="active">
-        <span class="bottom-bar-icon">🏠</span>
+        <Home :size="20" class="bottom-bar-icon" />
         <span class="bottom-bar-lbl">Home</span>
       </router-link>
       <router-link to="/shop" class="bottom-bar-item" active-class="active">
-        <span class="bottom-bar-icon">🛍️</span>
+        <ShoppingBag :size="20" class="bottom-bar-icon" />
         <span class="bottom-bar-lbl">Catalog</span>
       </router-link>
       <router-link to="/cart" class="bottom-bar-item bottom-bar-cart" active-class="active">
         <div class="bottom-cart-wrapper">
-          <span class="bottom-bar-icon">🛒</span>
+          <ShoppingCart :size="20" class="bottom-bar-icon" />
           <span v-if="cartStore.totalItems > 0" class="bottom-cart-badge">{{ cartStore.totalItems }}</span>
         </div>
         <span class="bottom-bar-lbl">Cart</span>
       </router-link>
       <router-link to="/garages" class="bottom-bar-item" active-class="active">
-        <span class="bottom-bar-icon">🔧</span>
+        <Wrench :size="20" class="bottom-bar-icon" />
         <span class="bottom-bar-lbl">Garages</span>
       </router-link>
       <router-link :to="authStore.isAuthenticated ? '/account/dashboard' : '/auth/login'" class="bottom-bar-item" active-class="active">
-        <span class="bottom-bar-icon">👤</span>
+        <User :size="20" class="bottom-bar-icon" />
         <span class="bottom-bar-lbl">{{ authStore.isAuthenticated ? 'Account' : 'Login' }}</span>
       </router-link>
     </nav>

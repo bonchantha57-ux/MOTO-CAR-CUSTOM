@@ -185,7 +185,7 @@ const confirmPayment = async () => {
                     <div class="item-install-badge" @click="cartStore.toggleInstallation(item.id)">
                       <Wrench :size="13" :class="item.installation_selected ? 'text-green' : 'text-orange'" />
                       <span>
-                        {{ item.installation_selected ? '✓ Certified Garage Installation Added (+$25)' : '+ Add Garage Installation ($25)' }}
+                        {{ item.installation_selected ? 'Certified Garage Installation Added (+$25)' : '+ Add Garage Installation ($25)' }}
                       </span>
                     </div>
                   </div>
@@ -251,7 +251,7 @@ const confirmPayment = async () => {
                   {{ promoApplied ? 'Applied' : 'Apply' }}
                 </button>
               </div>
-              <span v-if="promoApplied" class="promo-success">✓ 10% Motorsport VIP discount applied!</span>
+              <span v-if="promoApplied" class="promo-success">10% Motorsport VIP discount applied!</span>
               <span v-if="promoError" class="promo-err">{{ promoError }}</span>
             </div>
 
@@ -304,7 +304,7 @@ const confirmPayment = async () => {
       <div class="khqr-card glass-panel">
         <div class="khqr-head">
           <div class="khqr-logo-box">
-            <span class="khqr-flag">🇰🇭</span>
+            <QrCode :size="18" />
             <strong>BAKONG KHQR</strong>
           </div>
           <button class="btn-close-modal" @click="showKhqrModal = false">&times;</button>

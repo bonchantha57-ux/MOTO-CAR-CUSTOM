@@ -387,7 +387,7 @@ const handleBuyNow = () => {
 
             <button class="btn-add-cart" @click="handleAddToCart">
               <ShoppingBag :size="18" />
-              <span>{{ isAddedSuccess ? '✓ Added to Cart!' : 'Add to Shopping Cart' }}</span>
+              <span>{{ isAddedSuccess ? 'Added to Cart!' : 'Add to Shopping Cart' }}</span>
             </button>
 
             <button class="btn-buy-now" @click="handleBuyNow">
@@ -551,7 +551,7 @@ const handleBuyNow = () => {
       </div>
       <button class="mobile-add-btn" @click="handleAddToCart">
         <ShoppingBag :size="16" />
-        <span>{{ isAddedSuccess ? '✓ Added!' : 'Add to Cart' }}</span>
+        <span>{{ isAddedSuccess ? 'Added!' : 'Add to Cart' }}</span>
       </button>
     </div>
   </div>

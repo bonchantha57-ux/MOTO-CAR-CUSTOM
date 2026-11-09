@@ -189,7 +189,7 @@ const handleSave = async () => {
               @change="handleFileUpload" 
             />
             <span class="role-badge" :class="authStore.isB2B ? 'role-b2b' : 'role-b2c'">
-              {{ authStore.isAdmin ? '👑 ADMIN' : (authStore.isB2B ? '🏢 B2B GARAGE' : '⚡ VIP MEMBER') }}
+              {{ authStore.isAdmin ? 'ADMIN' : (authStore.isB2B ? 'B2B GARAGE' : 'VIP MEMBER') }}
             </span>
           </div>
 

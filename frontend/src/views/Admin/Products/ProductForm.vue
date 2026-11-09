@@ -18,7 +18,8 @@ import {
   Tag,
   Flame,
   Zap,
-  Award
+  Award,
+  Info
 } from 'lucide-vue-next'
 import { formatImageUrl, handleProductImageError, DEFAULT_PRODUCT_THUMB } from '@/utils/image'
 import { useRoute } from 'vue-router'
@@ -83,10 +84,10 @@ const discountSavings = computed(() => {
 })
 
 const badgePresets = [
-  { label: '🔥 VIRAL', value: 'VIRAL', desc: 'Trending / Popular' },
-  { label: '✨ NEW', value: 'NEW', desc: 'New Arrival' },
-  { label: '🏆 BEST SELLER', value: 'BEST SELLER', desc: 'Top Sales' },
-  { label: '⚡ HOT DEAL', value: 'HOT DEAL', desc: 'Special Discount' },
+  { label: 'VIRAL', value: 'VIRAL', desc: 'Trending / Popular' },
+  { label: 'NEW', value: 'NEW', desc: 'New Arrival' },
+  { label: 'BEST SELLER', value: 'BEST SELLER', desc: 'Top Sales' },
+  { label: 'HOT DEAL', value: 'HOT DEAL', desc: 'Special Discount' },
 ]
 
 const selectBadge = (val: string) => {
@@ -351,9 +352,9 @@ const handleSubmit = async () => {
               <div class="form-group">
                 <label class="lbl">{{ langStore.t.admin?.vehicleType || 'Vehicle Type *' }}</label>
                 <select v-model="form.vehicle_type" class="custom-select">
-                  <option value="motorcycle">{{ langStore.t.admin?.motorcycleOption || '🏍️ Motorcycle / Superbike' }}</option>
-                  <option value="car">{{ langStore.t.admin?.carOption || '🚗 Performance Car / Offroad' }}</option>
-                  <option value="both">{{ langStore.t.admin?.universalOption || '⚡ Universal Fitment' }}</option>
+                  <option value="motorcycle">{{ langStore.t.admin?.motorcycleOption || 'Motorcycle / Superbike' }}</option>
+                  <option value="car">{{ langStore.t.admin?.carOption || 'Performance Car / Offroad' }}</option>
+                  <option value="both">{{ langStore.t.admin?.universalOption || 'Universal Fitment' }}</option>
                 </select>
               </div>
             </div>
@@ -459,16 +460,16 @@ const handleSubmit = async () => {
             <!-- Discount Savings Banner & On Sale Toggle -->
             <div class="discount-banner-row">
               <div v-if="discountPercent > 0" class="discount-pill-alert">
-                <span class="pill-fire">🔥</span>
+                <span class="pill-fire"><Flame :size="14" /></span>
                 <span><strong>{{ langStore.t.admin?.activeDiscount || 'Active Discount:' }}</strong> {{ langStore.t.admin?.customerSaves || 'Customer saves' }} ${{ discountSavings }} (<strong>{{ discountPercent }}% {{ langStore.t.admin?.off || 'OFF' }}</strong>)</span>
               </div>
               <div v-else class="discount-pill-none">
-                <span>💡 {{ langStore.t.admin?.discountHint || 'Set Compare-At Price higher than Retail Price to display discount tags & strikethrough.' }}</span>
+                <span><Info :size="14" /> {{ langStore.t.admin?.discountHint || 'Set Compare-At Price higher than Retail Price to display discount tags & strikethrough.' }}</span>
               </div>
 
               <label class="switch-checkbox-label">
                 <input type="checkbox" v-model="form.is_on_sale" />
-                <span class="switch-text">{{ langStore.t.admin?.markOnSale || '🏷️ Mark as On Sale (Special Promotion)' }}</span>
+                <span class="switch-text">{{ langStore.t.admin?.markOnSale || 'Mark as On Sale (Special Promotion)' }}</span>
               </label>
             </div>
 

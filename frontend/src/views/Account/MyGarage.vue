@@ -12,7 +12,9 @@ import {
   ShieldCheck,
   Sparkles,
   Search,
-  Loader2
+  Loader2,
+  X,
+  Tag
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -168,7 +170,7 @@ const shopForVehicle = (v: Vehicle) => {
             <Sparkles :size="18" class="text-orange" />
             <span>Add Vehicle to My Garage</span>
           </h3>
-          <button class="close-btn" @click="isAddingNew = false">✕</button>
+          <button class="close-btn" @click="isAddingNew = false"><X :size="16" /></button>
         </div>
 
         <form @submit.prevent="handleAddVehicle" class="new-vehicle-form">
@@ -176,8 +178,8 @@ const shopForVehicle = (v: Vehicle) => {
             <div class="form-group">
               <label>Vehicle Type</label>
               <select v-model="newVehicle.type" class="custom-select">
-                <option value="motorcycle">🏍️ Motorcycle / Superbike</option>
-                <option value="car">🚗 Performance Car / 4x4 Offroad</option>
+                <option value="motorcycle">Motorcycle / Superbike</option>
+                <option value="car">Performance Car / 4x4 Offroad</option>
               </select>
             </div>
 
@@ -278,7 +280,7 @@ const shopForVehicle = (v: Vehicle) => {
           <!-- Card Top Bar -->
           <div class="card-head">
             <div class="type-pill">
-              <span>{{ v.type === 'motorcycle' ? '🏍️ SUPERBIKE' : '🏎️ PERFORMANCE CAR' }}</span>
+              <span>{{ v.type === 'motorcycle' ? 'SUPERBIKE' : 'PERFORMANCE CAR' }}</span>
             </div>
             <div v-if="v.active" class="active-badge">
               <CheckCircle :size="13" />
@@ -295,7 +297,7 @@ const shopForVehicle = (v: Vehicle) => {
               <span class="vehicle-year">{{ v.year }}</span>
               <h3 class="vehicle-name">{{ v.make }} {{ v.model }}</h3>
               <p class="vehicle-sub">{{ v.trim }}</p>
-              <span class="plate-tag" v-if="v.plate">🔖 {{ v.plate }}</span>
+              <span class="plate-tag" v-if="v.plate"><Tag :size="11" /> {{ v.plate }}</span>
             </div>
           </div>
 

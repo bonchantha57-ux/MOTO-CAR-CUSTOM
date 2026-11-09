@@ -366,7 +366,7 @@ const handleDeleteUser = async (user: any) => {
                     'role-b2c': user.role === 'customer'
                   }"
                 >
-                  {{ user.role === 'super_admin' ? '👑 SUPER ADMIN' : (user.role === 'b2b_client' ? '🏢 B2B GARAGE' : '👤 B2C BUYER') }}
+                  {{ user.role === 'super_admin' ? 'SUPER ADMIN' : (user.role === 'b2b_client' ? 'B2B GARAGE' : 'B2C BUYER') }}
                 </span>
               </td>
               <td>
@@ -416,7 +416,7 @@ const handleDeleteUser = async (user: any) => {
             <KeyRound :size="20" class="text-orange" />
             <h3>Change / Reset Password</h3>
           </div>
-          <button class="btn-close" @click="isPasswordModalOpen = false">✕</button>
+          <button class="btn-close" @click="isPasswordModalOpen = false"><X :size="16" /></button>
         </div>
 
         <p class="modal-desc">
@@ -456,7 +456,7 @@ const handleDeleteUser = async (user: any) => {
             <Edit :size="20" class="text-orange" />
             <h3>Edit User Details</h3>
           </div>
-          <button class="btn-close" @click="isEditModalOpen = false">✕</button>
+          <button class="btn-close" @click="isEditModalOpen = false"><X :size="16" /></button>
         </div>
 
         <form @submit.prevent="handleSaveUser" class="modal-form">
@@ -507,10 +507,10 @@ const handleDeleteUser = async (user: any) => {
           <div class="form-group">
             <label>Account Role</label>
             <select v-model="editForm.role" class="custom-select">
-              <option value="customer">👤 Retail Consumer (B2C)</option>
-              <option value="b2b_client">🏢 B2B Partner Garage</option>
-              <option value="admin">⚡ Administrator</option>
-              <option value="super_admin">👑 Super Administrator</option>
+              <option value="customer">Retail Consumer (B2C)</option>
+              <option value="b2b_client">B2B Partner Garage</option>
+              <option value="admin">Administrator</option>
+              <option value="super_admin">Super Administrator</option>
             </select>
           </div>
 
@@ -532,7 +532,7 @@ const handleDeleteUser = async (user: any) => {
             <Plus :size="20" class="text-orange" />
             <h3>Create New Database Account</h3>
           </div>
-          <button class="btn-close" @click="isCreateModalOpen = false">✕</button>
+          <button class="btn-close" @click="isCreateModalOpen = false"><X :size="16" /></button>
         </div>
 
         <form @submit.prevent="handleCreateUser" class="modal-form">
@@ -583,9 +583,9 @@ const handleDeleteUser = async (user: any) => {
           <div class="form-group">
             <label>Account Role *</label>
             <select v-model="createForm.role" class="custom-select" required>
-              <option value="customer">👤 Retail Consumer (B2C)</option>
-              <option value="b2b_client">🏢 B2B Partner Garage</option>
-              <option value="admin">⚡ Administrator</option>
+              <option value="customer">Retail Consumer (B2C)</option>
+              <option value="b2b_client">B2B Partner Garage</option>
+              <option value="admin">Administrator</option>
             </select>
           </div>
 

@@ -18,7 +18,8 @@ import {
   Mail,
   ShieldCheck,
   ChevronRight,
-  Trash2
+  Trash2,
+  Sparkles
 } from 'lucide-vue-next'
 
 import { formatImageUrl, DEFAULT_PRODUCT_THUMB } from '@/utils/image'
@@ -262,7 +263,7 @@ const deleteOrder = async (order: any) => {
             </div>
             <div class="alert-texts">
               <div class="alert-title-row">
-                <span class="pulse-tag">🎉 {{ langStore.t.admin?.newPurchaseAlert || 'NEW CUSTOMER PURCHASE!' }}</span>
+                <span class="pulse-tag"><Sparkles :size="13" /> {{ langStore.t.admin?.newPurchaseAlert || 'NEW CUSTOMER PURCHASE!' }}</span>
                 <span class="alert-timestamp">Just now</span>
               </div>
               <p class="alert-desc">

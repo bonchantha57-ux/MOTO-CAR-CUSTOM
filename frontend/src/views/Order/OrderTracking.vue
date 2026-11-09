@@ -252,7 +252,7 @@ watch(() => route.params.orderNumber, (newCode) => {
           <div class="toast-left">
             <span class="live-flash-dot"></span>
             <div class="toast-text-wrap">
-              <strong>⚡ LIVE SYNC UPDATE:</strong>
+              <strong>LIVE SYNC UPDATE:</strong>
               <span>{{ realtimeNotice }}</span>
             </div>
           </div>

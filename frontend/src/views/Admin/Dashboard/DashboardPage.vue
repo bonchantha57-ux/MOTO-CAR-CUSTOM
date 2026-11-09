@@ -243,7 +243,7 @@ onUnmounted(() => {
                         'badge-b2c': u.role === 'customer'
                       }"
                     >
-                      {{ u.role === 'super_admin' ? '👑 SUPER ADMIN' : (u.role === 'b2b_client' ? '🏢 B2B GARAGE' : '👤 B2C BUYER') }}
+                      {{ u.role === 'super_admin' ? 'SUPER ADMIN' : (u.role === 'b2b_client' ? 'B2B GARAGE' : 'B2C BUYER') }}
                     </span>
                   </td>
                   <td>

@@ -13,7 +13,10 @@ import {
   ShieldCheck,
   Building2,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Layers,
+  Car,
+  Sparkles
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -203,15 +206,18 @@ const handleRegister = async () => {
         <div class="interest-options">
           <label class="interest-pill" :class="{ active: form.vehicle_interest === 'motorcycle' }">
             <input v-model="form.vehicle_interest" type="radio" value="motorcycle" />
-            <span>🏍️ Motorcycle</span>
+            <Layers :size="14" />
+            <span>Motorcycle</span>
           </label>
           <label class="interest-pill" :class="{ active: form.vehicle_interest === 'car' }">
             <input v-model="form.vehicle_interest" type="radio" value="car" />
-            <span>🏎️ Car & 4x4</span>
+            <Car :size="14" />
+            <span>Car & 4x4</span>
           </label>
           <label class="interest-pill" :class="{ active: form.vehicle_interest === 'both' }">
             <input v-model="form.vehicle_interest" type="radio" value="both" />
-            <span>⚡ Both</span>
+            <Sparkles :size="14" />
+            <span>Both</span>
           </label>
         </div>
       </div>

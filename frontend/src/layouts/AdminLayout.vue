@@ -20,6 +20,7 @@ import {
   Upload,
   User,
   CheckCircle,
+  Check,
   X,
   Globe,
   ChevronDown
@@ -268,7 +269,7 @@ const handleLogout = async () => {
                     <span class="lang-item-native">{{ opt.nativeName }}</span>
                     <small class="lang-item-sub">{{ opt.label }}</small>
                   </div>
-                  <span v-if="langStore.currentLang === opt.code" class="check-mark">✓</span>
+                  <Check v-if="langStore.currentLang === opt.code" :size="14" class="check-mark" />
                 </div>
               </div>
             </transition>
@@ -287,7 +288,9 @@ const handleLogout = async () => {
                 class="admin-avatar" 
                 @error="handleAvatarError($event)"
               />
-              <span class="avatar-edit-dot" style="position: absolute; bottom: -2px; right: -2px; background: var(--orange-500); border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1.5px solid #080c16;">📷</span>
+              <span class="avatar-edit-dot" style="position: absolute; bottom: -2px; right: -2px; background: var(--orange-500); border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border: 1.5px solid #080c16; color: white;">
+                <Camera :size="9" />
+              </span>
             </div>
             <div class="profile-info">
               <strong class="admin-name">{{ authStore.user?.name || 'MotoCar Director' }}</strong>
@@ -307,7 +310,7 @@ const handleLogout = async () => {
               </div>
               <h3 style="margin: 0; color: #ffffff; font-size: 1.2rem; font-weight: 700;">{{ langStore.t.admin?.adminProfilePicture || 'Admin Profile & Picture' }}</h3>
             </div>
-            <button @click="isAdminModalOpen = false" style="background: none; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer;">✕</button>
+            <button @click="isAdminModalOpen = false" style="background: none; border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center;"><X :size="18" /></button>
           </div>
 
           <div v-if="adminSuccess" style="background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; padding: 0.65rem 1rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">

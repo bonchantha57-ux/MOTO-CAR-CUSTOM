@@ -444,7 +444,7 @@ onMounted(() => {
                   <span class="radio-circle"></span>
                 </div>
                 <div class="payment-brand-badge khqr-badge-style">
-                  <span class="flag-icon">🇰🇭</span>
+                  <QrCode :size="14" />
                   <span class="badge-text">KHQR</span>
                 </div>
                 <div class="payment-info">
@@ -504,7 +504,7 @@ onMounted(() => {
                 <div class="khqr-card-shell">
                   <div class="khqr-header-strip">
                     <div class="khqr-strip-logo">
-                      <span class="khqr-red-flag">🇰🇭</span>
+                      <QrCode :size="16" />
                       <strong>BAKONG KHQR</strong>
                     </div>
                     <div class="khqr-countdown">
@@ -533,7 +533,7 @@ onMounted(() => {
                           class="qr-real-image"
                         />
                         <div class="qr-center-emblem">
-                          <span class="emblem-flag">🇰🇭</span>
+                          <ShieldCheck :size="18" style="color: #d92534;" />
                         </div>
                       </div>
                       <p class="qr-instruction">

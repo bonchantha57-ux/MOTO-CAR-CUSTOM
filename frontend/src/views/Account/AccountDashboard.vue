@@ -14,7 +14,9 @@ import {
   LogOut,
   Sparkles,
   ArrowRight,
-  Camera
+  Camera,
+  Mail,
+  Phone
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -66,12 +68,12 @@ const handleLogout = async () => {
             <div class="name-badge-row">
               <h2>{{ authStore.user?.name || 'Member' }}</h2>
               <span class="role-chip" :class="authStore.isB2B ? 'chip-b2b' : 'chip-b2c'">
-                {{ authStore.isAdmin ? '👑 SUPER ADMIN' : (authStore.isB2B ? '🏢 B2B WHOLESALE GARAGE' : '⚡ VIP DRIVER') }}
+                {{ authStore.isAdmin ? 'SUPER ADMIN' : (authStore.isB2B ? 'B2B WHOLESALE GARAGE' : 'VIP DRIVER') }}
               </span>
             </div>
-            <p class="user-subtext">
-              <span>📧 {{ authStore.user?.email }}</span>
-              <span v-if="authStore.user?.phone"> • 📞 {{ authStore.user.phone }}</span>
+            <p class="user-subtext" style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+              <span style="display: flex; align-items: center; gap: 0.35rem;"><Mail :size="13" /> {{ authStore.user?.email }}</span>
+              <span v-if="authStore.user?.phone" style="display: flex; align-items: center; gap: 0.35rem;"><Phone :size="13" /> {{ authStore.user.phone }}</span>
             </p>
           </div>
         </div>

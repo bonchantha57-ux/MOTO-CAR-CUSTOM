@@ -347,7 +347,7 @@ const applyFitmentSearch = () => {
           <div v-for="product in featuredProducts" :key="product.id" class="product-item-card glass-card">
             <!-- Badge -->
             <div class="card-badge" :class="`badge-${(product.badge || '').toLowerCase().replace(/[^a-z0-9]/g, '-')}`">
-              {{ product.badge || (product.is_on_sale ? '🔥 HOT SALE' : (product.is_featured ? 'Best Seller' : 'Genuine Parts')) }}
+              {{ product.badge || (product.is_on_sale ? 'HOT SALE' : (product.is_featured ? 'Best Seller' : 'Genuine Parts')) }}
             </div>
 
             <!-- Floating Wishlist Heart Button -->
