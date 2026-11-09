@@ -1438,6 +1438,18 @@ const applyFitmentSearch = () => {
    Keeps dramatic cinematic contrast in hero to prevent eye glare ("រយះភ្នែក")
    while elegantly adapting cards and content below.
    ===================================================================== */
+:global(body.theme-light) .hero-main-title,
+:global([data-theme="light"]) .hero-main-title {
+  color: #ffffff !important;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9) !important;
+}
+
+:global(body.theme-light) .hero-description,
+:global([data-theme="light"]) .hero-description {
+  color: #f1f5f9 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85) !important;
+}
+
 :global(body.theme-light) .fitment-engine-card {
   background: rgba(255, 255, 255, 0.98) !important;
   border: 1px solid #cbd5e1 !important;
@@ -1450,10 +1462,12 @@ const applyFitmentSearch = () => {
 
 :global(body.theme-light) .header-title-box h3 {
   color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
 :global(body.theme-light) .header-title-box p {
-  color: #64748b !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
 }
 
 :global(body.theme-light) .type-pill-switch {
@@ -1462,44 +1476,50 @@ const applyFitmentSearch = () => {
 }
 
 :global(body.theme-light) .type-pill-switch button {
-  color: #64748b !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
 }
 
 :global(body.theme-light) .type-pill-switch button.active {
-  background: #f97316 !important;
+  background: #ea580c !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3) !important;
 }
 
 :global(body.theme-light) .fitment-grid-inputs label {
-  color: #334155 !important;
+  color: #0f172a !important;
   font-weight: 700 !important;
+  font-size: 0.85rem !important;
 }
 
 :global(body.theme-light) .custom-select,
 :global(body.theme-light) .custom-input {
   background: #ffffff !important;
   color: #0f172a !important;
-  border: 1px solid #cbd5e1 !important;
+  border: 1.5px solid #cbd5e1 !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  font-weight: 600 !important;
 }
 
 :global(body.theme-light) .hero-stats-row {
   background: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08) !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.1) !important;
 }
 
 :global(body.theme-light) .stat-number {
   color: #0f172a !important;
+  font-weight: 900 !important;
 }
 
 :global(body.theme-light) .stat-caption {
-  color: #64748b !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
 }
 
 :global(body.theme-light) .stat-sep {
-  background: #e2e8f0 !important;
+  background: #cbd5e1 !important;
 }
 
 :global(body.theme-light) .wholesale-indicator-pill {

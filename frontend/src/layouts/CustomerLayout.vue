@@ -112,15 +112,9 @@ const handleSearch = () => {
 
 <template>
   <div class="customer-layout">
-    <!-- Top Bar with Status & Controls -->
+    <!-- Top Bar with Controls -->
     <div class="top-announcement-bar">
       <div class="container top-bar-content">
-        <!-- Left: High-Performance Status Slogan -->
-        <div class="top-status-indicator">
-          <span class="status-pulse-dot"></span>
-          <span class="status-slogan">{{ langStore.currentLang === 'km' ? 'មជ្ឈមណ្ឌលគ្រឿងបន្លាស់ប្រណាំងរថយន្ត-ម៉ូតូកម្រិតខ្ពស់' : (langStore.currentLang === 'zh' ? '柬埔寨领先的高性能汽车与摩托车改装商城' : 'PREMIER HIGH-PERFORMANCE TUNING & WHOLESALE') }}</span>
-        </div>
-
         <div class="announcement-right">
           <!-- Segmented Theme Mode Switcher (Light Mode / Dark Mode) -->
           <div 
@@ -717,35 +711,10 @@ const handleSearch = () => {
 
 .top-bar-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-}
-
-/* TOP STATUS INDICATOR */
-.top-status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #94a3b8;
-}
-
-.status-pulse-dot {
-  width: 6px;
-  height: 6px;
-  background: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulseGlow 1.8s infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
 }
 
 /* THEME MODE SEGMENTED SWITCH */
@@ -1064,6 +1033,28 @@ body.theme-light .drawer-theme-toggle {
   font-size: 0.8rem;
   font-weight: 700;
   color: #ffffff;
+}
+
+body.theme-light .user-pill-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+body.theme-light .user-name {
+  color: #0f172a !important;
+}
+
+body.theme-light .arrow-icon {
+  color: #475569 !important;
+}
+
+body.theme-light .mode-label {
+  color: #0f172a !important;
+}
+
+body.theme-light .mode-pill-action {
+  background: #e2e8f0 !important;
+  color: #334155 !important;
 }
 
 .user-badge {
